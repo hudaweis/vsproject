@@ -18,19 +18,6 @@
 		<module>vs-master-parent</module>
 	</modules>
 
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<locales>zh_CN</locales>
-					<outputEncoding>UTF-8</outputEncoding>
-					<inputEncoding>UTF-8</inputEncoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
