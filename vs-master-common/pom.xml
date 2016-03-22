@@ -2,11 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.vshuok.parent</groupId>
+		<groupId>com.vshuok</groupId>
 		<artifactId>vs-master-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../vs-master-parent/pom.xml</relativePath>
 	</parent>
-
+	
 	<artifactId>vs-master-common</artifactId>
 	<packaging>jar</packaging>
 	<name>common</name>
@@ -16,5 +17,4 @@
 		<support.basedir>${project.parent.parent.basedir}/src/support</support.basedir>
 		<site.basedir>${project.parent.parent.basedir}</site.basedir>
 	</properties>
-
 </project>

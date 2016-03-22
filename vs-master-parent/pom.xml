@@ -5,17 +5,15 @@
 		<groupId>com.vshuok</groupId>
 		<artifactId>vs-master</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.vshuok.parent</groupId>
 	<artifactId>vs-master-parent</artifactId>
 	<packaging>pom</packaging>
 	<name>parent</name>
 	<url>https://github.com/hudaweis/vsproject/parent</url>
 
 	<modules>
-		<module>../common</module>
-		<module>../web</module>
 		<module>vs-master-common</module>
 	</modules>
 
@@ -509,17 +507,16 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.validator.version}</version>
 		</dependency>
-		<!-- JSF 相关jar包 -->
+		<!-- spring webmvc相关jar包 -->
 		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>${jsf.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
-		<!-- primefaces 相关jar包 -->
 		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>${primefaces.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<!-- apache shiro 相关jar包 -->
 		<dependency>
@@ -675,9 +672,6 @@
 		<aspectj.version>1.7.4</aspectj.version>
 		<spring.version>4.0.0.RELEASE</spring.version>
 		<spring.data.jpa.version>1.4.1.RELEASE</spring.data.jpa.version>
-
-		<jsf.version>2.2.3</jsf.version>
-		<primefaces.version>5.1</primefaces.version>
 
 		<hibernate.core.version>4.3.0.Final</hibernate.core.version>
 		<hibernate.ehcache.version>4.3.0.Final</hibernate.ehcache.version>
