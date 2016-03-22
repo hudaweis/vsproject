@@ -14,6 +14,11 @@ import com.vshuok.es.common.utils.MessageUtils;
  */
 public class BaseException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -170429253083933389L;
+
 	// 所属模块
 	private String module;
 
