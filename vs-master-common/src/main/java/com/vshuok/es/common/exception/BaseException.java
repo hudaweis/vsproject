@@ -1,4 +1,4 @@
-package com.vshuok.common.exception;
+package com.vshuok.es.common.exception;
 
 import org.apache.commons.lang3.StringUtils;
 

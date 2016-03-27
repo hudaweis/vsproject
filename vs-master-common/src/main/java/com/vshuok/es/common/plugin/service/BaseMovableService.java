@@ -5,7 +5,8 @@ import com.vshuok.es.common.entity.BaseEntity;
 import com.vshuok.es.common.entity.search.Searchable;
 import com.vshuok.es.common.plugin.entity.Movable;
 import com.vshuok.es.common.repository.RepositoryHelper;
-import com.vshuok.common.service.BaseService;
+import com.vshuok.es.common.service.BaseService;
+
 import org.springframework.aop.framework.AopContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

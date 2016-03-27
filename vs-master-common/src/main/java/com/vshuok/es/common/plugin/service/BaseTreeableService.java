@@ -10,8 +10,9 @@ import com.vshuok.es.common.entity.search.filter.SearchFilter;
 import com.vshuok.es.common.entity.search.filter.SearchFilterHelper;
 import com.vshuok.es.common.plugin.entity.Treeable;
 import com.vshuok.es.common.repository.RepositoryHelper;
-import com.vshuok.common.service.BaseService;
+import com.vshuok.es.common.service.BaseService;
 import com.vshuok.es.common.utils.ReflectUtils;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 

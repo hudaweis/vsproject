@@ -1,4 +1,4 @@
-package com.vshuok.common.service;
+package com.vshuok.es.common.service;
 
 import java.io.Serializable;
 import java.util.List;

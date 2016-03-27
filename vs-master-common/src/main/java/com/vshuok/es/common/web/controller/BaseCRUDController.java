@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.vshuok.common.service.BaseService;
 import com.vshuok.es.common.Constants;
 import com.vshuok.es.common.entity.AbstractEntity;
 import com.vshuok.es.common.entity.search.Searchable;
+import com.vshuok.es.common.service.BaseService;
 import com.vshuok.es.common.web.bind.annotation.PageableDefaults;
 import com.vshuok.es.common.web.controller.permission.PermissionList;
 
