@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>vs-master-parent</module>
+		<module>vs-master-web</module>
 	</modules>
 
 
