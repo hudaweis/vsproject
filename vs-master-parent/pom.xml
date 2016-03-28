@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>vs-master-common</module>
+		<module>vs-master-web</module>
 	</modules>
 
 	<build>

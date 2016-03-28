@@ -1,0 +1,188 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.vshuok</groupId>
+		<artifactId>vs-master-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../vs-master-parent/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>vs-master-web</artifactId>
+	<packaging>war</packaging>
+	<name>web</name>
+	<url>https://github.com/hudaweis/vsproject/web</url>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>${tomcat.maven.version}</version>
+				<configuration>
+					<port>8080</port>
+					<path>/${project.build.finalName}</path>
+					<!-- spring profile -->
+					<systemProperties>
+						<systemProperty>
+							<name>spring.profiles.active</name>
+							<value>development</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.m2e</groupId>
+				<artifactId>lifecycle-mapping</artifactId>
+				<version>1.0.0</version>
+				<configuration>
+					<lifecycleMappingMetadata>
+					<pluginExecutions>
+						<pluginExecution>
+							<pluginExecutionFilter>
+								<groupId>
+									org.codehaus.mojo
+								</groupId>
+								<artifactId>
+									native2ascii-maven-plugin
+								</artifactId>
+								<versionRange>
+									[1.0-alpha-1,)
+								</versionRange>
+								<goals>
+									<goal>native2ascii</goal>
+								</goals>
+							</pluginExecutionFilter>
+							<action>
+								<ignore />
+							</action>
+						</pluginExecution>
+					</pluginExecutions>
+					</lifecycleMappingMetadata>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.googlecode</groupId>
+				<artifactId>maven-db-plugin</artifactId>
+				<version>1.4</version>
+				<configuration>
+					<adminDbConnectionSettings>
+						<jdbcDriver>${connection.driver_class}</jdbcDriver>
+						<jdbcUrl>${connection.admin.url}</jdbcUrl>
+						<userName>${connection.username}</userName>
+						<password>${connection.password}</password>
+					</adminDbConnectionSettings>
+					<appDbConnectionSettings>
+						<jdbcDriver>${connection.driver_class}</jdbcDriver>
+						<jdbcUrl>${connection.url}</jdbcUrl>
+						<userName>${connection.username}</userName>
+						<password>${connection.password}</password>
+					</appDbConnectionSettings>
+					<dbDataScriptsDirectory>
+						<param>src/main/sql/data</param>
+					</dbDataScriptsDirectory>
+					<dbSchemaScriptsDirectory>
+						<param>src/main/sql/schema</param>
+					</dbSchemaScriptsDirectory>
+					<dbUpdateScriptsDirectory>
+						<param>src/main/sql/update</param>
+					</dbUpdateScriptsDirectory>
+					<dbCreateStatements>
+						create database ${db.name} CHARACTER SET
+						'utf8';
+					</dbCreateStatements>
+					<dbDropStatements>drop database ${db.name}; </dbDropStatements>
+					<sqlDelimiter>;;</sqlDelimiter>
+					<scriptEncoding>UTF-8</scriptEncoding>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mysql.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.vshuok</groupId>
+			<artifactId>vs-master-common</artifactId>
+			<version>${vshuok.common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.yahoo.platform.yui</groupId>
+			<artifactId>yuicompressor</artifactId>
+			<version>${yui.compressor.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.9</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+		</dependency>
+	</dependencies>
+
+	<properties>
+		<vshuok.common.version>1.0.0-SNAPSHOT</vshuok.common.version>
+		<tomcat.maven.version>2.2</tomcat.maven.version>
+		<support.basedir>${project.parent.parent.basedir}/src/support</support.basedir>
+		<site.basedir>${project.parent.parent.basedir}</site.basedir>
+		<mysql.version>5.1.32</mysql.version>
+		<yui.compressor.version>2.4.2</yui.compressor.version>
+	</properties>
+
+	<profiles>
+		<profile>
+			<!--正式环境 -->
+			<id>production</id>
+			<properties>
+				<db.name>vsdb</db.name>
+				<connection.driver_class>com.mysql.jdbc.Driver</connection.driver_class>
+				<connection.admin.url>
+					jdbc:mysql://localhost:3306/${db.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8
+				</connection.admin.url>
+				<connection.url>
+					jdbc:mysql://localhost:3306/${db.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8
+				</connection.url>
+				<connection.username>root</connection.username>
+				<connection.password>hdw3839!</connection.password>
+				<jpa.showSql>false</jpa.showSql>
+				<jpa.generateDdl>false</jpa.generateDdl>
+				<jpa.database>MYSQL</jpa.database>
+				<jpa.databasePlatform>org.hibernate.dialect.MySQL5InnoDBDialect</jpa.databasePlatform>
+
+				<shiro.uid.cookie.domain>vshuok.com</shiro.uid.cookie.domain>
+				<shiro.uid.cookie.path>/</shiro.uid.cookie.path>
+
+			</properties>
+		</profile>
+	</profiles>
+
+
+</project>
