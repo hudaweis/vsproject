@@ -8,7 +8,7 @@ package com.vshuok.es.common.plugin.entity;
  */
 public interface Movable {
 
-	public Integer getWeight();
+	public Integer getWeigth();
 	
-	public void setWeigth(Integer weight);
+	public void setWeigth(Integer weigth);
 }

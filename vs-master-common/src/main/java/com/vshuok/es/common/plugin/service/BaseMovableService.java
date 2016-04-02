@@ -51,7 +51,7 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
 
     @Override
     public M save(M m) {
-        if (m.getWeight() == null) {
+        if (m.getWeigth() == null) {
             m.setWeigth(findNextWeight());
         }
         return super.save(m);
@@ -71,8 +71,8 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (from == null || to == null || from.equals(to)) {
             return;
         }
-        Integer fromWeight = from.getWeight();
-        Integer toWeight = to.getWeight();
+        Integer fromWeight = from.getWeigth();
+        Integer toWeight = to.getWeigth();
 
 
         M nextTo = findNextByWeight(toWeight);
@@ -91,15 +91,15 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (count > 0 && count < 20) {
             List<M> moves = findByBetweenAndAsc(minWeight, maxWeight);
             if (fromWeight < toWeight) {
-                Integer swapInteger = moves.get(count - 2).getWeight();
+                Integer swapInteger = moves.get(count - 2).getWeigth();
                 for (int i = count - 2; i >= 1; i--) {
                     //最后一个的weight = toWeight;
-                    moves.get(i).setWeigth(moves.get(i - 1).getWeight());
+                    moves.get(i).setWeigth(moves.get(i - 1).getWeigth());
                 }
                 moves.get(0).setWeigth(swapInteger);
             } else {
                 for (int i = 0; i <= count - 2; i++) {
-                    moves.get(i).setWeigth(moves.get(i + 1).getWeight());
+                    moves.get(i).setWeigth(moves.get(i + 1).getWeigth());
                 }
                 moves.get(count - 1).setWeigth(minWeight);
             }
@@ -113,7 +113,7 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (preTo == null) {
             newWeight = toWeight / 2;
         } else {
-            newWeight = toWeight - (toWeight - preTo.getWeight()) / 2;
+            newWeight = toWeight - (toWeight - preTo.getWeigth()) / 2;
 
         }
 
@@ -138,8 +138,8 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (from == null || to == null || from.equals(to)) {
             return;
         }
-        Integer fromWeight = from.getWeight();
-        Integer toWeight = to.getWeight();
+        Integer fromWeight = from.getWeigth();
+        Integer toWeight = to.getWeigth();
 
 
         M preTo = findPreByWeight(toWeight);
@@ -160,15 +160,15 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
             //5000 4000 3000
 
             if (fromWeight > toWeight) {
-                Integer swapInteger = moves.get(count - 2).getWeight();
+                Integer swapInteger = moves.get(count - 2).getWeigth();
                 for (int i = count - 2; i >= 1; i--) {
                     //最后一个的weight = toWeight;
-                    moves.get(i).setWeigth(moves.get(i - 1).getWeight());
+                    moves.get(i).setWeigth(moves.get(i - 1).getWeigth());
                 }
                 moves.get(0).setWeigth(swapInteger);
             } else {
                 for (int i = 0; i <= count - 2; i++) {
-                    moves.get(i).setWeigth(moves.get(i + 1).getWeight());
+                    moves.get(i).setWeigth(moves.get(i + 1).getWeigth());
                 }
                 moves.get(count - 1).setWeigth(maxWeight);
             }
@@ -188,7 +188,7 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (nextTo == null) {
             newWeight = toWeight + stepLength;
         } else {
-            newWeight = toWeight + (nextTo.getWeight() - toWeight) / 2;
+            newWeight = toWeight + (nextTo.getWeigth() - toWeight) / 2;
         }
 
         if (Math.abs(newWeight - toWeight) <= 1) {
@@ -241,7 +241,7 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
             return stepLength;
         }
 
-        return page.getContent().get(0).getWeight() + stepLength;
+        return page.getContent().get(0).getWeigth() + stepLength;
     }
 
     public M findPreByWeight(Integer weight) {

@@ -5,7 +5,6 @@
 		<groupId>com.vshuok</groupId>
 		<artifactId>vs-master-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../vs-master-parent/pom.xml</relativePath>
 	</parent>
 	
 	<artifactId>vs-master-common</artifactId>
