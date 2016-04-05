@@ -12,7 +12,6 @@ import com.vshuok.es.common.plugin.entity.Treeable;
 import com.vshuok.es.common.repository.RepositoryHelper;
 import com.vshuok.es.common.service.BaseService;
 import com.vshuok.es.common.utils.ReflectUtils;
-
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -343,4 +342,5 @@ public abstract class BaseTreeableService<M extends BaseEntity<ID> & Treeable<ID
 		searchable.addSearchFilter("parentIds", SearchOperator.suffixNotLike,
 				excludeM.makeSelfAsNewParentIds());
 	}
+
 }

@@ -5,16 +5,18 @@
 		<groupId>com.vshuok</groupId>
 		<artifactId>vs-master</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>vs-master-parent</artifactId>
 	<packaging>pom</packaging>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>parent</name>
 	<url>https://github.com/hudaweis/vsproject/parent</url>
 
 	<modules>
-		<module>vs-master-common</module>
-		<module>vs-master-web</module>
+		<module>../vs-master-common</module>
+		<module>../vs-master-web</module>
 	</modules>
 
 	<build>
@@ -519,31 +521,31 @@
 			<version>${spring.version}</version>
 		</dependency>
 		<!-- apache shiro 相关jar包 -->
-<dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-web</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-aspectj</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-ehcache</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-aspectj</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>
 		<!-- encache 相关jar包 -->
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
@@ -670,7 +672,7 @@
 		<standard.version>1.1.2</standard.version>
 
 		<aspectj.version>1.7.4</aspectj.version>
-		<spring.version>4.0.0.RELEASE</spring.version>
+		<spring.version>4.0.1.RELEASE</spring.version>
 		<spring.data.jpa.version>1.4.1.RELEASE</spring.data.jpa.version>
 
 		<hibernate.core.version>4.3.0.Final</hibernate.core.version>

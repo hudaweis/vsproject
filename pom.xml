@@ -9,15 +9,27 @@
 	<url>>https://github.com/hudaweis/vsproject</url>
 
 	<organization>
-		<name>vs-master</name>
+		<name>vs</name>
 		<url>https://github.com/hudaweis</url>
 	</organization>
 
 	<modules>
 		<module>vs-master-parent</module>
-		<module>vs-master-web</module>
 	</modules>
 
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<locales>zh_CN</locales>
+					<outputEncoding>UTF-8</outputEncoding>
+					<inputEncoding>UTF-8</inputEncoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -98,13 +110,14 @@
 			<id>Codehaus repository</id>
 			<url>http://repository.codehaus.org/</url>
 		</pluginRepository>
+		<!--
 		<pluginRepository>
 			<id>maven-db-plugin-repo</id>
 			<name>maven db plugin repository</name>
 			<url>https://maven-db-plugin.googlecode.com/svn/maven/repo</url>
 			<layout>default</layout>
 		</pluginRepository>
-
+        -->
 	</pluginRepositories>
 
 	<!-- 开发人员信息 -->
@@ -161,7 +174,7 @@
 	<scm>
 		<url>https://github.com/hudaweis/vsproject/</url>
 		<connection>scm:git:git//github.com/hudaweis/vsproject.git</connection>
-	    <developerConnection>scm:git:ssh://git@github.com:hudaweis/vsproject.git</developerConnection>
+		<developerConnection>scm:git:ssh://git@github.com:hudaweis/vsproject.git</developerConnection>
 	</scm>
 
 </project>

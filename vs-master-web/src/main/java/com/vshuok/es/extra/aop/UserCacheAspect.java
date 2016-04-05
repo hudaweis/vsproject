@@ -1,23 +1,19 @@
-package com.vshuok.es.extra.aop;
+package com.shuok.es.extra.aop;
 
+import com.vshuok.es.common.cache.BaseCacheAspect;v
+import com.sishuok.es.sys.user.entity.User;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
-import com.vshuok.es.common.cache.BaseCacheAspect;
-import com.vshuok.es.sys.user.entity.User;
-
-/** 
- * <p>
- * 用户缓存切面<br/>
+/**
+ * 用户缓存切面
  * 缓存实现
- * </p>
- * @author Hu Dawei  
- * @version 1.0
+ * 1、username/email/mobilePhoneNumber------>id
+ * 2、id------->Model
+ * <p>User: Zhang Kaitao
+ * <p>Date: 13-3-22 下午9:00
+ * <p>Version: 1.0
  */
 @Component
 @Aspect
@@ -31,7 +27,7 @@ public class UserCacheAspect extends BaseCacheAspect {
     private String usernameKeyPrefix = "username-";
     private String emailKeyPrefix = "email-";
     private String mobilePhoneNumberKeyPrefix = "mobilePhoneNumber-";
-    
+
     ////////////////////////////////////////////////////////////////////////////////
     ////切入点
     ////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +57,7 @@ public class UserCacheAspect extends BaseCacheAspect {
     /**
      * evict 比如删除
      */
-	@Pointcut(value = "(execution(* delete(*))) && args(arg)", argNames = "arg")
+    @Pointcut(value = "(execution(* delete(*))) && args(arg)", argNames = "arg")
     private void cacheEvictPointcut(Object arg) {
     }
 

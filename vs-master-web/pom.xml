@@ -5,8 +5,9 @@
 		<groupId>com.vshuok</groupId>
 		<artifactId>vs-master-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../vs-master-parent/pom.xml</relativePath>
 	</parent>
-	
+
 	<artifactId>vs-master-web</artifactId>
 	<packaging>war</packaging>
 	<name>web</name>
@@ -15,7 +16,6 @@
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
@@ -39,27 +39,27 @@
 				<version>1.0.0</version>
 				<configuration>
 					<lifecycleMappingMetadata>
-					<pluginExecutions>
-						<pluginExecution>
-							<pluginExecutionFilter>
-								<groupId>
-									org.codehaus.mojo
-								</groupId>
-								<artifactId>
-									native2ascii-maven-plugin
-								</artifactId>
-								<versionRange>
-									[1.0-alpha-1,)
-								</versionRange>
-								<goals>
-									<goal>native2ascii</goal>
-								</goals>
-							</pluginExecutionFilter>
-							<action>
-								<ignore />
-							</action>
-						</pluginExecution>
-					</pluginExecutions>
+						<pluginExecutions>
+							<pluginExecution>
+								<pluginExecutionFilter>
+									<groupId>
+										org.codehaus.mojo
+									</groupId>
+									<artifactId>
+										native2ascii-maven-plugin
+									</artifactId>
+									<versionRange>
+										[1.0-alpha-1,)
+									</versionRange>
+									<goals>
+										<goal>native2ascii</goal>
+									</goals>
+								</pluginExecutionFilter>
+								<action>
+									<ignore />
+								</action>
+							</pluginExecution>
+						</pluginExecutions>
 					</lifecycleMappingMetadata>
 				</configuration>
 			</plugin>
@@ -95,7 +95,7 @@
 						'utf8';
 					</dbCreateStatements>
 					<dbDropStatements>drop database ${db.name}; </dbDropStatements>
-					<sqlDelimiter>;;</sqlDelimiter>
+					<sqlDelimiter>;</sqlDelimiter>
 					<scriptEncoding>UTF-8</scriptEncoding>
 				</configuration>
 				<dependencies>
@@ -159,15 +159,17 @@
 	<profiles>
 		<profile>
 			<!--正式环境 -->
-			<id>production</id>
+			<id>development</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
 				<db.name>esmaven</db.name>
 				<connection.driver_class>com.mysql.jdbc.Driver</connection.driver_class>
-				<connection.admin.url>
-					jdbc:mysql://localhost:3306/${db.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8
-				</connection.admin.url>
+				<!-- <connection.admin.url> jdbc:mysql://localhost:3306/?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8 
+					</connection.admin.url> -->
 				<connection.url>
-					jdbc:mysql://localhost:3306/${db.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8
+				    jdbc:mysql://localhost:3306/${db.name}
 				</connection.url>
 				<connection.username>root</connection.username>
 				<connection.password>hdw3839!</connection.password>
