@@ -86,16 +86,16 @@ public class NotificationTemplate extends BaseEntity<Long> implements LogicDelet
         this.template = template;
     }
 
-    public Boolean getDeleted() {
+    public Boolean getDelete() {
         return deleted;
     }
 
-    public void setDeleted(final Boolean deleted) {
+    public void setDelete(final Boolean deleted) {
         this.deleted = deleted;
     }
 
     public void markDeleted() {
-        setDeleted(Boolean.TRUE);
+        setDelete(Boolean.TRUE);
     }
 
 }

@@ -2,6 +2,7 @@ package com.vshuok.es.common.entity;
 
 import java.io.Serializable;
 
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;

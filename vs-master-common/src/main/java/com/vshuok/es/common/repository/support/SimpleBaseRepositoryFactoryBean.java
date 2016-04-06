@@ -1,10 +1,9 @@
 package com.vshuok.es.common.repository.support;
 
-import java.io.Serializable;
+import com.vshuok.es.common.repository.BaseRepository;
+import com.vshuok.es.common.repository.callback.SearchCallback;
+import com.vshuok.es.common.repository.support.annotation.SearchableQuery;
 
-import javax.persistence.EntityManager;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,10 +13,11 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
 import org.springframework.data.repository.core.RepositoryMetadata;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 import org.springframework.data.repository.query.QueryLookupStrategy;
+import org.springframework.util.StringUtils;
 
-import com.vshuok.es.common.repository.BaseRepository;
-import com.vshuok.es.common.repository.callback.SearchCallback;
-import com.vshuok.es.common.repository.support.annotation.SearchableQuery;
+import javax.persistence.EntityManager;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -31,9 +31,9 @@ public class SimpleBaseRepositoryFactoryBean<R extends JpaRepository<M, ID>, M, 
 		extends JpaRepositoryFactoryBean<R, M, ID> {
 
 	public SimpleBaseRepositoryFactoryBean() {
-
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected RepositoryFactorySupport createRepositoryFactory(
 			EntityManager entityManager) {
 		return new SimpleBaseRepositoryFactory(entityManager);
@@ -52,6 +52,7 @@ class SimpleBaseRepositoryFactory<M, ID extends Serializable> extends
 
 	protected Object getTargetRepository(RepositoryMetadata metadata) {
 		Class<?> repositoryInterface = metadata.getRepositoryInterface();
+
 		if (isBaseRepository(repositoryInterface)) {
 
 			JpaEntityInformation<M, ID> entityInformation = getEntityInformation((Class<M>) metadata
@@ -87,6 +88,13 @@ class SimpleBaseRepositoryFactory<M, ID extends Serializable> extends
 		return super.getTargetRepository(metadata);
 	}
 
+	protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
+		if (isBaseRepository(metadata.getRepositoryInterface())) {
+			return SimpleBaseRepository.class;
+		}
+		return super.getRepositoryBaseClass(metadata);
+	}
+
 	private boolean isBaseRepository(Class<?> repositoryInterface) {
 		return BaseRepository.class.isAssignableFrom(repositoryInterface);
 	}
@@ -96,5 +104,4 @@ class SimpleBaseRepositoryFactory<M, ID extends Serializable> extends
 			QueryLookupStrategy.Key key) {
 		return super.getQueryLookupStrategy(key);
 	}
-
 }

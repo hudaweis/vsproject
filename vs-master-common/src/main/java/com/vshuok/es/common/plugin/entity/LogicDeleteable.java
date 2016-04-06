@@ -11,9 +11,9 @@ package com.vshuok.es.common.plugin.entity;
  */
 public interface LogicDeleteable {
 
-	public Boolean getDeleted();
+	public Boolean getDelete();
 	
-	public void setDeleted(Boolean deleted);
+	public void setDelete(Boolean delete);
 	
 	/**
 	 * 标识为已删除

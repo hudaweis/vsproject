@@ -43,7 +43,7 @@ public class DeletedSample extends BaseEntity<Long> implements LogicDeleteable {
     @Column(name = "is_show")
     private Boolean show;
 
-    private Boolean deleted;
+    private Boolean delete;
 
     public String getName() {
         return name;
@@ -86,17 +86,17 @@ public class DeletedSample extends BaseEntity<Long> implements LogicDeleteable {
     }
 
     @Override
-    public Boolean getDeleted() {
-        return deleted;
+    public Boolean getDelete() {
+        return delete;
     }
 
     @Override
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
     }
 
     @Override
     public void markDeleted() {
-        this.deleted = Boolean.TRUE;
+        this.delete = Boolean.TRUE;
     }
 }

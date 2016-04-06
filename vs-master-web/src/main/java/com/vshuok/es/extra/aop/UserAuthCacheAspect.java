@@ -11,14 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.vshuok.es.common.cache.BaseCacheAspect;
+import com.vshuok.es.sys.auth.entity.Auth;
 import com.vshuok.es.sys.auth.service.AuthService;
+import com.vshuok.es.sys.group.entity.Group;
+import com.vshuok.es.sys.group.entity.GroupRelation;
 import com.vshuok.es.sys.group.service.GroupRelationService;
 import com.vshuok.es.sys.group.service.GroupService;
+import com.vshuok.es.sys.organization.entity.Job;
+import com.vshuok.es.sys.organization.entity.Organization;
 import com.vshuok.es.sys.organization.service.JobService;
 import com.vshuok.es.sys.organization.service.OrganizationService;
+import com.vshuok.es.sys.permission.entity.Permission;
+import com.vshuok.es.sys.permission.entity.Role;
 import com.vshuok.es.sys.permission.service.PermissionService;
 import com.vshuok.es.sys.permission.service.RoleService;
+import com.vshuok.es.sys.resource.entity.Resource;
 import com.vshuok.es.sys.resource.service.ResourceService;
+import com.vshuok.es.sys.user.entity.User;
 import com.vshuok.es.sys.user.service.UserService;
 
 import java.util.Arrays;
@@ -27,10 +36,6 @@ import java.util.Arrays;
  * 用户权限的切面
  * <p/>
  * 1、当调用如下方法时，加缓存
- * {@link com.sishuok.es.sys.auth.service.UserAuthService#findRoles}
- * {@link com.sishuok.es.sys.auth.service.UserAuthService#findStringRoles}
- * {@link com.sishuok.es.sys.auth.service.UserAuthService#findStringPermissions}
- * <p/>
  * 2、授权（Auth）
  * 当增删改授权时，
  * 如果是用户相关的，只删用户的即可，
@@ -119,7 +124,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
      * 如果是用户相关的，只删用户的即可，
      * 其他的全部清理
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.auth.service.AuthService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.auth.service.AuthService)")
     private void authServicePointcut() {
     }
 
@@ -143,7 +148,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
      * 当修改资源时判断是否发生变化（如resourceIdentity，是否显示），如果变了清缓存
      * 当删除资源时，清缓存
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.resource.service.ResourceService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.resource.service.ResourceService)")
     private void resourceServicePointcut() {
     }
 
@@ -160,7 +165,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
      * 当修改权限时判断是否发生变化（如permission，是否显示），如果变了清缓存
      * 当删除权限时，清缓存
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.permission.service.PermissionService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.permission.service.PermissionService)")
     private void permissionServicePointcut() {
     }
 
@@ -178,7 +183,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
      * 当删除角色时，请缓存
      * 当修改角色show/role/resourcePermissions关系时，清缓存
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.permission.service.RoleService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.permission.service.RoleService)")
     private void roleServicePointcut() {
     }
 
@@ -195,7 +200,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
      * 5.1、组织机构
      * 当删除/修改show字段时，清缓存
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.organization.service.OrganizationService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.organization.service.OrganizationService)")
     private void organizationServicePointcut() {
     }
 
@@ -211,7 +216,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
      * 5.2、工作职务
      * 当删除/修改show字段时，清缓存
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.organization.service.JobService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.organization.service.JobService)")
     private void jobServicePointcut() {
     }
 
@@ -229,7 +234,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
      * 当修改组的默认组/show时，清缓存
      * 当删除组时，清缓存
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.group.service.GroupService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.group.service.GroupService)")
     private void groupServicePointcut() {
     }
 
@@ -246,7 +251,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
      * 当添加/修改/删除的是某个用户的，只清理这个用户的缓存
      * 其他情况，清所有
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.group.service.GroupRelationService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.group.service.GroupRelationService)")
     private void groupRelationServicePointcut() {
     }
 
@@ -265,7 +270,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
      * 7、用户
      * 修改时，如果组织机构/工作职务变了，仅需清自己的缓存
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.user.service.UserService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.user.service.UserService)")
     private void userServicePointcut() {
     }
 
@@ -274,7 +279,7 @@ public class UserAuthCacheAspect extends BaseCacheAspect {
     }
 
 
-    @Pointcut(value = "target(com.sishuok.es.sys.auth.service.UserAuthService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.auth.service.UserAuthService)")
     private void userAuthServicePointcut() {
     }
 

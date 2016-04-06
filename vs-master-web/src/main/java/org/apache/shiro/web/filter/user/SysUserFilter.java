@@ -94,7 +94,7 @@ public class SysUserFilter extends AccessControlFilter {
 			return true;
 		}
 
-		if (Boolean.TRUE.equals(user.getDeleted())
+		if (Boolean.TRUE.equals(user.getDelete())
 				|| user.getStatus() == UserStatus.blocked) {
 			getSubject(request, response).logout();
 			saveRequestAndRedirectToLogin(request, response);
@@ -115,7 +115,7 @@ public class SysUserFilter extends AccessControlFilter {
 			ServletResponse response) throws IOException {
 		User user = (User) request.getAttribute(Constants.CURRENT_USER);
 		String url = null;
-		if (Boolean.TRUE.equals(user.getDeleted())) {
+		if (Boolean.TRUE.equals(user.getDelete())) {
 			url = getUserNotfoundUrl();
 		} else if (user.getStatus() == UserStatus.blocked) {
 			url = getUserBlockedUrl();

@@ -1,19 +1,17 @@
-package com.shuok.es.extra.aop;
+package com.vshuok.es.extra.aop;
 
-import com.vshuok.es.common.cache.BaseCacheAspect;v
-import com.sishuok.es.sys.user.entity.User;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
+
+import com.vshuok.es.common.cache.BaseCacheAspect;
+import com.vshuok.es.sys.user.entity.User;
 
 /**
  * 用户缓存切面
  * 缓存实现
  * 1、username/email/mobilePhoneNumber------>id
  * 2、id------->Model
- * <p>User: Zhang Kaitao
- * <p>Date: 13-3-22 下午9:00
- * <p>Version: 1.0
  */
 @Component
 @Aspect
@@ -35,7 +33,7 @@ public class UserCacheAspect extends BaseCacheAspect {
     /**
      * 匹配用户Service
      */
-    @Pointcut(value = "target(com.sishuok.es.sys.user.service.UserService)")
+    @Pointcut(value = "target(com.vshuok.es.sys.user.service.UserService)")
     private void userServicePointcut() {
     }
 

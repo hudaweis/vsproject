@@ -34,12 +34,13 @@ import com.vshuok.es.sys.user.service.UserService;
  * @version 1.0
  */
 public class UserRealm extends AuthorizingRealm {
+	
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private UserAuthService userAuthService;
 
-	private static final Logger log = LoggerFactory.getLogger("es-error");
+	private static final Logger log = LoggerFactory.getLogger("vs-error");
 
 	@Autowired
 	public UserRealm(ApplicationContext ctx) {

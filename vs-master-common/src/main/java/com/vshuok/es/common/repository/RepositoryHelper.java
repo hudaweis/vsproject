@@ -59,7 +59,7 @@ public class RepositoryHelper {
 		Assert.notNull(
 				entityManager,
 				"entityManager must null, please see "
-						+ "[com.sishuok.es.common.repository.RepositoryHelper#setEntityManagerFactory]");
+						+ "[com.vshuok.es.common.repository.RepositoryHelper#setEntityManagerFactory]");
 
 		return entityManager;
 	}
