@@ -222,7 +222,7 @@ public class MessageApiImpl implements MessageApi {
 		List<Long> receiverIds = Lists.newArrayList();
 
 		for (User receiver : receivers) {
-			if (Boolean.TRUE.equals(receiver.getDelete())
+			if (Boolean.TRUE.equals(receiver.getDeleted())
 					|| receiver.getStatus() != UserStatus.normal) {
 				continue;
 			}

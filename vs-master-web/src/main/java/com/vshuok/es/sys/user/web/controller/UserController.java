@@ -211,7 +211,7 @@ public class UserController extends BaseCRUDController<User, Long> {
 			RedirectAttributes redirectAttributes) {
 		for (Long id : ids) {
 			User user = getUserService().findOne(id);
-			user.setDelete(Boolean.FALSE);
+			user.setDeleted(Boolean.FALSE);
 			getUserService().update(user);
 		}
 		redirectAttributes.addFlashAttribute(Constants.MESSAGE, "还原成功！");

@@ -69,7 +69,7 @@ public class UserRealm extends AuthorizingRealm {
 
 	private static final String OR_OPERATOR = " or ";
 	private static final String AND_OPERATOR = " and ";
-	private static final String NOT_OPERATOR = "not ";
+	private static final String NOT_OPERATOR = " not ";
 
 	/**
 	 * 支持or and not 关键词 不支持and or混用
