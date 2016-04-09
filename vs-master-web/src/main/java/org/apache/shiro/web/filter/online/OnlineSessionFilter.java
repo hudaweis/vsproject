@@ -1,10 +1,12 @@
+/**
+ * Copyright (c) 2005-2012 https://github.com/zhangkaitao
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
 package org.apache.shiro.web.filter.online;
 
-import java.io.IOException;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
+import com.sishuok.es.common.Constants;
+import com.sishuok.es.sys.user.entity.User;
 import org.apache.shiro.ShiroConstants;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.OnlineSession;
@@ -13,22 +15,23 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 
-import com.vshuok.es.common.Constants;
-import com.vshuok.es.sys.user.entity.User;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import java.io.IOException;
 
-/** 
- * <p></p>
- * @author Hu Dawei  
- * @version 1.0
+/**
+ * <p>User: Zhang Kaitao
+ * <p>Date: 13-3-20 下午3:17
+ * <p>Version: 1.0
  */
 public class OnlineSessionFilter extends AccessControlFilter {
 
-	 /**
+    /**
      * 强制退出后重定向的地址
      */
     private String forceLogoutUrl;
 
-	private OnlineSessionDAO onlineSessionDAO;
+    private OnlineSessionDAO onlineSessionDAO;
 
     public String getForceLogoutUrl() {
         return forceLogoutUrl;
@@ -85,4 +88,5 @@ public class OnlineSessionFilter extends AccessControlFilter {
     protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
         WebUtils.issueRedirect(request, response, getForceLogoutUrl());
     }
+
 }

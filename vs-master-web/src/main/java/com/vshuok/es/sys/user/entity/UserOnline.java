@@ -18,7 +18,8 @@ import java.util.Date;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserOnline extends AbstractEntity<String> {
 
-    /**
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -766679594582783857L;

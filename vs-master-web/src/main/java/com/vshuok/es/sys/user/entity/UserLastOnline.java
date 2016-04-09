@@ -20,7 +20,7 @@ import java.util.Date;
 public class UserLastOnline extends BaseEntity<Long> {
 
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8227801300219970387L;

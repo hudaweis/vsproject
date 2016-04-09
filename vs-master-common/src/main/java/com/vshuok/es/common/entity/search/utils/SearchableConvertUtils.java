@@ -35,7 +35,7 @@ public final class SearchableConvertUtils {
 	 * 设置用于类型转换的conversionService 把如下代码放入spring配置文件即可 <bean class=
 	 * "org.springframework.beans.factory.config.MethodInvokingFactoryBean">
 	 * <property name="staticMethod" value=
-	 * "com.sishuok.es.common.entity.search.utils.SearchableConvertUtils.setConversionService"
+	 * "com.vshuok.es.common.entity.search.utils.SearchableConvertUtils.setConversionService"
 	 * /> <property name="arguments" ref="conversionService"/> </bean>
 	 * 
 	 * @param conversionService
@@ -55,7 +55,7 @@ public final class SearchableConvertUtils {
 						throw new SearchException(
 								"conversionService is null, "
 										+ "search param convert must use conversionService. "
-										+ "please see [com.sishuok.es.common.entity.search.utils."
+										+ "please see [com.vshuok.es.common.entity.search.utils."
 										+ "SearchableConvertUtils#setConversionService]");
 					}
 				}

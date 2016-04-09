@@ -21,7 +21,8 @@ import org.hibernate.usertype.UserType;
  */
 public class ObjectSerializeUserType implements UserType, Serializable {
 
-    /**
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 663732153223641145L;

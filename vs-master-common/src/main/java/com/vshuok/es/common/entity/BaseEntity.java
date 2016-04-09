@@ -17,12 +17,12 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class BaseEntity<ID extends Serializable> extends AbstractEntity<ID>{
 
-	/**
+
+    /**
 	 * 
 	 */
 	private static final long serialVersionUID = -8346457383929736146L;
-
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private ID id;
 

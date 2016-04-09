@@ -1,25 +1,23 @@
 package org.apache.shiro.session.mgt;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.vshuok.es.common.utils.IpUtils;
+import com.vshuok.es.sys.user.entity.UserOnline;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.web.session.mgt.WebSessionContext;
 
-import com.vshuok.es.common.utils.IpUtils;
-import com.vshuok.es.sys.user.entity.UserOnline;
+import javax.servlet.http.HttpServletRequest;
 
-/** 
- * <p>
+/**
  * 创建自定义的session，
  * 添加一些自定义的数据
  * 如 用户登录到的系统ip
  * 用户状态（在线 隐身 强制退出）
  * 等 比如当前所在系统等
- * </p>
- * @author Hu Dawei  
- * @version 1.0
+ * <p>User: Zhang Kaitao
+
+ * <p>Version: 1.0
  */
-public class OnlineSessionFactory implements SessionFactory{
+public class OnlineSessionFactory implements SessionFactory {
 
     @Override
     public Session createSession(SessionContext initData) {
@@ -39,5 +37,4 @@ public class OnlineSessionFactory implements SessionFactory{
     public Session createSession(UserOnline userOnline) {
         return userOnline.getSession();
     }
-
 }

@@ -1,20 +1,24 @@
+/**
+ * Copyright (c) 2005-2012 https://github.com/zhangkaitao
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
 package org.apache.shiro.web.filter.jcaptcha;
 
-import java.io.IOException;
+import com.sishuok.es.common.web.jcaptcha.JCaptcha;
+import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
-import org.apache.shiro.web.filter.AccessControlFilter;
-import org.apache.shiro.web.util.WebUtils;
-
-import com.vshuok.es.common.web.jcaptcha.JCaptcha;
-
-/** 
- * <p>验证码过滤器</p>
- * @author Hu Dawei  
- * @version 1.0
+/**
+ * 验证码过滤器
+ * <p>User: Zhang Kaitao
+ * <p>Date: 13-3-22 下午4:01
+ * <p>Version: 1.0
  */
 public class JCaptchaValidateFilter extends AccessControlFilter {
 
@@ -77,4 +81,5 @@ public class JCaptchaValidateFilter extends AccessControlFilter {
     protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
         WebUtils.issueRedirect(request, response, getJcapatchaErrorUrl());
     }
+
 }
