@@ -1,8 +1,7 @@
 package com.vshuok.es.sys.user.exception;
 
 /**
- * <p>User: Zhang Kaitao
- * <p>Date: 13-3-11 下午8:29
+ * <p>User: Hu dawei
  * <p>Version: 1.0
  */
 public class UserPasswordNotMatchException extends UserException {

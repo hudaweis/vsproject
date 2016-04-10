@@ -1,10 +1,10 @@
 package org.apache.shiro.realm;
 
-import com.vshuok.es.common.repository.support.SimpleBaseRepositoryFactoryBean;v
+import com.vshuok.es.common.repository.support.SimpleBaseRepositoryFactoryBean;
 import com.vshuok.es.sys.auth.service.UserAuthService;
 import com.vshuok.es.sys.user.entity.User;
-import com.sishuok.es.sys.user.exception.*;
-import com.sishuok.es.sys.user.service.UserService;
+import com.vshuok.es.sys.user.exception.*;
+import com.vshuok.es.sys.user.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 /**
- * <p>User: Zhang Kaitao
+ * <p>User: Hu dawei
  * <p>Date: 13-3-12 下午9:05
  * <p>Version: 1.0
  */

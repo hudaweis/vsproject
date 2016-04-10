@@ -1,14 +1,9 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package org.apache.shiro.web.filter.user;
 
-import com.sishuok.es.common.Constants;
-import com.sishuok.es.sys.user.entity.User;
-import com.sishuok.es.sys.user.entity.UserStatus;
-import com.sishuok.es.sys.user.service.UserService;
+import com.vshuok.es.common.Constants;
+import com.vshuok.es.sys.user.entity.User;
+import com.vshuok.es.sys.user.entity.UserStatus;
+import com.vshuok.es.sys.user.service.UserService;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
@@ -23,8 +18,7 @@ import java.io.IOException;
  * 验证用户过滤器
  * 1、用户是否删除
  * 2、用户是否锁定
- * <p>User: Zhang Kaitao
- * <p>Date: 13-3-19 下午3:09
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 public class SysUserFilter extends AccessControlFilter {

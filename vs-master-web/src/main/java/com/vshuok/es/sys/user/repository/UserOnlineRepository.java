@@ -1,23 +1,20 @@
 package com.vshuok.es.sys.user.repository;
 
-import java.util.Date;
-import java.util.List;
-
+import com.vshuok.es.common.repository.BaseRepository;
+import com.vshuok.es.sys.user.entity.UserOnline;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import com.vshuok.es.common.repository.BaseRepository;
-import com.vshuok.es.sys.user.entity.UserOnline;
+import java.util.Date;
+import java.util.List;
 
-/** 
- * <p></p>
- * @author Hu Dawei  
- * @version 1.0
+/**
+ * <p>User: Hu dawei
+ * <p>Version: 1.0
  */
-public interface UserOnlineRepository extends
-		BaseRepository<UserOnline, String> {
+public interface UserOnlineRepository extends BaseRepository<UserOnline, String> {
 
     @Query("from UserOnline o where o.lastAccessTime < ?1 order by o.lastAccessTime asc")
     Page<UserOnline> findExpiredUserOnlineList(Date expiredDate, Pageable pageable);

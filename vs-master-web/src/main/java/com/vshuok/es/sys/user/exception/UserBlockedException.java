@@ -1,8 +1,10 @@
 package com.vshuok.es.sys.user.exception;
 
-
+/**
+ * <p>User: Hu dawei
+ * <p>Version: 1.0
+ */
 public class UserBlockedException extends UserException {
-	
     /**
 	 * 
 	 */

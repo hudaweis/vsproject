@@ -7,11 +7,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-/** 
+/**
  * html工具类
  * 主要作用：标签转义、提取摘要、删除不安全的tag（比如<script></script>）
- * @author Hu Dawei  
- * @version 1.0
  */
 public class HtmlUtils {
 

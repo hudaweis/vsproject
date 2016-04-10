@@ -2,6 +2,10 @@ package com.vshuok.es.sys.user.exception;
 
 import com.vshuok.es.common.exception.BaseException;
 
+/**
+ * <p>User: Hu dawei
+ * <p>Version: 1.0
+ */
 public class UserException extends BaseException {
 
     /**

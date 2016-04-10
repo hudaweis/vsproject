@@ -1,14 +1,10 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package org.apache.shiro.web.session.mgt;
 
 import com.google.common.collect.Lists;
-import com.sishuok.es.common.Constants;
-import com.sishuok.es.sys.user.entity.UserOnline;
-import com.sishuok.es.sys.user.service.UserOnlineService;
+
+import com.vshuok.es.common.Constants;
+import com.vshuok.es.sys.user.entity.UserOnline;
+import com.vshuok.es.sys.user.service.UserOnlineService;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.shiro.ShiroConstants;
 import org.apache.shiro.session.ExpiredSessionException;
@@ -31,7 +27,7 @@ import java.util.List;
  * 为OnlineSession定制的Web Session Manager
  * 主要是在此如果会话的属性修改了 就标识下其修改了 然后方便 OnlineSessionDao同步
  * <p/>
- * <p>User: Zhang Kaitao
+ * <p>User: Hu dawei
  * <p>Date: 13-3-21 下午2:28
  * <p>Version: 1.0
  */

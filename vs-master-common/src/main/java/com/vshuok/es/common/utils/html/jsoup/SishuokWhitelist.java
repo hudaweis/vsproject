@@ -1,5 +1,10 @@
 package com.vshuok.es.common.utils.html.jsoup;
 
+/*
+    Thank you to Ryan Grove (wonko.com) for the Ruby HTML cleaner http://github.com/rgrove/sanitize/, which inspired
+    this whitelist configuration, and the initial defaults.
+ */
+
 import org.jsoup.helper.Validate;
 import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Attributes;

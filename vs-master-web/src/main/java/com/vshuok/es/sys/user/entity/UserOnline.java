@@ -12,14 +12,15 @@ import java.util.Date;
 
 /**
  * 当前在线会话
+ * <p>User: Hu dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "sys_user_online")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserOnline extends AbstractEntity<String> {
 
-
-	/**
+    /**
 	 * 
 	 */
 	private static final long serialVersionUID = -766679594582783857L;

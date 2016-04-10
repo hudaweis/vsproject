@@ -1,11 +1,6 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package org.apache.shiro.web.filter.jcaptcha;
 
-import com.sishuok.es.common.web.jcaptcha.JCaptcha;
+import com.vshuok.es.common.web.jcaptcha.JCaptcha;
 import org.apache.shiro.web.filter.AccessControlFilter;
 import org.apache.shiro.web.util.WebUtils;
 
@@ -16,8 +11,7 @@ import java.io.IOException;
 
 /**
  * 验证码过滤器
- * <p>User: Zhang Kaitao
- * <p>Date: 13-3-22 下午4:01
+ * <p>User: Hu dawei
  * <p>Version: 1.0
  */
 public class JCaptchaValidateFilter extends AccessControlFilter {

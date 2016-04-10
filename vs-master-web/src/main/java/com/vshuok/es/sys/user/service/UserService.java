@@ -28,11 +28,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>
- * </p>
- * 
- * @author Hu Dawei
- * @version 1.0
+ * <p>User: Hu dawei
+ * <p>Version: 1.0
  */
 @Service
 public class UserService extends BaseService<User, Long> {

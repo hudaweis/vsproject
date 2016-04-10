@@ -6,21 +6,19 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
-/** 
- * <p>
- * 在线用户最后一次在线信息
- * 次表对于分析活跃用户有用
- * </p>
- * @author Hu Dawei  
- * @version 1.0
+
+/**
+ * 在线用户最后一次在线信息()
+ * 此表对于分析活跃用户有用
+ * <p>User: Hu dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "sys_user_last_online")
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserLastOnline extends BaseEntity<Long> {
 
-
-	/**
+    /**
 	 * 
 	 */
 	private static final long serialVersionUID = 8227801300219970387L;
@@ -200,4 +198,5 @@ public class UserLastOnline extends BaseEntity<Long> {
         to.setLastLoginTimestamp(from.getLastLoginTimestamp());
         to.setLastStopTimestamp(from.getLastStopTimestamp());
     }
+
 }

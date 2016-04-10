@@ -1,12 +1,7 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package org.apache.shiro.web.filter.online;
 
-import com.sishuok.es.common.Constants;
-import com.sishuok.es.sys.user.entity.User;
+import com.vshuok.es.common.Constants;
+import com.vshuok.es.sys.user.entity.User;
 import org.apache.shiro.ShiroConstants;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.OnlineSession;
@@ -20,8 +15,7 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 /**
- * <p>User: Zhang Kaitao
- * <p>Date: 13-3-20 下午3:17
+ * <p>User: Hu dawei
  * <p>Version: 1.0
  */
 public class OnlineSessionFilter extends AccessControlFilter {

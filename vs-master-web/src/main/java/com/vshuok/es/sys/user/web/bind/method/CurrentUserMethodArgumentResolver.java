@@ -1,20 +1,18 @@
 package com.vshuok.es.sys.user.web.bind.method;
 
+import com.vshuok.es.sys.user.web.bind.annotation.CurrentUser;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import com.vshuok.es.sys.user.web.bind.annotation.CurrentUser;
-
-/** 
- * <p>用于绑定@FormModel的方法参数解析器</p>
- * @author Hu Dawei  
- * @version 1.0
+/**
+ * <p>用于绑定@FormModel的方法参数解析器
+ * <p>User: Hu dawei
+ * <p>Version: 1.0
  */
-public class CurrentUserMethodArgumentResolver implements
-		HandlerMethodArgumentResolver {
+public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
     public CurrentUserMethodArgumentResolver() {
     }
@@ -29,5 +27,4 @@ public class CurrentUserMethodArgumentResolver implements
         CurrentUser currentUserAnnotation = parameter.getParameterAnnotation(CurrentUser.class);
         return webRequest.getAttribute(currentUserAnnotation.value(), NativeWebRequest.SCOPE_REQUEST);
     }
-
 }
