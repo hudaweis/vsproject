@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package org.apache.shiro.web.filter.online;
 
 import com.vshuok.es.common.Constants;
@@ -21,7 +16,6 @@ import java.io.IOException;
 
 /**
  * <p>User: Hu Dawei
- 13-3-20 下午3:17
  * <p>Version: 1.0
  */
 public class OnlineSessionFilter extends AccessControlFilter {

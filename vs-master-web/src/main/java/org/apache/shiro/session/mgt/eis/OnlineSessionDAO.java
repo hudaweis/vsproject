@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package org.apache.shiro.session.mgt.eis;
 
 import com.vshuok.es.sys.user.entity.UserOnline;
@@ -20,7 +15,6 @@ import java.util.Date;
  * 对于db的操作 考虑使用 异步+队列机制
  * <p/>
  * <p>User: Hu Dawei
- 13-3-19 下午4:49
  * <p>Version: 1.0
  */
 public class OnlineSessionDAO extends EnterpriseCacheSessionDAO {

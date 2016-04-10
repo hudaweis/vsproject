@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf" %>
 <es:contentHeader title="用户登录 Easy-Scaffold脚手架" index="true"/>
+<!--
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <a class="brand" href="#">&nbsp;&nbsp;es脚手架</a>
@@ -13,6 +14,7 @@
         <a class="brand" style="float: right" href="mailto:zhangkaitao0503@gmail.com" target="_blank">&nbsp;&nbsp;问题反馈</a>
     </div>
 </div>
+ -->
 
 <div class="container">
     <div class="login">
@@ -64,7 +66,7 @@
         </div>
     </div>
 </div>
-
+<!--
 <footer class="footer">
     <div class="container">
         <p><a href="http://sishuok.com" target="_blank">私塾在线学习网</a></p>
@@ -78,6 +80,7 @@
         </ul>
     </div>
 </footer>
+  -->
 <es:contentFooter/>
 <script type="text/javascript">
     $(function() {

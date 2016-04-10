@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package org.apache.shiro.session.mgt.scheduler;
 
 import org.apache.shiro.session.mgt.DefaultSessionManager;
@@ -19,7 +14,6 @@ import java.util.concurrent.TimeUnit;
  * 使用spring的任务调度器完成 session验证
  * 功能直接复制了{@link org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler}
  * <p>User: Hu Dawei
- 13-7-2 下午5:33
  * <p>Version: 1.0
  */
 public class SpringSessionValidationScheduler implements SessionValidationScheduler {

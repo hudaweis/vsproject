@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2005-2012 https://github.com/zhangkaitao
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- */
 package org.apache.shiro.web.filter.authc;
 
 import com.vshuok.es.sys.user.entity.User;
@@ -22,7 +17,6 @@ import javax.servlet.ServletRequest;
  * 2.3、否则根据当前登录的用户决定返回到管理员首页/前台首页
  * <p/>
  * <p>User: Hu Dawei
- 13-3-19 下午2:11
  * <p>Version: 1.0
  */
 public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
