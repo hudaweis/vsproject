@@ -1,24 +1,23 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<es:contentHeader />
+<es:contentHeader/>
 <%@include file="/WEB-INF/jsp/common/import-zTree-css.jspf"%>
 <style>
-.scroll-pane {
-	width: 384px;
-	height: 100%;
-	overflow: auto;
-	float: left;
-}
-
-#organizationTree {
-	margin-right: 30px;
-}
+    .scroll-pane {
+        width: 384px;
+        height: 100%;
+        overflow: auto;
+        float: left;
+    }
+    #organizationTree {
+        margin-right: 30px;
+    }
 </style>
 
 <div id="organizationTree" class="scroll-pane"></div>
 
 <div id="jobTree" class="scroll-pane"></div>
-<es:contentFooter />
+<es:contentFooter/>
 <%@include file="/WEB-INF/jsp/common/import-zTree-js.jspf"%>
 
 <script type="text/javascript">

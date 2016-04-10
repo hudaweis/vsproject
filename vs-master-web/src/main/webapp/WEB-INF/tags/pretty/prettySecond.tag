@@ -1,5 +1,4 @@
-<%@ tag import="com.vshuok.es.common.utils.PrettyTimeUtils"%>
+<%@ tag import="com.sishuok.es.common.utils.PrettyTimeUtils" %>
 <%@ tag pageEncoding="UTF-8"%>
-<%@ attribute name="seconds" type="java.lang.Integer" required="true"
-	description="秒"%>
+<%@ attribute name="seconds" type="java.lang.Integer" required="true" description="秒" %>
 <%=PrettyTimeUtils.prettySeconds(seconds == null ? 0 : seconds)%>

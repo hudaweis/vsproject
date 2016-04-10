@@ -1,46 +1,51 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<es:contentHeader />
+<es:contentHeader/>
 <div data-table="table" class="panel">
 
-	<ul class="nav nav-tabs">
-		<li ${empty type ? 'class="active"' : ''}><a
-			href="${ctx}/admin/sys/group/${group.id}/listRelation"> <i
-				class="icon-table"></i> 查看组 &gt; ${group.type.info} &gt;
-				${group.name}
-		</a></li>
-		<li><a href="${ctx}/admin/sys/group"> <i class="icon-reply"></i>
-				返回分组列表
-		</a></li>
-	</ul>
+    <ul class="nav nav-tabs">
+        <li ${empty type ? 'class="active"' : ''}>
+            <a href="${ctx}/admin/sys/group/${group.id}/listRelation">
+                <i class="icon-table"></i>
+                查看组 &gt; ${group.type.info} &gt; ${group.name}
+            </a>
+        </li>
+        <li>
+            <a href="${ctx}/admin/sys/group">
+                <i class="icon-reply"></i>
+                返回分组列表
+            </a>
+        </li>
+    </ul>
 
-	<es:showMessage />
+    <es:showMessage/>
 
-	<div class="row-fluid tool ui-toolbar">
-		<div class="span4">
-			<div class="btn-group">
-				<shiro:hasPermission name="sys:group:create or sys:group:update">
-					<a class="btn btn-custom no-disabled"
-						href="${ctx}/admin/sys/group/${group.id}/batch/append"> <span
-						class="icon-file-alt"></span> 批量新增
-					</a>
-				</shiro:hasPermission>
-				<shiro:hasPermission name="sys:group:delete">
-					<a class="btn btn-custom btn-delete"> <i class="icon-trash"></i>
-						删除
-					</a>
-				</shiro:hasPermission>
-			</div>
-		</div>
-		<div class="span8">
-			<%@include file="relationSearchForm.jsp"%>
-		</div>
-	</div>
-	<%@include file="relationListTable.jsp"%>
+    <div class="row-fluid tool ui-toolbar">
+        <div class="span4">
+            <div class="btn-group">
+                <shiro:hasPermission name="sys:group:create or sys:group:update">
+                <a class="btn btn-custom no-disabled" href="${ctx}/admin/sys/group/${group.id}/batch/append">
+                    <span class="icon-file-alt"></span>
+                    批量新增
+                </a>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="sys:group:delete">
+                <a class="btn btn-custom btn-delete">
+                    <i class="icon-trash"></i>
+                    删除
+                </a>
+                </shiro:hasPermission>
+            </div>
+        </div>
+        <div class="span8">
+            <%@include file="relationSearchForm.jsp"%>
+        </div>
+    </div>
+    <%@include file="relationListTable.jsp"%>
 
 </div>
 
-<es:contentFooter />
+<es:contentFooter/>
 <script type="text/javascript">
     $(function() {
         $(".btn-delete").off("click").on("click", function() {

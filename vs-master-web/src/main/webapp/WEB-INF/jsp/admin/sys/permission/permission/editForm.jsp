@@ -1,99 +1,109 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<es:contentHeader />
+<es:contentHeader/>
 <div class="panel">
 
-	<ul class="nav nav-tabs">
-		<c:if test="${op eq '新增'}">
-			<li ${op eq '新增' ? 'class="active"' : ''}><a
-				href="${ctx}/admin/sys/permission/permission/create?BackURL=<es:BackURL/>">
-					<i class="icon-file-alt"></i> 新增
-			</a></li>
-		</c:if>
+    <ul class="nav nav-tabs">
+        <c:if test="${op eq '新增'}">
+            <li ${op eq '新增' ? 'class="active"' : ''}>
+                <a href="${ctx}/admin/sys/permission/permission/create?BackURL=<es:BackURL/>">
+                    <i class="icon-file-alt"></i>
+                    新增
+                </a>
+            </li>
+        </c:if>
 
-		<c:if test="${not empty m.id}">
-			<li ${op eq '查看' ? 'class="active"' : ''}><a
-				href="${ctx}/admin/sys/permission/permission/${m.id}?BackURL=<es:BackURL/>">
-					<i class="icon-eye-open"></i> 查看
-			</a></li>
-			<li ${op eq '修改' ? 'class="active"' : ''}><a
-				href="${ctx}/admin/sys/permission/permission/${m.id}/update?BackURL=<es:BackURL/>">
-					<i class="icon-edit"></i> 修改
-			</a></li>
-			<li ${op eq '删除' ? 'class="active"' : ''}><a
-				href="${ctx}/admin/sys/permission/permission/${m.id}/delete?BackURL=<es:BackURL/>">
-					<i class="icon-trash"></i> 删除
-			</a></li>
-		</c:if>
-		<li><a href="<es:BackURL/>" class="btn btn-link"> <i
-				class="icon-reply"></i> 返回
-		</a></li>
-	</ul>
+        <c:if test="${not empty m.id}">
+            <li ${op eq '查看' ? 'class="active"' : ''}>
+                <a href="${ctx}/admin/sys/permission/permission/${m.id}?BackURL=<es:BackURL/>">
+                    <i class="icon-eye-open"></i>
+                    查看
+                </a>
+            </li>
+            <li ${op eq '修改' ? 'class="active"' : ''}>
+                <a href="${ctx}/admin/sys/permission/permission/${m.id}/update?BackURL=<es:BackURL/>">
+                    <i class="icon-edit"></i>
+                    修改
+                </a>
+            </li>
+            <li ${op eq '删除' ? 'class="active"' : ''}>
+                <a href="${ctx}/admin/sys/permission/permission/${m.id}/delete?BackURL=<es:BackURL/>">
+                    <i class="icon-trash"></i>
+                    删除
+                </a>
+            </li>
+        </c:if>
+        <li>
+            <a href="<es:BackURL/>" class="btn btn-link">
+                <i class="icon-reply"></i>
+                返回
+            </a>
+        </li>
+    </ul>
 
-	<form:form id="editForm" method="post" commandName="m"
-		cssClass="form-horizontal">
+    <form:form id="editForm" method="post" commandName="m" cssClass="form-horizontal">
 
-		<es:showGlobalError commandName="m" />
+            <es:showGlobalError commandName="m"/>
 
-		<form:hidden path="id" />
+            <form:hidden path="id"/>
 
-		<div class="control-group">
-			<form:label path="name" cssClass="control-label">权限名称</form:label>
-			<div class="controls">
-				<form:input path="name" cssClass="validate[required]"
-					placeholder="权限描述名" />
-			</div>
-		</div>
+            <div class="control-group">
+                <form:label path="name" cssClass="control-label">权限名称</form:label>
+                <div class="controls">
+                    <form:input path="name" cssClass="validate[required]" placeholder="权限描述名"/>
+                </div>
+            </div>
 
-		<div class="control-group">
-			<form:label path="permission" cssClass="control-label">权限标识</form:label>
-			<div class="controls">
-				<form:input path="permission" cssClass="validate[required]"
-					placeholder="程序中使用的名称" />
-			</div>
-		</div>
-		<div class="control-group">
-			<form:label path="description" cssClass="control-label">详细描述</form:label>
-			<div class="controls">
-				<form:input path="description" />
-			</div>
-		</div>
+            <div class="control-group">
+                <form:label path="permission" cssClass="control-label">权限标识</form:label>
+                <div class="controls">
+                    <form:input path="permission" cssClass="validate[required]" placeholder="程序中使用的名称"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <form:label path="description" cssClass="control-label">详细描述</form:label>
+                <div class="controls">
+                    <form:input path="description"/>
+                </div>
+            </div>
 
-		<div class="control-group">
-			<form:label path="show" cssClass="control-label">状态</form:label>
-			<div class="controls inline-radio">
-				<form:radiobuttons path="show" items="${availableList}"
-					itemLabel="info" itemValue="value" cssClass="validate[required]" />
-			</div>
-		</div>
-
-
-
-		<c:if test="${op eq '新增'}">
-			<c:set var="icon" value="icon-file-alt" />
-		</c:if>
-		<c:if test="${op eq '修改'}">
-			<c:set var="icon" value="icon-edit" />
-		</c:if>
-		<c:if test="${op eq '删除'}">
-			<c:set var="icon" value="icon-trash" />
-		</c:if>
-
-		<div class="control-group">
-			<div class="controls">
-				<button type="submit" class="btn btn-primary">
-					<i class="${icon}"></i> ${op}
-				</button>
-				<a href="<es:BackURL/>" class="btn"> <i class="icon-reply"></i>
-					返回
-				</a>
-			</div>
-		</div>
+            <div class="control-group">
+                <form:label path="show" cssClass="control-label">状态</form:label>
+                <div class="controls inline-radio">
+                    <form:radiobuttons
+                            path="show" items="${availableList}" itemLabel="info" itemValue="value" cssClass="validate[required]"/>
+                </div>
+            </div>
 
 
-	</form:form>
+
+        <c:if test="${op eq '新增'}">
+                <c:set var="icon" value="icon-file-alt"/>
+            </c:if>
+            <c:if test="${op eq '修改'}">
+                <c:set var="icon" value="icon-edit"/>
+            </c:if>
+            <c:if test="${op eq '删除'}">
+                <c:set var="icon" value="icon-trash"/>
+            </c:if>
+
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="${icon}"></i>
+                            ${op}
+                    </button>
+                    <a href="<es:BackURL/>" class="btn">
+                        <i class="icon-reply"></i>
+                        返回
+                    </a>
+                </div>
+            </div>
+
+
+    </form:form>
 </div>
-<es:contentFooter />
+<es:contentFooter/>
 <script type="text/javascript">
     $(function () {
         <c:choose>

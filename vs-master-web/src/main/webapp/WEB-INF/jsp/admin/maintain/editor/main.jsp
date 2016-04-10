@@ -1,16 +1,14 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<es:contentHeader />
+<es:contentHeader/>
 <div class="ui-layout-west tree">
-	<iframe name="treeFrame" width="100%" height="100%" frameborder="0"
-		scrolling="auto" src="${ctx}/admin/maintain/editor/tree?async=true"></iframe>
+    <iframe name="treeFrame" width="100%" height="100%"  frameborder="0" scrolling="auto" src="${ctx}/admin/maintain/editor/tree?async=true"></iframe>
 </div>
 <div class="ui-layout-center tree">
-	<iframe name="listFrame" width="100%" height="100%" frameborder="0"
-		scrolling="auto" src="${ctx}/admin/maintain/editor/list"></iframe>
+    <iframe name="listFrame" width="100%" height="100%"  frameborder="0" scrolling="auto" src="${ctx}/admin/maintain/editor/list"></iframe>
 </div>
 
-<es:contentFooter />
+<es:contentFooter/>
 
 <script type="text/javascript">
     $(document).ready(function () {

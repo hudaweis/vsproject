@@ -1,6 +1,5 @@
-<%@ page contentType="text/html; encoding=gb2312"%><%@ page
-	import="java.lang.management.ManagementFactory"%>
-<%@ page import="java.lang.management.OperatingSystemMXBean"%>
+<%@ page contentType="text/html; encoding=gb2312"%><%@ page import="java.lang.management.ManagementFactory"%>
+<%@ page import="java.lang.management.OperatingSystemMXBean" %>
 <%
 OperatingSystemMXBean os = ManagementFactory.getOperatingSystemMXBean();
 %>

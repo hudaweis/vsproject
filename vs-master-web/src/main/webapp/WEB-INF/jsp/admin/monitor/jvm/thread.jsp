@@ -1,7 +1,6 @@
-<%@ page contentType="text/html; encoding=gb2312"%><%@ page
-	import="java.lang.management.ManagementFactory"%>
-<%@ page import="java.lang.management.ThreadInfo"%>
-<%@ page import="java.lang.management.ThreadMXBean"%>
+<%@ page contentType="text/html; encoding=gb2312"%><%@ page import="java.lang.management.ManagementFactory"%>
+<%@ page import="java.lang.management.ThreadInfo" %>
+<%@ page import="java.lang.management.ThreadMXBean" %>
 <%
 ThreadMXBean tm = ManagementFactory.getThreadMXBean();
 tm.setThreadContentionMonitoringEnabled(true);
@@ -9,11 +8,9 @@ tm.setThreadContentionMonitoringEnabled(true);
 <b>Thread Count: </b><%=tm.getThreadCount()%><br>
 <b>Started Thread Count: </b><%=tm.getTotalStartedThreadCount()%><br>
 <b>thread contention monitoring is enabled? </b><%=tm.isThreadContentionMonitoringEnabled()%><br>
-<b>if the Java virtual machine supports thread contention
-	monitoring? </b><%=tm.isThreadContentionMonitoringSupported()%><br>
+<b>if the Java virtual machine supports thread contention monitoring? </b><%=tm.isThreadContentionMonitoringSupported()%><br>
 <b>thread CPU time measurement is enabled? </b><%=tm.isThreadCpuTimeEnabled()%><br>
-<b>if the Java virtual machine implementation supports CPU time
-	measurement for any thread? </b><%=tm.isThreadCpuTimeSupported()%><br>
+<b>if the Java virtual machine implementation supports CPU time measurement for any thread? </b><%=tm.isThreadCpuTimeSupported()%><br>
 <hr>
 <%
 long [] tid = tm.getAllThreadIds();
@@ -49,12 +46,8 @@ for (int t = 0; t < threadArray.length; t ++)
 <b>Thread State: </b><%=ti.getThreadState()%><br>
 <b>Thread Lock Name: </b><%=ti.getLockName()%><br>
 <b>Thread Lock Owner Name: </b><%=ti.getLockOwnerName()%><br>
-<b>Thread CPU Time: </b><%=threadArray[t][1]%>
-sec
-<br>
-<b>Stack Info: (depth:<%=ti.getStackTrace().length%>)
-</b>
-<br>
+<b>Thread CPU Time: </b><%=threadArray[t][1]%> sec<br>
+<b>Stack Info: (depth:<%=ti.getStackTrace().length%>)</b><br>
 <%
 StackTraceElement[] stes = ti.getStackTrace();
 for(int j=0; j<stes.length; j++)

@@ -1,17 +1,20 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<es:contentHeader />
+<es:contentHeader/>
 <%@include file="/WEB-INF/jsp/common/import-zTree-css.jspf"%>
 
 
 <ul class="nav nav-tabs">
-	<li ${empty param['search.show_eq'] ? 'class="active"' : ''}><a
-		href="${ctx}/admin/maintain/editor/tree?async=${not empty param.async and param.async eq true}">
-			<i class="icon-table"></i> 目录列表 <i class="icon-refresh" title="点击刷新"></i>
-	</a></li>
+    <li ${empty param['search.show_eq'] ? 'class="active"' : ''}>
+        <a href="${ctx}/admin/maintain/editor/tree?async=${not empty param.async and param.async eq true}">
+            <i class="icon-table"></i>
+            目录列表
+            <i class="icon-refresh" title="点击刷新"></i>
+        </a>
+    </li>
 </ul>
 
-<es:contentFooter />
+<es:contentFooter/>
 <%@include file="/WEB-INF/jsp/common/import-zTree-js.jspf"%>
 <script type="text/javascript">
     $(function() {

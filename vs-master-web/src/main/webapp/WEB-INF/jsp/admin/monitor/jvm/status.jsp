@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"%>
 <%@ page import="org.springframework.web.context.WebApplicationContext"%>
-<%@ page
-	import="org.springframework.web.context.support.WebApplicationContextUtils"%>
-<%@ page import="java.lang.management.ManagementFactory"%>
-<%@ page import="java.lang.management.MemoryUsage"%>
+<%@ page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+<%@ page import="java.lang.management.ManagementFactory" %>
+<%@ page import="java.lang.management.MemoryUsage" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
 	try{

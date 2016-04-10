@@ -1,25 +1,28 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<es:contentHeader />
+<es:contentHeader/>
 <%@include file="/WEB-INF/jsp/common/import-zTree-css.jspf"%>
 
 <ul class="nav nav-tabs">
-	<li ${empty param['search.show_eq'] ? 'class="active"' : ''}><a
-		href="${ctx}/showcase/tree/tree?async=${not empty param.async and param.async eq true}">
-			<i class="icon-table"></i> 所有 <i class="icon-refresh" title="点击刷新"></i>
-	</a></li>
-	<li ${not empty param['search.show_eq'] ? 'class="active"' : ''}>
-		<a
-		href="${ctx}/showcase/tree/tree?async=${not empty param.async and param.async eq true}&search.show_eq=true">
-			<i class="icon-table"></i> 显示的
-	</a>
-	</li>
+    <li ${empty param['search.show_eq'] ? 'class="active"' : ''}>
+        <a href="${ctx}/showcase/tree/tree?async=${not empty param.async and param.async eq true}">
+            <i class="icon-table"></i>
+            所有
+            <i class="icon-refresh" title="点击刷新"></i>
+        </a>
+    </li>
+    <li ${not empty param['search.show_eq'] ? 'class="active"' : ''}>
+        <a href="${ctx}/showcase/tree/tree?async=${not empty param.async and param.async eq true}&search.show_eq=true">
+            <i class="icon-table"></i>
+            显示的
+        </a>
+    </li>
 </ul>
 
 
 <div id="treeContainer"></div>
 
-<es:contentFooter />
+<es:contentFooter/>
 <%@include file="/WEB-INF/jsp/common/import-zTree-js.jspf"%>
 <script type="text/javascript">
     var async = ${not empty param.async and param.async eq true};
