@@ -9,7 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Entity
 @Table(name = "showcase_moveable")
 public class Move extends BaseEntity<Long> implements Movable {
@@ -17,7 +20,7 @@ public class Move extends BaseEntity<Long> implements Movable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -4881533226187248907L;
+	private static final long serialVersionUID = 5249548743731618763L;
 
 	@NotNull(groups = Create.class)
     @Column(name = "name")
@@ -38,6 +41,14 @@ public class Move extends BaseEntity<Long> implements Movable {
         this.name = name;
     }
 
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
     public Boolean getShow() {
         return show;
     }
@@ -45,17 +56,4 @@ public class Move extends BaseEntity<Long> implements Movable {
     public void setShow(Boolean show) {
         this.show = show;
     }
-
-	@Override
-	public Integer getWeigth() {
-		// TODO Auto-generated method stub
-		return weight;
-	}
-
-	@Override
-	public void setWeigth(Integer weigth) {
-		// TODO Auto-generated method stub
-		this.weight=weigth;
-	}
-
 }

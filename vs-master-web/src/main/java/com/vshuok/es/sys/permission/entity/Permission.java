@@ -1,17 +1,17 @@
 package com.vshuok.es.sys.permission.entity;
 
+import com.vshuok.es.common.entity.BaseEntity;
+import com.vshuok.es.common.repository.support.annotation.EnableQueryCache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.vshuok.es.common.entity.BaseEntity;
-import com.vshuok.es.common.repository.support.annotation.EnableQueryCache;
-
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-/** 
- * <p>权限表</p>
- * @author Hu Dawei  
- * @version 1.0
+/**
+ * 权限表
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "sys_permission")
@@ -19,12 +19,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Permission extends BaseEntity<Long> {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -3407386996089042452L;
-
-	 /**
+	private static final long serialVersionUID = -6949122419807202368L;
+	/**
      * 前端显示名称
      */
     private String name;

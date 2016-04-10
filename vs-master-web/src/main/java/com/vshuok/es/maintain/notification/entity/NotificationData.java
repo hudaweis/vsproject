@@ -8,6 +8,8 @@ import java.util.Date;
 
 /**
  * 通知数据
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "maintain_notification_data")

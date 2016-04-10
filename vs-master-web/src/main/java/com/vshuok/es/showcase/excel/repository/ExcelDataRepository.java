@@ -5,7 +5,10 @@ import com.vshuok.es.showcase.excel.entity.ExcelData;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public interface ExcelDataRepository extends BaseRepository<ExcelData, Long> {
 
     public void truncate();

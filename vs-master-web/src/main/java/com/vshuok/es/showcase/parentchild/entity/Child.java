@@ -9,7 +9,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Entity
 @Table(name = "showcase_child")
 public class Child extends BaseEntity<Long> {

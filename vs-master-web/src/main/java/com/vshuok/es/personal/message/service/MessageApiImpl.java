@@ -1,7 +1,6 @@
 package com.vshuok.es.personal.message.service;
 
 import com.google.common.collect.Lists;
-
 import com.vshuok.es.common.entity.search.SearchOperator;
 import com.vshuok.es.common.entity.search.Searchable;
 import com.vshuok.es.common.entity.search.filter.SearchFilter;
@@ -30,368 +29,361 @@ import org.springframework.util.StringUtils;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Service
 public class MessageApiImpl implements MessageApi {
 
-	@Autowired
-	private MessageService messageService;
+    @Autowired
+    private MessageService messageService;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private PushApi pushApi;
+    @Autowired
+    private PushApi pushApi;
 
-	@Override
-	public Page<Message> findUserMessage(Long userId, MessageState state,
-			Pageable pageable) {
-		Searchable searchable = Searchable.newSearchable();
-		searchable.setPage(pageable);
+    @Override
+    public Page<Message> findUserMessage(Long userId, MessageState state, Pageable pageable) {
+        Searchable searchable = Searchable.newSearchable();
+        searchable.setPage(pageable);
 
-		switch (state) {
-		// sender的
-		case draft_box:
-		case out_box:
-			searchable.addSearchFilter("senderId", SearchOperator.eq, userId);
-			searchable.addSearchFilter("senderState", SearchOperator.eq, state);
-			break;
-		// receiver的
-		case in_box:
-			searchable.addSearchFilter("receiverId", SearchOperator.eq, userId);
-			searchable.addSearchFilter("receiverState", SearchOperator.eq,
-					state);
-			break;
-		// sender or receiver的
-		case store_box:
-		case trash_box:
-			// sender
+        switch (state) {
+            //sender的
+            case draft_box:
+            case out_box:
+                searchable.addSearchFilter("senderId", SearchOperator.eq, userId);
+                searchable.addSearchFilter("senderState", SearchOperator.eq, state);
+                break;
+            //receiver的
+            case in_box:
+                searchable.addSearchFilter("receiverId", SearchOperator.eq, userId);
+                searchable.addSearchFilter("receiverState", SearchOperator.eq, state);
+                break;
+            //sender or receiver的
+            case store_box:
+            case trash_box:
+                //sender
 
-			SearchFilter senderFilter = SearchFilterHelper.newCondition(
-					"senderId", SearchOperator.eq, userId);
-			SearchFilter senderStateFilter = SearchFilterHelper.newCondition(
-					"senderState", SearchOperator.eq, state);
-			SearchFilter and1 = SearchFilterHelper.and(senderFilter,
-					senderStateFilter);
+                SearchFilter senderFilter = SearchFilterHelper.newCondition("senderId", SearchOperator.eq, userId);
+                SearchFilter senderStateFilter = SearchFilterHelper.newCondition("senderState", SearchOperator.eq, state);
+                SearchFilter and1 = SearchFilterHelper.and(senderFilter, senderStateFilter);
 
-			// receiver
-			SearchFilter receiverFilter = SearchFilterHelper.newCondition(
-					"receiverId", SearchOperator.eq, userId);
-			SearchFilter receiverStateFilter = SearchFilterHelper.newCondition(
-					"receiverState", SearchOperator.eq, state);
-			SearchFilter and2 = SearchFilterHelper.and(receiverFilter,
-					receiverStateFilter);
+                //receiver
+                SearchFilter receiverFilter = SearchFilterHelper.newCondition("receiverId", SearchOperator.eq, userId);
+                SearchFilter receiverStateFilter = SearchFilterHelper.newCondition("receiverState", SearchOperator.eq, state);
+                SearchFilter and2 = SearchFilterHelper.and(receiverFilter, receiverStateFilter);
 
-			searchable.or(and1, and2);
-		}
+                searchable.or(and1, and2);
+        }
 
-		return messageService.findAll(searchable);
-	}
 
-	@Override
-	public List<Message> findAncestorsAndDescendants(Message message) {
-		Searchable searchable = Searchable.newSearchable();
+        return messageService.findAll(searchable);
+    }
 
-		searchable.addSort(Sort.Direction.ASC, "id");
+    @Override
+    public List<Message> findAncestorsAndDescendants(Message message) {
+        Searchable searchable = Searchable.newSearchable();
 
-		SearchFilter filter = null;
-		// 祖先 不为空 从祖先查起
-		if (!StringUtils.isEmpty(message.getParentIds())) {
-			String ancestorsId = message.getParentIds().split("/")[0];
-			filter = SearchFilterHelper.or(SearchFilterHelper.newCondition(
-					"parentIds", SearchOperator.prefixLike, ancestorsId + "/"),
-					SearchFilterHelper.newCondition("id", SearchOperator.eq,
-							ancestorsId));
-		} else {
-			// 祖先为空 查自己的后代
-			String descendantsParentIds = message.makeSelfAsParentIds();
-			filter = SearchFilterHelper.newCondition("parentIds",
-					SearchOperator.prefixLike, descendantsParentIds);
-		}
+        searchable.addSort(Sort.Direction.ASC, "id");
 
-		searchable.addSearchFilter(filter);
-		List<Message> result = messageService.findAllWithSort(searchable);
-		// 把自己排除
-		result.remove(message);
+        SearchFilter filter = null;
+        //祖先 不为空 从祖先查起
+        if (!StringUtils.isEmpty(message.getParentIds())) {
+            String ancestorsId = message.getParentIds().split("/")[0];
+            filter = SearchFilterHelper.or(
+                    SearchFilterHelper.newCondition("parentIds", SearchOperator.prefixLike, ancestorsId + "/"),
+                    SearchFilterHelper.newCondition("id", SearchOperator.eq, ancestorsId)
+            );
+        } else {
+            //祖先为空 查自己的后代
+            String descendantsParentIds = message.makeSelfAsParentIds();
+            filter = SearchFilterHelper.newCondition("parentIds", SearchOperator.prefixLike, descendantsParentIds);
+        }
 
-		// 删除 不可见的消息 如垃圾箱/已删除
-		for (int i = result.size() - 1; i >= 0; i--) {
-			Message m = result.get(i);
+        searchable.addSearchFilter(filter);
+        List<Message> result = messageService.findAllWithSort(searchable);
+        //把自己排除
+        result.remove(message);
 
-			if (m.getSenderId() == message.getSenderId()
-					&& (m.getSenderState() == MessageState.trash_box || m
-							.getSenderState() == MessageState.delete_box)) {
-				result.remove(i);
-			}
+        //删除 不可见的消息 如垃圾箱/已删除
+        for (int i = result.size() - 1; i >= 0; i--) {
+            Message m = result.get(i);
 
-			if (m.getReceiverId() == message.getSenderId()
-					&& (m.getSenderState() == MessageState.trash_box || m
-							.getSenderState() == MessageState.delete_box)) {
-				result.remove(i);
-			}
-		}
+            if (m.getSenderId() == message.getSenderId() &&
+                    (m.getSenderState() == MessageState.trash_box || m.getSenderState() == MessageState.delete_box)) {
+                result.remove(i);
+            }
 
-		return result;
-	}
+            if (m.getReceiverId() == message.getSenderId() &&
+                    (m.getSenderState() == MessageState.trash_box || m.getSenderState() == MessageState.delete_box)) {
+                result.remove(i);
+            }
+        }
 
-	@Override
-	public void saveDraft(Message message) {
-		message.setSenderState(MessageState.draft_box);
-		message.setReceiverState(null);
-		if (message.getContent() != null) {
-			message.getContent().setMessage(message);
-		}
-		messageService.save(message);
-	}
+        return result;
+    }
 
-	@Override
-	public void send(Message message) {
-		Date now = new Date();
-		message.setSendDate(now);
-		message.setSenderState(MessageState.out_box);
-		message.setSenderStateChangeDate(now);
-		message.setReceiverState(MessageState.in_box);
-		message.setReceiverStateChangeDate(now);
+    @Override
+    public void saveDraft(Message message) {
+        message.setSenderState(MessageState.draft_box);
+        message.setReceiverState(null);
+        if (message.getContent() != null) {
+            message.getContent().setMessage(message);
+        }
+        messageService.save(message);
+    }
 
-		message.getContent().setMessage(message);
+    @Override
+    public void send(Message message) {
+        Date now = new Date();
+        message.setSendDate(now);
+        message.setSenderState(MessageState.out_box);
+        message.setSenderStateChangeDate(now);
+        message.setReceiverState(MessageState.in_box);
+        message.setReceiverStateChangeDate(now);
 
-		if (message.getParentId() != null) {
-			Message parent = messageService.findOne(message.getParentId());
-			if (parent != null) {
-				message.setParentIds(parent.makeSelfAsParentIds());
-			}
-		}
+        message.getContent().setMessage(message);
 
-		messageService.save(message);
+        if (message.getParentId() != null) {
+            Message parent = messageService.findOne(message.getParentId());
+            if (parent != null) {
+                message.setParentIds(parent.makeSelfAsParentIds());
+            }
+        }
 
-		pushApi.pushUnreadMessage(message.getReceiverId(),
-				countUnread(message.getReceiverId()));
+        messageService.save(message);
 
-	}
 
-	@Override
-	public void sendSystemMessage(Long[] receiverIds, Message message) {
-		message.setType(MessageType.system_message);
+        pushApi.pushUnreadMessage(message.getReceiverId(), countUnread(message.getReceiverId()));
 
-		for (Long receiverId : receiverIds) {
-			if (receiverId == null) {
-				continue;
-			}
-			Message copyMessage = new Message();
-			MessageContent copyMessageContent = new MessageContent();
-			copyMessageContent.setContent(message.getContent().getContent());
+    }
 
-			BeanUtils.copyProperties(message, copyMessage);
+    @Override
+    public void sendSystemMessage(Long[] receiverIds, Message message) {
+        message.setType(MessageType.system_message);
 
-			copyMessage.setContent(copyMessageContent);
-			copyMessageContent.setMessage(copyMessage);
+        for (Long receiverId : receiverIds) {
+            if (receiverId == null) {
+                continue;
+            }
+            Message copyMessage = new Message();
+            MessageContent copyMessageContent = new MessageContent();
+            copyMessageContent.setContent(message.getContent().getContent());
 
-			copyMessage.setReceiverId(receiverId);
+            BeanUtils.copyProperties(message, copyMessage);
 
-			send(copyMessage);
+            copyMessage.setContent(copyMessageContent);
+            copyMessageContent.setMessage(copyMessage);
 
-		}
-	}
+            copyMessage.setReceiverId(receiverId);
 
-	@Async
-	@Override
-	public void sendSystemMessageToAllUser(Message message) {
-		// TODO 变更实现策略 使用异步发送
+            send(copyMessage);
 
-		int pn = 0;
-		int pageSize = 100;
+        }
+    }
 
-		Pageable pageable = null;
-		Page<User> page = null;
+    @Async
+    @Override
+    public void sendSystemMessageToAllUser(Message message) {
+        //TODO 变更实现策略 使用异步发送
 
-		do {
-			pageable = new PageRequest(pn++, pageSize);
-			page = userService.findAll(pageable);
+        int pn = 0;
+        int pageSize = 100;
 
-			try {
-				((MessageApiImpl) AopContext.currentProxy())
-						.doSendSystemMessage(page.getContent(), message);
-			} catch (Exception e) {
-				LogUtils.logError("send system message to all user error", e);
-			}
-			RepositoryHelper.clear();
-		} while (page.hasNextPage());
+        Pageable pageable = null;
+        Page<User> page = null;
 
-	}
+        do {
+            pageable = new PageRequest(pn++, pageSize);
+            page = userService.findAll(pageable);
 
-	public void doSendSystemMessage(List<User> receivers, Message message) {
-		List<Long> receiverIds = Lists.newArrayList();
+            try {
+                ((MessageApiImpl) AopContext.currentProxy()).doSendSystemMessage(page.getContent(), message);
+            } catch (Exception e) {
+                LogUtils.logError("send system message to all user error", e);
+            }
+            RepositoryHelper.clear();
+        } while (page.hasNextPage());
 
-		for (User receiver : receivers) {
-			if (Boolean.TRUE.equals(receiver.getDeleted())
-					|| receiver.getStatus() != UserStatus.normal) {
-				continue;
-			}
+    }
 
-			receiverIds.add(receiver.getId());
-		}
+    public void doSendSystemMessage(List<User> receivers, Message message) {
+        List<Long> receiverIds = Lists.newArrayList();
 
-		sendSystemMessage(receiverIds.toArray(new Long[0]), message);
-	}
+        for (User receiver : receivers) {
+            if (Boolean.TRUE.equals(receiver.getDeleted()) || receiver.getStatus() != UserStatus.normal) {
+                continue;
+            }
 
-	@Override
-	public void recycle(Long userId, Long messageId) {
-		changeState(userId, messageId, MessageState.trash_box);
-	}
+            receiverIds.add(receiver.getId());
+        }
 
-	@Override
-	public void recycle(Long userId, Long[] messageIds) {
-		for (Long messageId : messageIds) {
-			recycle(userId, messageId);
-		}
-	}
+        sendSystemMessage(receiverIds.toArray(new Long[0]), message);
+    }
 
-	@Override
-	public void store(Long userId, Long messageId) {
-		changeState(userId, messageId, MessageState.store_box);
-	}
+    @Override
+    public void recycle(Long userId, Long messageId) {
+        changeState(userId, messageId, MessageState.trash_box);
+    }
 
-	@Override
-	public void store(Long userId, Long[] messageIds) {
-		for (Long messageId : messageIds) {
-			store(userId, messageId);
-		}
-	}
+    @Override
+    public void recycle(Long userId, Long[] messageIds) {
+        for (Long messageId : messageIds) {
+            recycle(userId, messageId);
+        }
+    }
 
-	@Override
-	public void delete(Long userId, Long messageId) {
-		changeState(userId, messageId, MessageState.delete_box);
-	}
+    @Override
+    public void store(Long userId, Long messageId) {
+        changeState(userId, messageId, MessageState.store_box);
+    }
 
-	@Override
-	public void delete(Long userId, Long[] messageIds) {
-		for (Long messageId : messageIds) {
-			delete(userId, messageId);
-		}
-	}
+    @Override
+    public void store(Long userId, Long[] messageIds) {
+        for (Long messageId : messageIds) {
+            store(userId, messageId);
+        }
+    }
 
-	/**
-	 * 变更状态 根据用户id是收件人/发件人 决定更改哪个状态
-	 *
-	 * @param userId
-	 * @param messageId
-	 * @param state
-	 */
-	private void changeState(Long userId, Long messageId, MessageState state) {
-		Message message = messageService.findOne(messageId);
-		if (message == null) {
-			return;
-		}
-		if (userId.equals(message.getSenderId())) {
-			changeSenderState(message, state);
-		} else {
-			changeReceiverState(message, state);
-		}
-		messageService.update(message);
-	}
+    @Override
+    public void delete(Long userId, Long messageId) {
+        changeState(userId, messageId, MessageState.delete_box);
+    }
 
-	@Override
-	public void clearBox(Long userId, MessageState state) {
-		switch (state) {
-		case draft_box:
-			clearBox(userId, MessageState.draft_box, MessageState.trash_box);
-			break;
-		case in_box:
-			clearBox(userId, MessageState.in_box, MessageState.trash_box);
-			break;
-		case out_box:
-			clearBox(userId, MessageState.out_box, MessageState.trash_box);
-			break;
-		case store_box:
-			clearBox(userId, MessageState.store_box, MessageState.trash_box);
-			break;
-		case trash_box:
-			clearBox(userId, MessageState.trash_box, MessageState.delete_box);
-			break;
-		default:
-			// none;
-			break;
-		}
-	}
+    @Override
+    public void delete(Long userId, Long[] messageIds) {
+        for (Long messageId : messageIds) {
+            delete(userId, messageId);
+        }
+    }
 
-	@Override
-	public void clearDraftBox(Long userId) {
-		clearBox(userId, MessageState.draft_box);
-	}
 
-	@Override
-	public void clearInBox(Long userId) {
-		clearBox(userId, MessageState.in_box);
-	}
+    /**
+     * 变更状态
+     * 根据用户id是收件人/发件人 决定更改哪个状态
+     *
+     * @param userId
+     * @param messageId
+     * @param state
+     */
+    private void changeState(Long userId, Long messageId, MessageState state) {
+        Message message = messageService.findOne(messageId);
+        if (message == null) {
+            return;
+        }
+        if (userId.equals(message.getSenderId())) {
+            changeSenderState(message, state);
+        } else {
+            changeReceiverState(message, state);
+        }
+        messageService.update(message);
+    }
 
-	@Override
-	public void clearOutBox(Long userId) {
-		clearBox(userId, MessageState.out_box);
-	}
+    @Override
+    public void clearBox(Long userId, MessageState state) {
+        switch (state) {
+            case draft_box:
+                clearBox(userId, MessageState.draft_box, MessageState.trash_box);
+                break;
+            case in_box:
+                clearBox(userId, MessageState.in_box, MessageState.trash_box);
+                break;
+            case out_box:
+                clearBox(userId, MessageState.out_box, MessageState.trash_box);
+                break;
+            case store_box:
+                clearBox(userId, MessageState.store_box, MessageState.trash_box);
+                break;
+            case trash_box:
+                clearBox(userId, MessageState.trash_box, MessageState.delete_box);
+                break;
+            default:
+                //none;
+                break;
+        }
+    }
 
-	@Override
-	public void clearStoreBox(Long userId) {
-		clearBox(userId, MessageState.store_box);
-	}
+    @Override
+    public void clearDraftBox(Long userId) {
+        clearBox(userId, MessageState.draft_box);
+    }
 
-	@Override
-	public void clearTrashBox(Long userId) {
-		clearBox(userId, MessageState.trash_box);
-	}
+    @Override
+    public void clearInBox(Long userId) {
+        clearBox(userId, MessageState.in_box);
+    }
 
-	private void clearBox(Long userId, MessageState oldState,
-			MessageState newState) {
-		if (oldState == MessageState.draft_box
-				|| oldState == MessageState.out_box
-				|| oldState == MessageState.store_box
-				|| oldState == MessageState.trash_box) {
+    @Override
+    public void clearOutBox(Long userId) {
+        clearBox(userId, MessageState.out_box);
+    }
 
-			messageService.changeSenderState(userId, oldState, newState);
-		}
+    @Override
+    public void clearStoreBox(Long userId) {
+        clearBox(userId, MessageState.store_box);
+    }
 
-		if (oldState == MessageState.in_box
-				|| oldState == MessageState.store_box
-				|| oldState == MessageState.trash_box) {
-			messageService.changeReceiverState(userId, oldState, newState);
-		}
+    @Override
+    public void clearTrashBox(Long userId) {
+        clearBox(userId, MessageState.trash_box);
+    }
 
-	}
+    private void clearBox(Long userId, MessageState oldState, MessageState newState) {
+        if (oldState == MessageState.draft_box
+                || oldState == MessageState.out_box
+                || oldState == MessageState.store_box
+                || oldState == MessageState.trash_box) {
 
-	@Override
-	public Long countUnread(Long userId) {
-		return messageService.countUnread(userId);
-	}
+            messageService.changeSenderState(userId, oldState, newState);
+        }
 
-	@Override
-	public void markRead(Message message) {
-		if (Boolean.TRUE.equals(message.getRead())) {
-			return;
-		}
-		message.setRead(Boolean.TRUE);
-		messageService.update(message);
-	}
+        if (oldState == MessageState.in_box
+                || oldState == MessageState.store_box
+                || oldState == MessageState.trash_box) {
+            messageService.changeReceiverState(userId, oldState, newState);
+        }
 
-	@Override
-	public void markReplied(Message message) {
-		if (Boolean.TRUE.equals(message.getReplied())) {
-			return;
-		}
-		message.setReplied(Boolean.TRUE);
-		messageService.update(message);
-	}
+    }
 
-	@Override
-	public void markRead(final Long userId, final Long[] ids) {
-		messageService.markRead(userId, ids);
-	}
+    @Override
+    public Long countUnread(Long userId) {
+        return messageService.countUnread(userId);
+    }
 
-	private void changeSenderState(Message message, MessageState state) {
-		message.setSenderState(state);
-		message.setSenderStateChangeDate(new Date());
-	}
+    @Override
+    public void markRead(Message message) {
+        if (Boolean.TRUE.equals(message.getRead())) {
+            return;
+        }
+        message.setRead(Boolean.TRUE);
+        messageService.update(message);
+    }
 
-	private void changeReceiverState(Message message, MessageState state) {
-		message.setReceiverState(state);
-		message.setReceiverStateChangeDate(new Date());
-	}
+    @Override
+    public void markReplied(Message message) {
+        if (Boolean.TRUE.equals(message.getReplied())) {
+            return;
+        }
+        message.setReplied(Boolean.TRUE);
+        messageService.update(message);
+    }
+
+    @Override
+    public void markRead(final Long userId, final Long[] ids) {
+        messageService.markRead(userId, ids);
+    }
+
+    private void changeSenderState(Message message, MessageState state) {
+        message.setSenderState(state);
+        message.setSenderStateChangeDate(new Date());
+    }
+
+    private void changeReceiverState(Message message, MessageState state) {
+        message.setReceiverState(state);
+        message.setReceiverStateChangeDate(new Date());
+    }
 
 }

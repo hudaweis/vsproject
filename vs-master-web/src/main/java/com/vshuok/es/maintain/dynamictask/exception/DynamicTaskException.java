@@ -1,13 +1,11 @@
 package com.vshuok.es.maintain.dynamictask.exception;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public class DynamicTaskException extends RuntimeException {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2092276450032995608L;
-
-	public DynamicTaskException(String message, Throwable cause) {
+    public DynamicTaskException(String message, Throwable cause) {
         super(message, cause);
     }
 }

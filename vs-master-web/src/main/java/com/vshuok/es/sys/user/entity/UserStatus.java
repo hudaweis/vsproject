@@ -1,7 +1,7 @@
 package com.vshuok.es.sys.user.entity;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 public enum UserStatus {

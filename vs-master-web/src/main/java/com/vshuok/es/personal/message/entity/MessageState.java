@@ -2,6 +2,8 @@ package com.vshuok.es.personal.message.entity;
 
 /**
  * 消息状态
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 public enum MessageState {
 

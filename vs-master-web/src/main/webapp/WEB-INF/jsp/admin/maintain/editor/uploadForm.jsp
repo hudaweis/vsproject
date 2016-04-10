@@ -1,84 +1,84 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<es:contentHeader/>
+<es:contentHeader />
 <%@include file="/WEB-INF/jsp/common/import-upload-css.jspf"%>
 
 <div class="panel">
 
-    <ul class="nav nav-tabs">
-        <li class="active">
-            <a href="${ctx}/admin/maintain/editor/upload?parentPath=${parentPath}">
-                <i class="icon-upload"></i>
-                上传
-            </a>
-        </li>
-        <li>
-            <a href="${ctx}/admin/maintain/editor/list?path=${parentPath}">
-                <i class="icon-reply"></i>
-                返回
-            </a>
-        </li>
-    </ul>
+	<ul class="nav nav-tabs">
+		<li class="active"><a
+			href="${ctx}/admin/maintain/editor/upload?parentPath=${parentPath}">
+				<i class="icon-upload"></i> 上传
+		</a></li>
+		<li><a
+			href="${ctx}/admin/maintain/editor/list?path=${parentPath}"> <i
+				class="icon-reply"></i> 返回
+		</a></li>
+	</ul>
 
-    <div class="alert alert-block">
-        <strong>注意：</strong>可以上传的文件类型包括：图片：bmp,gif,jpg,png、文档：pdf,doc,xls,ppt、压缩文件：zip,rar、web相关：jsp,jspx,tag,tld,xml,html,css,js,class！
-    </div>
+	<div class="alert alert-block">
+		<strong>注意：</strong>可以上传的文件类型包括：图片：bmp,gif,jpg,png、文档：pdf,doc,xls,ppt、压缩文件：zip,rar、web相关：jsp,jspx,tag,tld,xml,html,css,js,class！
+	</div>
 
 
-    <form:form id="fileupload" method="post" cssClass="form-horizontal" enctype="multipart/form-data">
+	<form:form id="fileupload" method="post" cssClass="form-horizontal"
+		enctype="multipart/form-data">
 
-        <div class="label label-info">当前目录：${empty parentPath ? '根' : parentPath}</div><br/><br/>
-        <input type="hidden" name="parentPath" value="${parentPath}"/>
+		<div class="label label-info">当前目录：${empty parentPath ? '根' : parentPath}</div>
+		<br />
+		<br />
+		<input type="hidden" name="parentPath" value="${parentPath}" />
 
-        <label class="label label-info">冲突时：</label>
-        <label class="radio inline"><input type="radio" name="conflict" value="override">覆盖</label><label class="radio inline"><input type="radio" name="conflict" value="ignore" checked="checked">跳过</label>
-        <br/><br/>
-        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-        <div class="row fileupload-buttonbar">
-            <div class="span7">
-                <!-- The fileinput-button span is used to style the file input field as button -->
-                <label for="files" class="btn btn-success fileinput-button">
-                    <i class="icon-plus icon-white"></i>
-                    添加文件...
-                    <input type="file" id="files" name="files[]" multiple>
-                </label>
+		<label class="label label-info">冲突时：</label>
+		<label class="radio inline"><input type="radio"
+			name="conflict" value="override">覆盖</label>
+		<label class="radio inline"><input type="radio"
+			name="conflict" value="ignore" checked="checked">跳过</label>
+		<br />
+		<br />
+		<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+		<div class="row fileupload-buttonbar">
+			<div class="span7">
+				<!-- The fileinput-button span is used to style the file input field as button -->
+				<label for="files" class="btn btn-success fileinput-button">
+					<i class="icon-plus icon-white"></i> 添加文件... <input type="file"
+					id="files" name="files[]" multiple>
+				</label>
 
-                <button type="submit" class="btn btn-primary start">
-                    <i class="icon-upload icon-white"></i>
-                    开始上传
-                </button>
-                <button type="reset" class="btn btn-warning cancel">
-                    <i class="icon-ban-circle icon-white"></i>
-                    取消上传
-                </button>
-                <button type="button" class="btn btn-danger delete">
-                    <i class="icon-trash icon-white"></i>
-                    删除
-                </button>
-                <input type="checkbox" class="toggle">
-            </div>
-            <!-- The global progress information -->
-            <div class="span5 fileupload-progress fade">
-                <!-- The global progress bar -->
-                <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0"
-                     aria-valuemax="100">
-                    <div class="bar" style="width:0%;"></div>
-                </div>
-                <!-- The extended global progress information -->
-                <div class="progress-extended">&nbsp;</div>
-            </div>
-        </div>
-        <!-- The loading indicator is shown during file processing -->
-        <div class="fileupload-loading"></div>
-        <br>
-        <!-- The table listing the files available for upload/download -->
-        <table role="presentation" class="table">
-            <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
-        </table>
+				<button type="submit" class="btn btn-primary start">
+					<i class="icon-upload icon-white"></i> 开始上传
+				</button>
+				<button type="reset" class="btn btn-warning cancel">
+					<i class="icon-ban-circle icon-white"></i> 取消上传
+				</button>
+				<button type="button" class="btn btn-danger delete">
+					<i class="icon-trash icon-white"></i> 删除
+				</button>
+				<input type="checkbox" class="toggle">
+			</div>
+			<!-- The global progress information -->
+			<div class="span5 fileupload-progress fade">
+				<!-- The global progress bar -->
+				<div class="progress progress-success progress-striped active"
+					role="progressbar" aria-valuemin="0" aria-valuemax="100">
+					<div class="bar" style="width: 0%;"></div>
+				</div>
+				<!-- The extended global progress information -->
+				<div class="progress-extended">&nbsp;</div>
+			</div>
+		</div>
+		<!-- The loading indicator is shown during file processing -->
+		<div class="fileupload-loading"></div>
+		<br>
+		<!-- The table listing the files available for upload/download -->
+		<table role="presentation" class="table">
+			<tbody class="files" data-toggle="modal-gallery"
+				data-target="#modal-gallery"></tbody>
+		</table>
 
-    </form:form>
+	</form:form>
 </div>
-<es:contentFooter/>
+<es:contentFooter />
 <%@include file="/WEB-INF/jsp/common/import-upload-js.jspf"%>
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">

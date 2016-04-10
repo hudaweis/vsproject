@@ -1,42 +1,40 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/jsp/common/taglibs.jspf" %>
-<es:contentHeader/>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
+<es:contentHeader />
 <style>
-    .detail {
-        word-break: break-all;
-    }
+.detail {
+	word-break: break-all;
+}
 </style>
 <div data-table="table" class="panel">
-    <%@include file="nav.jspf" %>
-    <a href="<es:BackURL/>" class="btn btn-link pull-right">返回</a>
-    <a href="?BackURL=<es:BackURL/>" class="btn btn-link pull-right">刷新</a>
-    <a class="btn btn-link pull-right btn-clear">清空</a>
+	<%@include file="nav.jspf"%>
+	<a href="<es:BackURL/>" class="btn btn-link pull-right">返回</a> <a
+		href="?BackURL=<es:BackURL/>" class="btn btn-link pull-right">刷新</a> <a
+		class="btn btn-link pull-right btn-clear">清空</a>
 
-    <table class="table table-bordered">
-        <tbody>
+	<table class="table table-bordered">
+		<tbody>
 
-        <tr class="bold info">
-            <td colspan="2">
-                ${cacheName} 键列表
-                <esform:input path="searchText" class="input-medium pull-right no-margin" placeholder="回车模糊查询"/>
-            </td>
-        </tr>
+			<tr class="bold info">
+				<td colspan="2">${cacheName}键列表 <esform:input path="searchText"
+						class="input-medium pull-right no-margin" placeholder="回车模糊查询" />
+				</td>
+			</tr>
 
-        <c:forEach items="${keys}" var="key">
-            <tr>
-                <td style="width: 40%">${key}</td>
-                <td data-key="${key}">
-                    <a class="btn btn-link no-padding btn-details">查看详细</a>
-                    <a class="btn btn-link no-padding btn-delete">删除</a>
-                </td>
-            </tr>
-        </c:forEach>
+			<c:forEach items="${keys}" var="key">
+				<tr>
+					<td style="width: 40%">${key}</td>
+					<td data-key="${key}"><a
+						class="btn btn-link no-padding btn-details">查看详细</a> <a
+						class="btn btn-link no-padding btn-delete">删除</a></td>
+				</tr>
+			</c:forEach>
 
-        </tbody>
-    </table>
-    <br/><br/>
+		</tbody>
+	</table>
+	<br /> <br />
 </div>
-<es:contentFooter/>
+<es:contentFooter />
 <script type="text/javascript">
 $(function() {
     $("#searchText").keyup(function(event) {

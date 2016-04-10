@@ -22,7 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
+ 13-2-4 上午9:38
  * <p>Version: 1.0
  */
 @Entity

@@ -5,7 +5,10 @@ import com.vshuok.es.showcase.deleted.entity.DeletedSample;
 import com.vshuok.es.showcase.deleted.repository.DeletedSampleRepository;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Service
 public class DeletedSampleService extends BaseService<DeletedSample, Long> {
 

@@ -12,7 +12,10 @@ import java.io.*;
 import java.util.Enumeration;
 import java.util.List;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public class CompressUtils {
 
     public static final void zip(String compressPath, String[] needCompressPaths) {
@@ -85,6 +88,7 @@ public class CompressUtils {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static void unzipFolder(File uncompressFile, File descPathFile, boolean override) {
 
         ZipFile zipFile = null;
@@ -133,4 +137,19 @@ public class CompressUtils {
 
     }
 
+
+    public static void main(String[] args) {
+//        String[] needCompressFilePath = new String[]{
+//                "C:\\Documents and Settings\\Administrator\\桌面\\JEE入门",
+//                "C:\\Documents and Settings\\Administrator\\桌面\\learn-spring",
+//                "C:\\Documents and Settings\\Administrator\\桌面\\XML.doc"
+//        };
+//
+//        String compressPath = "C:\\Documents and Settings\\Administrator\\桌面\\中文.tar.gz";
+
+//        zip(compressPath, needCompressFilePath);
+
+//        unzip("C:\\Documents and Settings\\Administrator\\桌面\\新建文件夹\\中文.tar.gz", "C:\\Documents and Settings\\Administrator\\桌面\\新建文件夹");
+
+    }
 }

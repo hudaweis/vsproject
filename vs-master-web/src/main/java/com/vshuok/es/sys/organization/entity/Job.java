@@ -13,6 +13,9 @@ import javax.persistence.Table;
 
 /**
  * 组织机构树
+ * <p>User: Hu Dawei
+ 13-2-4 上午9:38
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "sys_job")
@@ -63,33 +66,27 @@ public class Job extends BaseEntity<Long> implements Treeable<Long> {
         setId(id);
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
 
-    @Override
     public Long getParentId() {
 
         return parentId;
     }
 
-    @Override
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
-    @Override
     public String getParentIds() {
         return parentIds;
     }
 
-    @Override
     public void setParentIds(String parentIds) {
         this.parentIds = parentIds;
     }
@@ -104,7 +101,6 @@ public class Job extends BaseEntity<Long> implements Treeable<Long> {
         return "/";
     }
 
-    @Override
     public Integer getWeight() {
         return weight;
     }
@@ -113,7 +109,6 @@ public class Job extends BaseEntity<Long> implements Treeable<Long> {
         this.weight = weight;
     }
 
-    @Override
     public String getIcon() {
         if (!StringUtils.isEmpty(icon)) {
             return icon;

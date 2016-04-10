@@ -1,7 +1,6 @@
 package com.vshuok.es.maintain.editor.web.controller.utils;
 
 import com.google.common.collect.Maps;
-
 import com.vshuok.es.common.Constants;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.data.domain.Sort;
@@ -12,7 +11,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public class OnlineEditorUtils {
 
     private static final String DATE_PATTERN = "yyyy-MM-dd hh:mm:ss";

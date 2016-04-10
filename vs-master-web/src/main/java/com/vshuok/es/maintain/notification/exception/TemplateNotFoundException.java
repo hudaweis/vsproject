@@ -1,6 +1,9 @@
 package com.vshuok.es.maintain.notification.exception;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public class TemplateNotFoundException extends TemplateException {
     /**
 	 * 

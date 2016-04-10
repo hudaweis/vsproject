@@ -7,11 +7,12 @@ import com.vshuok.es.common.entity.enums.BooleanEnum;
 import com.vshuok.es.common.entity.search.SearchOperator;
 import com.vshuok.es.common.entity.search.Searchable;
 import com.vshuok.es.common.plugin.entity.Treeable;
-import com.vshuok.es.common.plugin.service.BaseTreeableService;
+import com.vshuok.es.common.plugin.serivce.BaseTreeableService;
 import com.vshuok.es.common.plugin.web.controller.entity.ZTree;
 import com.vshuok.es.common.web.bind.annotation.PageableDefaults;
 import com.vshuok.es.common.web.controller.BaseController;
 import com.vshuok.es.common.web.controller.permission.PermissionList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.List;

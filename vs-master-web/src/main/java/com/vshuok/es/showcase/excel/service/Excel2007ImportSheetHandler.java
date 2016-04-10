@@ -10,76 +10,78 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.List;
 
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 class Excel2007ImportSheetHandler extends DefaultHandler {
 
-	private final Logger log = LoggerFactory
-			.getLogger(Excel2007ImportSheetHandler.class);
+    private final Logger log = LoggerFactory.getLogger(Excel2007ImportSheetHandler.class);
 
-	private int batchSize; // 批处理大小
-	private int totalSize = 0; // 总行数
+    private int batchSize; //批处理大小
+    private int totalSize = 0; //总行数
 
-	private int rowNumber = 1;
-	private String lastContents;
-	private List<ExcelData> dataList;
-	private ExcelDataService excelDataService;
+    private int rowNumber = 1;
+    private String lastContents;
+    private List<ExcelData> dataList;
+    private ExcelDataService excelDataService;
 
-	private List<String> currentCellData = Lists.newArrayList();
+    private List<String> currentCellData = Lists.newArrayList();
 
-	Excel2007ImportSheetHandler(final ExcelDataService excelDataService,
-			final List<ExcelData> dataList, final int batchSize) {
-		this.excelDataService = excelDataService;
-		this.dataList = dataList;
-		this.batchSize = batchSize;
 
-	}
+    Excel2007ImportSheetHandler(
+            final ExcelDataService excelDataService, final List<ExcelData> dataList, final int batchSize) {
+        this.excelDataService = excelDataService;
+        this.dataList = dataList;
+        this.batchSize = batchSize;
 
-	public void startElement(String uri, String localName, String name,
-			Attributes attributes) throws SAXException {
-		if ("row".equals(name)) {// 如果是行开始 清空cell数据 重来
-			rowNumber = Integer.valueOf(attributes.getValue("r"));// 当前行号
-			if (rowNumber == 1) {
-				return;
-			}
-			currentCellData.clear();
-		}
+    }
 
-		lastContents = "";
-	}
+    public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
+        if ("row".equals(name)) {//如果是行开始 清空cell数据 重来
+            rowNumber = Integer.valueOf(attributes.getValue("r"));//当前行号
+            if (rowNumber == 1) {
+                return;
+            }
+            currentCellData.clear();
+        }
 
-	public void endElement(String uri, String localName, String name)
-			throws SAXException {
+        lastContents = "";
+    }
 
-		if ("row".equals(name)) {// 如果是行开始 清空cell数据 重来
-			if (rowNumber == 1) {
-				return;
-			}
-			ExcelData data = new ExcelData();
-			data.setId(Double.valueOf(currentCellData.get(0)).longValue());
-			data.setContent(currentCellData.get(1));
-			dataList.add(data);
+    public void endElement(String uri, String localName, String name) throws SAXException {
 
-			totalSize++;
+        if ("row".equals(name)) {//如果是行开始 清空cell数据 重来
+            if (rowNumber == 1) {
+                return;
+            }
+            ExcelData data = new ExcelData();
+            data.setId(Double.valueOf(currentCellData.get(0)).longValue());
+            data.setContent(currentCellData.get(1));
+            dataList.add(data);
 
-			if (totalSize % batchSize == 0) {
-				try {
-					excelDataService.doBatchSave(dataList);
-				} catch (Exception e) {
-					Long fromId = dataList.get(0).getId();
-					Long endId = dataList.get(dataList.size() - 1).getId();
-					log.error("from " + fromId + " to " + endId + ", error", e);
-				}
-				dataList.clear();
-			}
-		}
+            totalSize++;
 
-		if ("c".equals(name)) {// 按照列顺序添加数据
-			currentCellData.add(lastContents);
-		}
+            if (totalSize % batchSize == 0) {
+                try {
+                    excelDataService.doBatchSave(dataList);
+                } catch (Exception e) {
+                    Long fromId = dataList.get(0).getId();
+                    Long endId = dataList.get(dataList.size() - 1).getId();
+                    log.error("from " + fromId + " to " + endId + ", error", e);
+                }
+                dataList.clear();
+            }
+        }
 
-	}
+        if ("c".equals(name)) {//按照列顺序添加数据
+            currentCellData.add(lastContents);
+        }
 
-	public void characters(char[] ch, int start, int length)
-			throws SAXException {
-		lastContents += new String(ch, start, length);
-	}
+
+    }
+
+    public void characters(char[] ch, int start, int length) throws SAXException {
+        lastContents += new String(ch, start, length);
+    }
 }

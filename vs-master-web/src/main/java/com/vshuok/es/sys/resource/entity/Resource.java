@@ -12,11 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * <p>
- * </p>
- * 
- * @author Hu Dawei
- * @version 1.0
+ * <p>User: Hu Dawei
+ 13-2-4 上午9:38
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "sys_resource")
@@ -24,204 +22,209 @@ import javax.persistence.Table;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Resource extends BaseEntity<Long> implements Treeable<Long> {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = -3251040080189062174L;
+	private static final long serialVersionUID = -678650760543563446L;
 
 	/**
-	 * 标题
-	 */
-	private String name;
+     * 标题
+     */
+    private String name;
 
-	/**
-	 * 资源标识符 用于权限匹配的 如sys:resource
-	 */
-	private String identity;
+    /**
+     * 资源标识符 用于权限匹配的 如sys:resource
+     */
+    private String identity;
 
-	/**
-	 * 点击后前往的地址 菜单才有
-	 */
-	private String url;
+    /**
+     * 点击后前往的地址
+     * 菜单才有
+     */
+    private String url;
 
-	/**
-	 * 父路径
-	 */
-	@Column(name = "parent_id")
-	private Long parentId;
 
-	@Column(name = "parent_ids")
-	private String parentIds;
+    /**
+     * 父路径
+     */
+    @Column(name = "parent_id")
+    private Long parentId;
 
-	private Integer weight;
+    @Column(name = "parent_ids")
+    private String parentIds;
 
-	/**
-	 * 图标
-	 */
-	private String icon;
+    private Integer weight;
 
-	/**
-	 * 是否有叶子节点
-	 */
-	@Formula(value = "(select count(*) from sys_resource f_t where f_t.parent_id = id)")
-	private boolean hasChildren;
+    /**
+     * 图标
+     */
+    private String icon;
 
-	/**
-	 * 是否显示
-	 */
-	@Column(name = "is_show")
-	private Boolean show = Boolean.FALSE;
+    /**
+     * 是否有叶子节点
+     */
+    @Formula(value = "(select count(*) from sys_resource f_t where f_t.parent_id = id)")
+    private boolean hasChildren;
 
-	public String getName() {
+    /**
+     * 是否显示
+     */
+    @Column(name = "is_show")
+    private Boolean show = Boolean.FALSE;
 
-		return name;
-	}
+    public String getName() {
 
-	public void setName(String name) {
-		this.name = name;
-	}
+        return name;
+    }
 
-	public String getIdentity() {
-		return identity;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setIdentity(String identity) {
-		this.identity = identity;
-	}
+    public String getIdentity() {
+        return identity;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public Long getParentId() {
-		return parentId;
-	}
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
+    public Long getParentId() {
+        return parentId;
+    }
 
-	public String getParentIds() {
-		return parentIds;
-	}
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
 
-	public void setParentIds(String parentIds) {
-		this.parentIds = parentIds;
-	}
+    public String getParentIds() {
+        return parentIds;
+    }
 
-	@Override
-	public String makeSelfAsNewParentIds() {
-		return getParentIds() + getId() + getSeparator();
-	}
+    public void setParentIds(String parentIds) {
+        this.parentIds = parentIds;
+    }
 
-	public String getTreetableIds() {
-		String selfId = makeSelfAsNewParentIds().replace("/", "-");
-		return selfId.substring(0, selfId.length() - 1);
-	}
+    @Override
+    public String makeSelfAsNewParentIds() {
+        return getParentIds() + getId() + getSeparator();
+    }
 
-	public String getTreetableParentIds() {
-		String parentIds = getParentIds().replace("/", "-");
-		return parentIds.substring(0, parentIds.length() - 1);
-	}
+    public String getTreetableIds() {
+        String selfId = makeSelfAsNewParentIds().replace("/", "-");
+        return selfId.substring(0, selfId.length() - 1);
+    }
 
-	@Override
-	public String getSeparator() {
-		return "/";
-	}
+    public String getTreetableParentIds() {
+        String parentIds = getParentIds().replace("/", "-");
+        return parentIds.substring(0, parentIds.length() - 1);
+    }
 
-	public Integer getWeight() {
-		return weight;
-	}
+    @Override
+    public String getSeparator() {
+        return "/";
+    }
 
-	public void setWeight(Integer weight) {
-		this.weight = weight;
-	}
+    public Integer getWeight() {
+        return weight;
+    }
 
-	public String getIcon() {
-		if (!StringUtils.isEmpty(icon)) {
-			return icon;
-		}
-		if (isRoot()) {
-			return getRootDefaultIcon();
-		}
-		if (isLeaf()) {
-			return getLeafDefaultIcon();
-		}
-		return getBranchDefaultIcon();
-	}
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
 
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
+    public String getIcon() {
+        if (!StringUtils.isEmpty(icon)) {
+            return icon;
+        }
+        if (isRoot()) {
+            return getRootDefaultIcon();
+        }
+        if (isLeaf()) {
+            return getLeafDefaultIcon();
+        }
+        return getBranchDefaultIcon();
+    }
 
-	@Override
-	public boolean isRoot() {
-		if (getParentId() != null && getParentId() == 0) {
-			return true;
-		}
-		return false;
-	}
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
-	@Override
-	public boolean isLeaf() {
-		if (isRoot()) {
-			return false;
-		}
-		if (isHasChildren()) {
-			return false;
-		}
 
-		return true;
-	}
+    @Override
+    public boolean isRoot() {
+        if (getParentId() != null && getParentId() == 0) {
+            return true;
+        }
+        return false;
+    }
 
-	public boolean isHasChildren() {
-		return hasChildren;
-	}
 
-	public void setHasChildren(boolean hasChildren) {
-		this.hasChildren = hasChildren;
-	}
+    @Override
+    public boolean isLeaf() {
+        if (isRoot()) {
+            return false;
+        }
+        if (isHasChildren()) {
+            return false;
+        }
 
-	public Boolean getShow() {
-		return show;
-	}
+        return true;
+    }
 
-	public void setShow(Boolean show) {
-		this.show = show;
-	}
+    public boolean isHasChildren() {
+        return hasChildren;
+    }
 
-	/**
-	 * 根节点默认图标 如果没有默认 空即可
-	 *
-	 * @return
-	 */
-	@Override
-	public String getRootDefaultIcon() {
-		return "ztree_setting";
-	}
+    public void setHasChildren(boolean hasChildren) {
+        this.hasChildren = hasChildren;
+    }
 
-	/**
-	 * 树枝节点默认图标 如果没有默认 空即可
-	 *
-	 * @return
-	 */
-	@Override
-	public String getBranchDefaultIcon() {
-		return "ztree_folder";
-	}
+    public Boolean getShow() {
+        return show;
+    }
 
-	/**
-	 * 树叶节点默认图标 如果没有默认 空即可
-	 *
-	 * @return
-	 */
-	@Override
-	public String getLeafDefaultIcon() {
-		return "ztree_file";
-	}
+    public void setShow(Boolean show) {
+        this.show = show;
+    }
+
+
+    /**
+     * 根节点默认图标 如果没有默认 空即可
+     *
+     * @return
+     */
+    @Override
+    public String getRootDefaultIcon() {
+        return "ztree_setting";
+    }
+
+    /**
+     * 树枝节点默认图标 如果没有默认 空即可
+     *
+     * @return
+     */
+    @Override
+    public String getBranchDefaultIcon() {
+        return "ztree_folder";
+    }
+
+    /**
+     * 树叶节点默认图标 如果没有默认 空即可
+     *
+     * @return
+     */
+    @Override
+    public String getLeafDefaultIcon() {
+        return "ztree_file";
+    }
 
 }

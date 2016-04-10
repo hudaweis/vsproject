@@ -5,7 +5,10 @@ import com.vshuok.es.maintain.keyvalue.entity.KeyValue;
 import com.vshuok.es.maintain.keyvalue.repository.KeyValueRepository;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Service
 public class KeyValueService extends BaseService<KeyValue, Long> {
 

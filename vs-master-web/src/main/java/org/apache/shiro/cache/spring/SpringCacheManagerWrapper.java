@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2005-2012 https://github.com/zhangkaitao
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
 package org.apache.shiro.cache.spring;
 
 import org.apache.shiro.cache.Cache;
@@ -10,7 +15,8 @@ import java.util.Set;
 
 /**
  * 包装Spring cache抽象
- * <p>User: HU DAWEI
+ * <p>User: Hu Dawei
+ 13-3-23 上午8:26
  * <p>Version: 1.0
  */
 public class SpringCacheManagerWrapper implements CacheManager {

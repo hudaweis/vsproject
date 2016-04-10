@@ -24,8 +24,8 @@ import com.google.common.collect.Maps;
  * @version 1.0
  */
 public class LogUtils {
-    public static final Logger ERROR_LOG = LoggerFactory.getLogger("es-error");
-    public static final Logger ACCESS_LOG = LoggerFactory.getLogger("es-access");
+    public static final Logger ERROR_LOG = LoggerFactory.getLogger("vs-error");
+    public static final Logger ACCESS_LOG = LoggerFactory.getLogger("vs-access");
 
     /**
      * 记录访问日志

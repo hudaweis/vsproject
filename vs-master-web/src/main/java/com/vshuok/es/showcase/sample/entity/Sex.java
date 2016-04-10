@@ -1,6 +1,9 @@
 package com.vshuok.es.showcase.sample.entity;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public enum Sex {
     male("男"), female("女");
 

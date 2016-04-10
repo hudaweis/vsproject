@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2005-2012 https://github.com/zhangkaitao
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
 package org.apache.shiro.realm;
 
 import com.vshuok.es.common.repository.support.SimpleBaseRepositoryFactoryBean;
@@ -15,8 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 /**
- * <p>User: Hu dawei
- * <p>Date: 13-3-12 下午9:05
+ * <p>User: Hu Dawei
+ 13-3-12 下午9:05
  * <p>Version: 1.0
  */
 public class UserRealm extends AuthorizingRealm {
@@ -26,7 +31,7 @@ public class UserRealm extends AuthorizingRealm {
     @Autowired
     private UserAuthService userAuthService;
 
-    private static final Logger log = LoggerFactory.getLogger("es-error");
+    private static final Logger log = LoggerFactory.getLogger("vs-error");
 
     @Autowired
     public UserRealm(ApplicationContext ctx) {

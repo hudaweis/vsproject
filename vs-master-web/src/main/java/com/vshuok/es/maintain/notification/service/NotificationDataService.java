@@ -6,8 +6,7 @@ import com.vshuok.es.maintain.notification.repository.NotificationDataRepository
 import org.springframework.stereotype.Service;
 
 /**
- * <p>User: Hu dawei
- * <p>Date: 13-5-22 下午2:40
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @Service

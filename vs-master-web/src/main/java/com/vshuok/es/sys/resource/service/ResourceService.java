@@ -2,12 +2,11 @@ package com.vshuok.es.sys.resource.service;
 
 import com.vshuok.es.common.entity.search.SearchOperator;
 import com.vshuok.es.common.entity.search.Searchable;
-import com.vshuok.es.common.plugin.service.BaseTreeableService;
+import com.vshuok.es.common.plugin.serivce.BaseTreeableService;
 import com.vshuok.es.sys.auth.service.UserAuthService;
 import com.vshuok.es.sys.resource.entity.Resource;
 import com.vshuok.es.sys.resource.entity.tmp.Menu;
 import com.vshuok.es.sys.user.entity.User;
-
 import org.apache.shiro.authz.permission.WildcardPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -18,12 +17,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 /**
- * <p>
- * </p>
- * 
- * @author Hu Dawei
- * @version 1.0
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Service
 public class ResourceService extends BaseTreeableService<Resource, Long> {
@@ -182,4 +179,5 @@ public class ResourceService extends BaseTreeableService<Resource, Long> {
     private static Menu convertToMenu(Resource resource) {
         return new Menu(resource.getId(), resource.getName(), resource.getIcon(), resource.getUrl());
     }
+
 }

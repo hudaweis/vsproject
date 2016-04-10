@@ -10,7 +10,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public interface ChildRepository extends BaseRepository<Child, Long> {
 
     @Query(value = "select o from Child o where o.parent=?1")

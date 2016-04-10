@@ -28,7 +28,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.regex.Pattern;
 
-
+/**
+ * <p>User: Hu Dawei
+ 13-7-1 下午2:39
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping("/admin/monitor/db")
 @RequiresPermissions("monitor:ql:*")

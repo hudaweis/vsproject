@@ -1,51 +1,52 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Druid Spring Stat</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
-		<link href='css/bootstrap.min.css' rel="stylesheet" />
-		<link href="css/style.css" type="text/css" rel="stylesheet"/>
-    	<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script src="js/common.js" type="text/javascript" charset="utf8"></script>
-	</head>
-	<body>
-		<div class="container-fluid">
-      		<div class="row-fluid">
-        		<div class="span12">
-          				<h3>
-          					Pooling Connection Info List for Datasource-<span id="datasourceId"></span>
-          				</h3>
-						<table id="dataTable" class="table table-bordered table-striped">
-							<thead>
-								<tr>
-									<th width="50">ID</th>
-									<th width="50">UseCount</th>
-									<th width="150">LastActiveTime</th>
-									<th width="150">ConnectTime</th>
-									<th width="50">Holdability</th>
-									<th width="50" title="Transaction Isolation">TranIsolation</th>
-									<th width="50">AutoCommit</th>
-									<th width="50">ReadoOnly</th>
-									<th>
-										Pscache<br />
-										<table>
-											<thead><tr>
-												<th>sql</th>
-												<th width="50">defaultRowPretch</th>
-												<th width="50">rowPrefetch</th>
-												<th width="50">hitCount</th>
-											</tr></thead>
-										</table>
-									</th>
-								</tr>
-							</thead> 
-							<tbody></tbody>
-						</table>
-        		</div>
-      		</div> 
-    	</div>
-    	
-    	<script type="text/javascript">
+<head>
+<title>Druid Spring Stat</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<link href='css/bootstrap.min.css' rel="stylesheet" />
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/common.js" type="text/javascript" charset="utf8"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<h3>
+					Pooling Connection Info List for Datasource-<span id="datasourceId"></span>
+				</h3>
+				<table id="dataTable" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th width="50">ID</th>
+							<th width="50">UseCount</th>
+							<th width="150">LastActiveTime</th>
+							<th width="150">ConnectTime</th>
+							<th width="50">Holdability</th>
+							<th width="50" title="Transaction Isolation">TranIsolation</th>
+							<th width="50">AutoCommit</th>
+							<th width="50">ReadoOnly</th>
+							<th>Pscache<br />
+								<table>
+									<thead>
+										<tr>
+											<th>sql</th>
+											<th width="50">defaultRowPretch</th>
+											<th width="50">rowPrefetch</th>
+											<th width="50">hitCount</th>
+										</tr>
+									</thead>
+								</table>
+							</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
     	$.namespace("druid.connectionInfo");
     	druid.connectionInfo = function () { 
     		var datasourceId = druid.common.getUrlVar("datasourceId");
@@ -127,5 +128,5 @@
     		druid.connectionInfo.init();
     	});
     	</script>
-	</body>
+</body>
 </html>

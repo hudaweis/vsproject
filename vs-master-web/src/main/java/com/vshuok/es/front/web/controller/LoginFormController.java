@@ -1,7 +1,8 @@
 package com.vshuok.es.front.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.vshuok.es.common.Constants;
+import com.vshuok.es.sys.user.entity.User;
+import com.vshuok.es.sys.user.service.UserStatusHistoryService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
@@ -13,18 +14,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vshuok.es.common.Constants;
-import com.vshuok.es.sys.user.entity.User;
-import com.vshuok.es.sys.user.service.UserStatusHistoryService;
+import javax.servlet.http.HttpServletRequest;
 
-/** 
- * <p></p>
- * @author Hu Dawei  
- * @version 1.0
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Controller
 public class LoginFormController {
-
 
     @Value(value = "${shiro.login.url}")
     private String loginUrl;
@@ -35,7 +32,7 @@ public class LoginFormController {
     @Autowired
     private UserStatusHistoryService userStatusHistoryService;
 
-    @RequestMapping(value = {"/{login:login;?.*}"}) 
+    @RequestMapping(value = {"/{login:login;?.*}"}) //spring3.2.2 bug see  http://jinnianshilongnian.iteye.com/blog/1831408
     public String loginForm(HttpServletRequest request, ModelMap model) {
 
         //表示退出

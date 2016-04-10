@@ -11,6 +11,8 @@ import java.util.Date;
 
 /**
  * 产品
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "showcase_product")

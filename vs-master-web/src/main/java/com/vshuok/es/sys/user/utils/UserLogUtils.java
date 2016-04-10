@@ -9,12 +9,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 public class UserLogUtils {
 
-    private static final Logger SYS_USER_LOGGER = LoggerFactory.getLogger("es-sys-user");
+    private static final Logger SYS_USER_LOGGER = LoggerFactory.getLogger("vs-sys-user");
 
 
     private Logger getSysUserLog() {

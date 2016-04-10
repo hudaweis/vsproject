@@ -24,7 +24,7 @@ import java.lang.annotation.*;
  * <p>绑定当前登录的用户</p>
  * <p>不同于@ModelAttribute</p>
  *
- * @author Hu dawei
+ * @author Hu Dawei
  */
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)

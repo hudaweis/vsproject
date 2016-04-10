@@ -8,7 +8,7 @@ import com.vshuok.es.sys.organization.entity.Organization;
 import javax.persistence.Query;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 public class UserSearchCallback extends DefaultSearchCallback {

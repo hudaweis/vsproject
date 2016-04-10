@@ -1,7 +1,6 @@
 package com.vshuok.es.sys.user.service;
 
 import com.vshuok.es.common.entity.search.Searchable;
-
 import com.vshuok.es.common.service.BaseService;
 import com.vshuok.es.sys.user.entity.User;
 import com.vshuok.es.sys.user.entity.UserStatus;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @Service

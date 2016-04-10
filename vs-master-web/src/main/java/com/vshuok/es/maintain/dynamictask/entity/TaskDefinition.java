@@ -6,17 +6,14 @@ import javax.persistence.*;
 
 /**
  * 定时任务 beanName.beanMethod 和 beanClass.beanMethod 二选一
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "maintain_task_definition")
 public class TaskDefinition extends BaseEntity<Long> {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4904874512081212723L;
-
-	@Column(name = "name")
+    @Column(name = "name")
     private String name;
 
     /**

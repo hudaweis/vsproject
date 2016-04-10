@@ -11,6 +11,8 @@ import javax.persistence.*;
 
 /**
  * 组织机构树
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "sys_organization")

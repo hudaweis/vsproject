@@ -9,7 +9,11 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingDeque;
 
-
+/**
+ *
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Service
 public class PushService {
 

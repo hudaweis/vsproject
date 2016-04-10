@@ -1,43 +1,44 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/WEB-INF/jsp/common/taglibs.jspf" %>
-<es:contentHeader/>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
+<es:contentHeader />
 <%@include file="/WEB-INF/jsp/common/import-calendar-css.jspf"%>
 
 <style>
-    body {
-        margin-top: 40px;
-        text-align: center;
-        font-size: 14px;
-        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-    }
+body {
+	margin-top: 40px;
+	text-align: center;
+	font-size: 14px;
+	font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+}
 
-    .fc-button-add {
-        margin-right: 10px!important;
-    }
+.fc-button-add {
+	margin-right: 10px !important;
+}
 
-    #loading {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-    }
+#loading {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
 
-    .ui-dialog {
-        overflow: visible!important;
-    }
-    .ui-dialog-content {
-        overflow: hidden!important;
-        overflow: visible!important;
-    }
+.ui-dialog {
+	overflow: visible !important;
+}
 
-    #calendar {
-        width: 800px;
-        margin: 0 auto;
-    }
+.ui-dialog-content {
+	overflow: hidden !important;
+	overflow: visible !important;
+}
+
+#calendar {
+	width: 800px;
+	margin: 0 auto;
+}
 </style>
 
 <div id='calendar'></div>
 
-<es:contentFooter/>
+<es:contentFooter />
 <%@include file="/WEB-INF/jsp/common/import-calendar-js.jspf"%>
 <script>
     $(document).ready(function() {

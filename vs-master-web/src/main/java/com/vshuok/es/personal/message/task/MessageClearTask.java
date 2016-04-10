@@ -1,7 +1,6 @@
 package com.vshuok.es.personal.message.task;
 
 import com.google.common.collect.Lists;
-
 import com.vshuok.es.personal.message.entity.MessageState;
 import com.vshuok.es.personal.message.service.MessageService;
 import org.springframework.aop.framework.AopContext;
@@ -10,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * 清理 过期的/删除的消息
-
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Service
 public class MessageClearTask {

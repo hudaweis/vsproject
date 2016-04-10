@@ -16,60 +16,60 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>
- * </p>
- * 
- * @author Hu Dawei
- * @version 1.0
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Service
 public class GroupService extends BaseService<Group, Long> {
 
-	@Autowired
-	private GroupRelationService groupRelationService;
 
-	private GroupRepository getGroupRepository() {
-		return (GroupRepository) baseRepository;
-	}
+    @Autowired
+    private GroupRelationService groupRelationService;
 
-	public Set<Map<String, Object>> findIdAndNames(Searchable searchable,
-			String groupName) {
+    private GroupRepository getGroupRepository() {
+        return (GroupRepository) baseRepository;
+    }
 
-		searchable.addSearchFilter("name", SearchOperator.like, groupName);
+    public Set<Map<String, Object>> findIdAndNames(Searchable searchable, String groupName) {
 
-		return Sets.newHashSet(Lists.transform(
-				findAll(searchable).getContent(),
-				new Function<Group, Map<String, Object>>() {
-					@Override
-					public Map<String, Object> apply(Group input) {
-						Map<String, Object> data = Maps.newHashMap();
-						data.put("label", input.getName());
-						data.put("value", input.getId());
-						return data;
-					}
-				}));
-	}
+        searchable.addSearchFilter("name", SearchOperator.like, groupName);
 
-	/**
-	 * 获取可用的的分组编号列表
-	 *
-	 * @param userId
-	 * @param organizationIds
-	 * @return
-	 */
-	public Set<Long> findShowGroupIds(Long userId, Set<Long> organizationIds) {
-		Set<Long> groupIds = Sets.newHashSet();
-		groupIds.addAll(getGroupRepository().findDefaultGroupIds());
-		groupIds.addAll(groupRelationService.findGroupIds(userId,
-				organizationIds));
+        return Sets.newHashSet(
+                Lists.transform(
+                        findAll(searchable).getContent(),
+                        new Function<Group, Map<String, Object>>() {
+                            @Override
+                            public Map<String, Object> apply(Group input) {
+                                Map<String, Object> data = Maps.newHashMap();
+                                data.put("label", input.getName());
+                                data.put("value", input.getId());
+                                return data;
+                            }
+                        }
+                )
+        );
+    }
 
-		// TODO 如果分组数量很多 建议此处查询时直接带着是否可用的标识去查
-		for (Group group : findAll()) {
-			if (Boolean.FALSE.equals(group.getShow())) {
-				groupIds.remove(group.getId());
-			}
-		}
+    /**
+     * 获取可用的的分组编号列表
+     *
+     * @param userId
+     * @param organizationIds
+     * @return
+     */
+    public Set<Long> findShowGroupIds(Long userId, Set<Long> organizationIds) {
+        Set<Long> groupIds = Sets.newHashSet();
+        groupIds.addAll(getGroupRepository().findDefaultGroupIds());
+        groupIds.addAll(groupRelationService.findGroupIds(userId, organizationIds));
 
-		return groupIds;
-	}
+
+        //TODO 如果分组数量很多 建议此处查询时直接带着是否可用的标识去查
+        for (Group group : findAll()) {
+            if (Boolean.FALSE.equals(group.getShow())) {
+                groupIds.remove(group.getId());
+            }
+        }
+
+        return groupIds;
+    }
 }

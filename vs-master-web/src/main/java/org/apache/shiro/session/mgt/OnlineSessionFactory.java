@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2005-2012 https://github.com/zhangkaitao
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
 package org.apache.shiro.session.mgt;
 
 import com.vshuok.es.common.utils.IpUtils;
@@ -13,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
  * 如 用户登录到的系统ip
  * 用户状态（在线 隐身 强制退出）
  * 等 比如当前所在系统等
- * <p>User: Hu dawei
-
+ * <p>User: Hu Dawei
+ 13-3-20 下午2:33
  * <p>Version: 1.0
  */
 public class OnlineSessionFactory implements SessionFactory {

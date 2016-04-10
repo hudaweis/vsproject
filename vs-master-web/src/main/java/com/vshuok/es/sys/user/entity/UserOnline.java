@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * 当前在线会话
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @Entity

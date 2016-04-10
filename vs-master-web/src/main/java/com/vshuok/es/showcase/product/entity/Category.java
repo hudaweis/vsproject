@@ -9,7 +9,8 @@ import javax.persistence.Table;
 
 /**
  * 产品类别
-
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "showcase_category")
@@ -18,7 +19,7 @@ public class Category extends BaseEntity<Long> implements Movable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -8783966920518092563L;
+	private static final long serialVersionUID = 320315655295779632L;
 
 	@Column(name = "name")
     private String name;
@@ -38,11 +39,11 @@ public class Category extends BaseEntity<Long> implements Movable {
         this.name = name;
     }
 
-    public Integer getWeigth() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeigth(Integer weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 

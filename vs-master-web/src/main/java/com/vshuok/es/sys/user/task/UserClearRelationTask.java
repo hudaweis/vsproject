@@ -20,7 +20,7 @@ import java.util.Collection;
  * 清理无关联的User-Organization/Job关系
  * 1、User-Organization/Job
  * <p/>
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @Service()

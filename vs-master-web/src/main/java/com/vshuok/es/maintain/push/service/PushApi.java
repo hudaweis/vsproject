@@ -3,7 +3,10 @@ package com.vshuok.es.maintain.push.service;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public interface PushApi {
 
     /**

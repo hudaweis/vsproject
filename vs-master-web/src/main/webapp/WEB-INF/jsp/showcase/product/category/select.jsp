@@ -1,44 +1,41 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
 <div id="container" data-table="childTable">
-    <div class="row-fluid tool ui-toolbar">
-        <%@include file="searchForm.jsp"%>
-    </div>
-    <div>
-      <table id="childTable" class="sort-table table table-bordered table-hover"
-              data-async="true"
-              data-async-container="container">
-          <thead>
-            <tr>
+	<div class="row-fluid tool ui-toolbar">
+		<%@include file="searchForm.jsp"%>
+	</div>
+	<div>
+		<table id="childTable"
+			class="sort-table table table-bordered table-hover" data-async="true"
+			data-async-container="container">
+			<thead>
+				<tr>
 
-                <th sort="id">编号</th>
-                <th sort="name">名称</th>
-                <th style="width: 80px">选择</th>
-            </tr>
-          </thead>
-          <tbody>
-          <c:forEach items="${page.content}" var="m" varStatus="status">
-            <tr id="${m.id}">
+					<th sort="id">编号</th>
+					<th sort="name">名称</th>
+					<th style="width: 80px">选择</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${page.content}" var="m" varStatus="status">
+					<tr id="${m.id}">
 
-                <td>${m.id}</td>
-                <td class="name">${m.name}</td>
-                <td class="check">
-                    <c:choose>
-                        <c:when test="${selectType eq 'multiple'}">
-                            <input type="checkbox" name="ids" value="${m.id}">
-                        </c:when>
-                        <c:otherwise>
-                            <input type="radio" name="ids" value="${m.id}">
-                        </c:otherwise>
-                    </c:choose>
-
-                </td>
-            </tr>
-          </c:forEach>
-          </tbody>
-      </table>
-      <es:page page="${page}"/>
-    </div>
+						<td>${m.id}</td>
+						<td class="name">${m.name}</td>
+						<td class="check"><c:choose>
+								<c:when test="${selectType eq 'multiple'}">
+									<input type="checkbox" name="ids" value="${m.id}">
+								</c:when>
+								<c:otherwise>
+									<input type="radio" name="ids" value="${m.id}">
+								</c:otherwise>
+							</c:choose></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<es:page page="${page}" />
+	</div>
 </div>
 <script type="text/javascript">
     $(function() {

@@ -1,17 +1,24 @@
+/**
+ * Copyright (c) 2005-2012 https://github.com/zhangkaitao
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
 package com.vshuok.es.extra.aop;
-
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
-import org.springframework.stereotype.Component;
 
 import com.vshuok.es.common.cache.BaseCacheAspect;
 import com.vshuok.es.sys.user.entity.User;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
 
 /**
  * 用户缓存切面
  * 缓存实现
  * 1、username/email/mobilePhoneNumber------>id
  * 2、id------->Model
+ * <p>User: Hu Dawei
+ 13-3-22 下午9:00
+ * <p>Version: 1.0
  */
 @Component
 @Aspect

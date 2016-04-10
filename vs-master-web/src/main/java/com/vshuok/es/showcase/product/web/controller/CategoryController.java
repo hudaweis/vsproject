@@ -12,36 +12,41 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping(value = "/showcase/product/category")
 public class CategoryController extends BaseMovableController<Category, Long> {
 
-	public CategoryController() {
-		setResourceIdentity("showcase:productCategory");
-	}
 
-	@Override
-	protected void setCommonData(Model model) {
-		model.addAttribute("booleanList", BooleanEnum.values());
-	}
+    public CategoryController() {
+        setResourceIdentity("showcase:productCategory");
+    }
 
-	// selectType multiple single
-	@RequestMapping(value = { "select/{selectType}", "select" }, method = RequestMethod.GET)
-	@PageableDefaults(sort = "weight=desc")
-	public String select(
-			Searchable searchable,
-			Model model,
-			@PathVariable(value = "selectType") String selectType,
-			@MatrixVariable(value = "domId", pathVar = "selectType") String domId,
-			@MatrixVariable(value = "domName", pathVar = "selectType", required = false) String domName) {
+    @Override
+    protected void setCommonData(Model model) {
+        model.addAttribute("booleanList", BooleanEnum.values());
+    }
 
-		this.permissionList.assertHasViewPermission();
 
-		model.addAttribute("selectType", selectType);
-		model.addAttribute("domId", domId);
-		model.addAttribute("domName", domName);
+    //selectType  multiple single
+    @RequestMapping(value = {"select/{selectType}", "select"}, method = RequestMethod.GET)
+    @PageableDefaults(sort = "weight=desc")
+    public String select(
+            Searchable searchable, Model model,
+            @PathVariable(value = "selectType") String selectType,
+            @MatrixVariable(value = "domId", pathVar = "selectType") String domId,
+            @MatrixVariable(value = "domName", pathVar = "selectType", required = false) String domName) {
 
-		super.list(searchable, model);
-		return "showcase/product/category/select";
-	}
+        this.permissionList.assertHasViewPermission();
+
+        model.addAttribute("selectType", selectType);
+        model.addAttribute("domId", domId);
+        model.addAttribute("domName", domName);
+
+        super.list(searchable, model);
+        return "showcase/product/category/select";
+    }
 }

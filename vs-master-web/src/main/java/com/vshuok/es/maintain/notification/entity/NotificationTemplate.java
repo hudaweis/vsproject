@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 消息通知模板
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "maintain_notification_template")

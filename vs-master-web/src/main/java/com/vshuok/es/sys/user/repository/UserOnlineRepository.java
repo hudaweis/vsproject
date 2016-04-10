@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 public interface UserOnlineRepository extends BaseRepository<UserOnline, String> {

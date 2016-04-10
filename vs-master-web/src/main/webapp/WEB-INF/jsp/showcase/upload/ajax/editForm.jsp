@@ -1,73 +1,67 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/jsp/common/taglibs.jspf"%>
-<es:contentHeader/>
+<es:contentHeader />
 <%@include file="/WEB-INF/jsp/common/import-upload-css.jspf"%>
 <div>
 
-    <ul class="nav nav-tabs">
-        <li class="active">
-            <a>
-                <i class="icon-file-alt"></i>
-                ${op}
-            </a>
-        </li>
-        <li>
-            <a href="<es:BackURL/>" class="btn btn-link">
-                <i class="icon-reply"></i>
-                返回
-            </a>
-        </li>
-    </ul>
+	<ul class="nav nav-tabs">
+		<li class="active"><a> <i class="icon-file-alt"></i> ${op}
+		</a></li>
+		<li><a href="<es:BackURL/>" class="btn btn-link"> <i
+				class="icon-reply"></i> 返回
+		</a></li>
+	</ul>
 
-    <form:form id="editForm" method="post" commandName="upload" cssClass="form-horizontal" enctype="multipart/form-data">
+	<form:form id="editForm" method="post" commandName="upload"
+		cssClass="form-horizontal" enctype="multipart/form-data">
 
 
-            <es:showGlobalError commandName="upload"/>
+		<es:showGlobalError commandName="upload" />
 
-            <form:hidden path="id"/>
+		<form:hidden path="id" />
 
-            <div class="control-group">
-                <form:label path="name" cssClass="control-label">名称</form:label>
-                <div class="controls">
-                    <form:input path="name" cssClass="validate[required,maxSize[10]]" placeholder="最多10个字符"/>
-                </div>
-            </div>
+		<div class="control-group">
+			<form:label path="name" cssClass="control-label">名称</form:label>
+			<div class="controls">
+				<form:input path="name" cssClass="validate[required,maxSize[10]]"
+					placeholder="最多10个字符" />
+			</div>
+		</div>
 
-            <div class="control-group" style="margin-bottom: 0px;<c:if test="${empty upload.src}">display: none</c:if>">
-                <label for="files" class="control-label"></label>
-                <div class="controls">
-                    <div class="ajax-upload-view"></div>
-                    <form:hidden path="src"/>
-                </div>
-            </div>
+		<div class="control-group"
+			style="margin-bottom: 0px;<c:if test="${empty upload.src}">display: none</c:if>">
+			<label for="files" class="control-label"></label>
+			<div class="controls">
+				<div class="ajax-upload-view"></div>
+				<form:hidden path="src" />
+			</div>
+		</div>
 
-            <div class="control-group">
-                <label for="files" class="control-label">文件</label>
-                <div class="controls">
-                   <label for="files" class="btn btn-success fileinput-button">
-                        <i class="icon-plus icon-white"></i>
-                        <span>添加文件...</span>
-                       <input type="file" id="files" name="files[]" data-url="${ctx}/ajaxUpload" multiple>
-                   </label>
+		<div class="control-group">
+			<label for="files" class="control-label">文件</label>
+			<div class="controls">
+				<label for="files" class="btn btn-success fileinput-button">
+					<i class="icon-plus icon-white"></i> <span>添加文件...</span> <input
+					type="file" id="files" name="files[]" data-url="${ctx}/ajaxUpload"
+					multiple>
+				</label>
 
-                </div>
-            </div>
+			</div>
+		</div>
 
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="icon-file-alt"></i>
-                        ${op}
-                    </button>
-                    <a href="<es:BackURL/>" class="btn">
-                        <i class="icon-reply"></i>
-                        返回
-                    </a>
-                </div>
-            </div>
-    </form:form>
+		<div class="control-group">
+			<div class="controls">
+				<button type="submit" class="btn btn-primary">
+					<i class="icon-file-alt"></i> ${op}
+				</button>
+				<a href="<es:BackURL/>" class="btn"> <i class="icon-reply"></i>
+					返回
+				</a>
+			</div>
+		</div>
+	</form:form>
 </div>
-<es:contentFooter/>
+<es:contentFooter />
 <%@include file="/WEB-INF/jsp/common/import-upload-simple-js.jspf"%>
 
 <script type="text/javascript">

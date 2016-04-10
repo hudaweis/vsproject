@@ -1,7 +1,6 @@
 package com.vshuok.es.monitor.web.controller;
 
 import com.google.common.collect.Lists;
-
 import com.google.common.collect.Maps;
 import com.vshuok.es.common.utils.PrettyMemoryUtils;
 import com.vshuok.es.common.web.controller.BaseController;
@@ -22,6 +21,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <p>User: Hu Dawei
+ 13-6-8 下午5:17
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping("/admin/monitor/ehcache")
 @RequiresPermissions("monitor:ehcache:*")

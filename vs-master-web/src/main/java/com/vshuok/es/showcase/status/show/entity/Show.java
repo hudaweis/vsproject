@@ -8,7 +8,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Entity
 @Table(name = "showcase_status_show")
 public class Show extends BaseEntity<Long> implements Stateable<Stateable.ShowStatus> {

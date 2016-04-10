@@ -10,7 +10,8 @@ import java.util.Date;
 /**
  * 在线用户最后一次在线信息()
  * 此表对于分析活跃用户有用
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
+ 13-3-11 下午3:25
  * <p>Version: 1.0
  */
 @Entity

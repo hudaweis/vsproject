@@ -11,7 +11,7 @@ import javax.persistence.*;
 /**
  * 为了提高连表性能 使用数据冗余 而不是 组织机构(1)-----(*)职务的中间表
  * 即在该表中 用户--组织机构--职务 是唯一的  但 用户-组织机构可能重复
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @Entity

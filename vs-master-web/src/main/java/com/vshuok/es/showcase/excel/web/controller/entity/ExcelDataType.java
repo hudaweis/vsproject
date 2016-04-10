@@ -1,6 +1,9 @@
 package com.vshuok.es.showcase.excel.web.controller.entity;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public enum ExcelDataType {
 
     csv("CSV"),

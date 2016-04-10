@@ -8,7 +8,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Entity
 @Table(name = "personal_calendar")
 public class Calendar extends BaseEntity<Long> {

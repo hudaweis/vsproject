@@ -11,7 +11,8 @@ import javax.persistence.Table;
 
 /**
  * 消息内容
-
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "personal_message_content")

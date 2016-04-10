@@ -33,6 +33,8 @@ import java.util.regex.Pattern;
  *  所有需要版本控制的静态资源 以.jspf为后缀 放到webapp/WEB-INF/jsp/common下
  * 这样即可扫描这些文件实施版本控制
  *
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Controller
 @RequestMapping("/admin/maintain/staticResource")

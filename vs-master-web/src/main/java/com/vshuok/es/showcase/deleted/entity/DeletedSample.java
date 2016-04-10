@@ -10,7 +10,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Entity
 @Table(name = "showcase_sample")
 public class DeletedSample extends BaseEntity<Long> implements LogicDeleteable {

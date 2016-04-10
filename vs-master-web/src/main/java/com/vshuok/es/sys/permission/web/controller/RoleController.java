@@ -1,21 +1,5 @@
 package com.vshuok.es.sys.permission.web.controller;
 
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.google.common.collect.Sets;
 import com.vshuok.es.common.Constants;
 import com.vshuok.es.common.entity.enums.AvailableEnum;
@@ -24,31 +8,42 @@ import com.vshuok.es.common.web.controller.BaseCRUDController;
 import com.vshuok.es.sys.permission.entity.Role;
 import com.vshuok.es.sys.permission.entity.RoleResourcePermission;
 import com.vshuok.es.sys.permission.service.PermissionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/** 
- * <p></p>
- * @author Hu Dawei  
- * @version 1.0
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.Set;
+
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Controller
 @RequestMapping(value = "/admin/sys/permission/role")
 public class RoleController extends BaseCRUDController<Role, Long> {
 
-	@Autowired
-	private PermissionService permissionService;
-	
-	public RoleController(){
-		setResourceIdentity("sys:role");
-	}
-	
-	@Override
-	protected void setCommonData(Model model){
-		super.setCommonData(model);
-		model.addAttribute("availableList", AvailableEnum.values());
-		Searchable searchable=Searchable.newSearchable();
-		model.addAttribute("permissions", permissionService.findAllWithNoPageNoSort(searchable));
-	}
-	
+    @Autowired
+    private PermissionService permissionService;
+
+    public RoleController() {
+        setResourceIdentity("sys:role");
+    }
+
+    @Override
+    protected void setCommonData(Model model) {
+        super.setCommonData(model);
+        model.addAttribute("availableList", AvailableEnum.values());
+
+        Searchable searchable = Searchable.newSearchable();
+//        searchable.addSearchFilter("show", SearchOperator.eq, true);
+        model.addAttribute("permissions", permissionService.findAllWithNoPageNoSort(searchable));
+    }
+
 
     @RequestMapping(value = "create/discard", method = RequestMethod.POST)
     @Override
@@ -107,7 +102,9 @@ public class RoleController extends BaseCRUDController<Role, Long> {
             for (Long[] permissionId : permissionIds) {
                 permissionIdSet.add(permissionId[0]);
             }
-            role.addResourcePermission(new RoleResourcePermission(resourceIds[0], permissionIdSet));
+            role.addResourcePermission(
+                    new RoleResourcePermission(resourceIds[0], permissionIdSet)
+            );
 
         } else {
             for (int i = 0; i < resourceLength; i++) {
@@ -146,6 +143,4 @@ public class RoleController extends BaseCRUDController<Role, Long> {
         return viewName("permissionsTable");
     }
 
-	
-	
 }

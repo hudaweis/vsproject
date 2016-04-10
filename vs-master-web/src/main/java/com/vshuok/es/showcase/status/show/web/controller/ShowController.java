@@ -4,8 +4,6 @@ import com.vshuok.es.common.Constants;
 import com.vshuok.es.common.plugin.entity.Stateable;
 import com.vshuok.es.common.web.controller.BaseCRUDController;
 import com.vshuok.es.showcase.status.show.entity.Show;
-import com.vshuok.es.showcase.status.show.service.ShowService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
@@ -18,51 +16,57 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping(value = "/showcase/status/show")
 public class ShowController extends BaseCRUDController<Show, Long> {
 
-	public ShowController() {
-		setListAlsoSetCommonData(true);
-		setResourceIdentity("showcase:statusShow");
-	}
+    public ShowController() {
+        setListAlsoSetCommonData(true);
+        setResourceIdentity("showcase:statusShow");
+    }
 
-	@Override
-	protected void setCommonData(Model model) {
-		model.addAttribute("statusList", Stateable.ShowStatus.values());
-	}
+    @Override
+    protected void setCommonData(Model model) {
+        model.addAttribute("statusList", Stateable.ShowStatus.values());
+    }
 
-	@RequestMapping(value = "status/{status}", method = RequestMethod.GET)
-	public String audit(HttpServletRequest request,
-			@RequestParam("ids") Long[] ids,
-			@PathVariable("status") Stateable.ShowStatus status,
-			RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "status/{status}", method = RequestMethod.GET)
+    public String audit(
+            HttpServletRequest request,
+            @RequestParam("ids") Long[] ids,
+            @PathVariable("status") Stateable.ShowStatus status,
+            RedirectAttributes redirectAttributes
+    ) {
 
-		this.permissionList.assertHasPermission("audit");
+        this.permissionList.assertHasPermission("audit");
 
-		for (Long id : ids) {
-			Show show = baseService.findOne(id);
-			show.setStatus(status);
-			baseService.update(show);
-		}
+        for (Long id : ids) {
+            Show show = baseService.findOne(id);
+            show.setStatus(status);
+            baseService.update(show);
+        }
 
-		redirectAttributes.addFlashAttribute(Constants.MESSAGE, "操作成功！");
+        redirectAttributes.addFlashAttribute(Constants.MESSAGE, "操作成功！");
 
-		return "redirect:" + request.getAttribute(Constants.BACK_URL);
-	}
+        return "redirect:" + request.getAttribute(Constants.BACK_URL);
+    }
 
-	/**
-	 * 验证失败返回true
-	 *
-	 * @param m
-	 * @param result
-	 * @return
-	 */
-	@Override
-	protected boolean hasError(Show m, BindingResult result) {
-		Assert.notNull(m);
+    /**
+     * 验证失败返回true
+     *
+     * @param m
+     * @param result
+     * @return
+     */
+    @Override
+    protected boolean hasError(Show m, BindingResult result) {
+        Assert.notNull(m);
 
-		return result.hasErrors();
-	}
+        return result.hasErrors();
+    }
 
 }

@@ -7,7 +7,10 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping(value = "/showcase/editor")
 public class EditorController extends BaseCRUDController<Editor, Long> {

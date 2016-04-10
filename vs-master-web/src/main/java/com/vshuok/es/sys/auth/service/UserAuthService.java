@@ -22,16 +22,17 @@ import org.springframework.util.StringUtils;
 
 import java.util.Set;
 
-/** 
- * <p>分组、组织机构、用户、新增、修改、删除时evict缓存</p>
+/**
+ * 分组、组织机构、用户、新增、修改、删除时evict缓存
+ * <p/>
  * 获取用户授权的角色及组装好的权限
- * @author Hu Dawei  
- * @version 1.0
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Service
 public class UserAuthService {
 
-	@Autowired
+    @Autowired
     private GroupService groupService;
 
     @Autowired
@@ -153,4 +154,5 @@ public class UserAuthService {
 
         return permissions;
     }
+
 }

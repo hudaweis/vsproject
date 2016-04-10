@@ -23,7 +23,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * <p>User: Hu Dawei
+ 13-1-28 下午4:29
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping(value = "/admin/personal/calendar")
 public class CalendarController extends BaseController<Calendar, Long> {

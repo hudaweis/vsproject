@@ -1,7 +1,6 @@
 package com.vshuok.es.sys.user.web.controller;
 
 import com.vshuok.es.common.web.controller.BaseCRUDController;
-
 import com.vshuok.es.sys.user.entity.UserStatus;
 import com.vshuok.es.sys.user.entity.UserStatusHistory;
 import org.springframework.stereotype.Controller;
@@ -9,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @Controller

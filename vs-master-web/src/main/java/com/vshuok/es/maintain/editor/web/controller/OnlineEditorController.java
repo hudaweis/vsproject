@@ -1,7 +1,6 @@
 package com.vshuok.es.maintain.editor.web.controller;
 
 import com.google.common.collect.Lists;
-
 import com.vshuok.es.common.Constants;
 import com.vshuok.es.common.utils.LogUtils;
 import com.vshuok.es.common.utils.MessageUtils;
@@ -44,7 +43,10 @@ import java.util.Map;
 
 import static com.vshuok.es.maintain.editor.web.controller.utils.OnlineEditorUtils.*;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping("/admin/maintain/editor")
 @RequiresPermissions("maintain:onlineEditor:*")

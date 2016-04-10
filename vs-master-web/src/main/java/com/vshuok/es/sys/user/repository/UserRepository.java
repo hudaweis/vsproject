@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 /**
- * <p>User: hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @SearchableQuery(callbackClass = UserSearchCallback.class)

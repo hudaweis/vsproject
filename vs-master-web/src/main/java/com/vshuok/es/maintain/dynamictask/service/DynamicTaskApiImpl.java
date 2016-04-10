@@ -1,10 +1,10 @@
 package com.vshuok.es.maintain.dynamictask.service;
 
 import com.google.common.collect.Lists;
+
 import com.google.common.collect.Maps;
 import com.vshuok.es.maintain.dynamictask.entity.TaskDefinition;
 import com.vshuok.es.maintain.dynamictask.exception.DynamicTaskException;
-import java.lang.reflect.InvocationTargetException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -20,15 +20,17 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
-import org.springframework.beans.BeansException;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Service
 public class DynamicTaskApiImpl implements DynamicTaskApi {
 
-    private final Logger logger = LoggerFactory.getLogger("es-error");
+    private final Logger logger = LoggerFactory.getLogger("vs-error");
 
-    private final Map<Long, ScheduledFuture<?>> taskMap = Maps.newConcurrentMap();
+    private Map<Long, ScheduledFuture<?>> taskMap = Maps.newConcurrentMap();
 
 
     @Autowired
@@ -130,13 +132,7 @@ public class DynamicTaskApiImpl implements DynamicTaskApi {
             }
             methodInvoker.setTargetObject(bean);
             methodInvoker.prepare();
-        } catch (BeansException e) {
-            throw new DynamicTaskException("create task runnable error, task id is : " + taskId, e);
-        } catch (IllegalStateException e) {
-            throw new DynamicTaskException("create task runnable error, task id is : " + taskId, e);
-        } catch (ClassNotFoundException e) {
-            throw new DynamicTaskException("create task runnable error, task id is : " + taskId, e);
-        } catch (NoSuchMethodException e) {
+        } catch (Exception e) {
             throw new DynamicTaskException("create task runnable error, task id is : " + taskId, e);
         }
         return new Runnable() {
@@ -144,10 +140,7 @@ public class DynamicTaskApiImpl implements DynamicTaskApi {
             public void run() {
                 try {
                     methodInvoker.invoke();
-                } catch (InvocationTargetException e) {
-                    logger.error("run dynamic task error, task id is:" + taskId, e);
-                    throw new DynamicTaskException("run dynamic task error, task id is:" + taskId, e);
-                } catch (IllegalAccessException e) {
+                } catch (Exception e) {
                     logger.error("run dynamic task error, task id is:" + taskId, e);
                     throw new DynamicTaskException("run dynamic task error, task id is:" + taskId, e);
                 }

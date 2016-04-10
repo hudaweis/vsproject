@@ -13,7 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping(value = "/admin/maintain/dynamicTask")
 public class DynamicTaskController extends BaseCRUDController<TaskDefinition, Long> {

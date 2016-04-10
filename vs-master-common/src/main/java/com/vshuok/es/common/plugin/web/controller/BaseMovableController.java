@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.vshuok.es.common.entity.BaseEntity;
 import com.vshuok.es.common.entity.search.Searchable;
 import com.vshuok.es.common.plugin.entity.Movable;
-import com.vshuok.es.common.plugin.service.BaseMovableService;
+import com.vshuok.es.common.plugin.serivce.BaseMovableService;
 import com.vshuok.es.common.utils.MessageUtils;
 import com.vshuok.es.common.web.bind.annotation.PageableDefaults;
 import com.vshuok.es.common.web.controller.BaseCRUDController;

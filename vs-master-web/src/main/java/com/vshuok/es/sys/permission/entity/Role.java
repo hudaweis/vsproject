@@ -1,21 +1,19 @@
 package com.vshuok.es.sys.permission.entity;
 
-import java.util.List;
-
+import com.google.common.collect.Lists;
+import com.vshuok.es.common.entity.BaseEntity;
+import com.vshuok.es.common.repository.support.annotation.EnableQueryCache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
-import com.google.common.collect.Lists;
-import com.vshuok.es.common.entity.BaseEntity;
-import com.vshuok.es.common.repository.support.annotation.EnableQueryCache;
-
-/** 
- * <p>角色表</p>
- * @author Hu Dawei  
- * @version 1.0
+/**
+ * 角色表
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "sys_role")
@@ -23,13 +21,11 @@ import com.vshuok.es.common.repository.support.annotation.EnableQueryCache;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Role extends BaseEntity<Long> {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1839542527964840103L;
-
-	
-    /**
+	private static final long serialVersionUID = 3792941263945960957L;
+	/**
      * 前端显示名称
      */
     private String name;

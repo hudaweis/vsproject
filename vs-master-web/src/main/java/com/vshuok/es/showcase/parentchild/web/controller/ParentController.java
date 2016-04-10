@@ -23,179 +23,180 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping(value = "/showcase/parentchild/parent")
 public class ParentController extends BaseCRUDController<Parent, Long> {
 
-	private ParentService getParentService() {
-		return (ParentService) baseService;
-	}
+    private ParentService getParentService() {
+        return (ParentService) baseService;
+    }
 
-	@Autowired
-	private ChildService childService;
+    @Autowired
+    private ChildService childService;
 
-	protected ParentController() {
-		setListAlsoSetCommonData(true);
-		setResourceIdentity("showcase:parentchild");
-	}
+    protected ParentController() {
+        setListAlsoSetCommonData(true);
+        setResourceIdentity("showcase:parentchild");
+    }
 
-	@Override
-	protected void setCommonData(Model model) {
-		model.addAttribute("booleanList", BooleanEnum.values());
-		model.addAttribute("typeList", ParentChildType.values());
-	}
 
-	@RequestMapping(value = "create/discard", method = RequestMethod.POST)
-	@Override
-	public String create(Model model,
-			@Valid @ModelAttribute("m") Parent parent, BindingResult result,
-			RedirectAttributes redirectAttributes) {
-		throw new RuntimeException("discarded method");
-	}
+    @Override
+    protected void setCommonData(Model model) {
+        model.addAttribute("booleanList", BooleanEnum.values());
+        model.addAttribute("typeList", ParentChildType.values());
+    }
 
-	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(Model model,
-			@Valid @ModelAttribute("parent") Parent parent,
-			BindingResult result,
-			@FormModel("childList") List<Child> childList,
-			RedirectAttributes redirectAttributes) {
 
-		if (hasError(parent, result)) {
-			return showCreateForm(model);
-		}
-		getParentService().save(parent, childList);
-		redirectAttributes.addFlashAttribute(Constants.MESSAGE, "创建成功");
-		return redirectToUrl(null);
-	}
+    @RequestMapping(value = "create/discard", method = RequestMethod.POST)
+    @Override
+    public String create(Model model, @Valid @ModelAttribute("m") Parent parent, BindingResult result, RedirectAttributes redirectAttributes) {
+        throw new RuntimeException("discarded method");
+    }
 
-	@Override
-	@RequestMapping(value = "{id}/update", method = RequestMethod.GET)
-	public String showUpdateForm(@PathVariable("id") Parent parent, Model model) {
-		model.addAttribute("childList", childService.findByParent(parent, null)
-				.getContent());
-		return super.showUpdateForm(parent, model);
-	}
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+    public String create(
+            Model model,
+            @Valid @ModelAttribute("parent") Parent parent, BindingResult result,
+            @FormModel("childList") List<Child> childList,
+            RedirectAttributes redirectAttributes) {
 
-	@RequestMapping(value = "{id}/update/discard", method = RequestMethod.POST)
-	@Override
-	public String update(Model model,
-			@Valid @ModelAttribute("m") Parent parent, BindingResult result,
-			@RequestParam(value = "BackURL", required = false) String backURL,
-			RedirectAttributes redirectAttributes) {
-		throw new RuntimeException("discarded method");
-	}
+        if (hasError(parent, result)) {
+            return showCreateForm(model);
+        }
+        getParentService().save(parent, childList);
+        redirectAttributes.addFlashAttribute(Constants.MESSAGE, "创建成功");
+        return redirectToUrl(null);
+    }
 
-	@RequestMapping(value = "{id}/update", method = RequestMethod.POST)
-	public String update(Model model,
-			@Valid @ModelAttribute("parent") Parent parent,
-			BindingResult result,
-			@FormModel("childList") List<Child> childList,
-			@RequestParam(value = "BackURL", required = false) String backURL,
-			RedirectAttributes redirectAttributes) {
+    @Override
+    @RequestMapping(value = "{id}/update", method = RequestMethod.GET)
+    public String showUpdateForm(@PathVariable("id") Parent parent, Model model) {
+        model.addAttribute("childList", childService.findByParent(parent, null).getContent());
+        return super.showUpdateForm(parent, model);
+    }
 
-		if (hasError(parent, result)) {
-			return showUpdateForm(parent, model);
-		}
-		getParentService().update(parent, childList);
-		redirectAttributes.addFlashAttribute(Constants.MESSAGE, "修改成功");
-		return redirectToUrl(backURL);
-	}
+    @RequestMapping(value = "{id}/update/discard", method = RequestMethod.POST)
+    @Override
+    public String update(Model model, @Valid @ModelAttribute("m") Parent parent, BindingResult result, @RequestParam(value = "BackURL", required = false) String backURL, RedirectAttributes redirectAttributes) {
+        throw new RuntimeException("discarded method");
+    }
 
-	@RequestMapping(value = "{id}/delete", method = RequestMethod.GET)
-	@Override
-	public String showDeleteForm(@PathVariable("id") Parent parent, Model model) {
-		model.addAttribute("childList", childService.findByParent(parent, null)
-				.getContent());
-		return super.showDeleteForm(parent, model);
-	}
+    @RequestMapping(value = "{id}/update", method = RequestMethod.POST)
+    public String update(
+            Model model,
+            @Valid @ModelAttribute("parent") Parent parent, BindingResult result,
+            @FormModel("childList") List<Child> childList,
+            @RequestParam(value = "BackURL", required = false) String backURL,
+            RedirectAttributes redirectAttributes) {
 
-	/**
-	 * 验证失败返回true
-	 *
-	 * @param parent
-	 * @param result
-	 * @return
-	 */
-	protected boolean hasError(Parent parent, BindingResult result) {
-		Assert.notNull(parent);
+        if (hasError(parent, result)) {
+            return showUpdateForm(parent, model);
+        }
+        getParentService().update(parent, childList);
+        redirectAttributes.addFlashAttribute(Constants.MESSAGE, "修改成功");
+        return redirectToUrl(backURL);
+    }
 
-		// 全局错误 前台使用<es:showGlobalError commandName="showcase/parent"/> 显示
-		if (parent.getName().contains("admin")) {
-			result.reject("name.must.not.admin");
-		}
+    @RequestMapping(value = "{id}/delete", method = RequestMethod.GET)
+    @Override
+    public String showDeleteForm(@PathVariable("id") Parent parent, Model model) {
+        model.addAttribute("childList", childService.findByParent(parent, null).getContent());
+        return super.showDeleteForm(parent, model);
+    }
 
-		return result.hasErrors();
-	}
+    /**
+     * 验证失败返回true
+     *
+     * @param parent
+     * @param result
+     * @return
+     */
+    protected boolean hasError(Parent parent, BindingResult result) {
+        Assert.notNull(parent);
 
-	// ////////////////////////////////child////////////////////////////////////
+        //全局错误 前台使用<es:showGlobalError commandName="showcase/parent"/> 显示
+        if (parent.getName().contains("admin")) {
+            result.reject("name.must.not.admin");
+        }
 
-	@RequestMapping(value = "{parent}/child", method = RequestMethod.GET)
-	@PageableDefaults(value = Integer.MAX_VALUE, sort = "id=desc")
-	public String listChild(Model model, @PathVariable("parent") Long parentId,
-			Searchable searchable) {
+        return result.hasErrors();
+    }
 
-		this.permissionList.assertHasViewPermission();
 
-		searchable.addSearchFilter("parent.id", SearchOperator.eq, parentId);
+    //////////////////////////////////child////////////////////////////////////
 
-		model.addAttribute("page", childService.findAll(searchable));
+    @RequestMapping(value = "{parent}/child", method = RequestMethod.GET)
+    @PageableDefaults(value = Integer.MAX_VALUE, sort = "id=desc")
+    public String listChild(Model model, @PathVariable("parent") Long parentId, Searchable searchable) {
 
-		return "showcase/parentchild/child/list";
-	}
+        this.permissionList.assertHasViewPermission();
 
-	@RequestMapping(value = "child/create", method = RequestMethod.GET)
-	public String showChildCreateForm(Model model) {
+        searchable.addSearchFilter("parent.id", SearchOperator.eq, parentId);
 
-		this.permissionList.assertHasEditPermission();
+        model.addAttribute("page", childService.findAll(searchable));
 
-		setCommonData(model);
-		model.addAttribute(Constants.OP_NAME, "新增");
-		if (!model.containsAttribute("child")) {
-			model.addAttribute("child", new Child());
-		}
-		return "showcase/parentchild/child/editForm";
-	}
+        return "showcase/parentchild/child/list";
+    }
 
-	@RequestMapping(value = "child/{id}/update", method = RequestMethod.GET)
-	public String showChildUpdateForm(Model model,
-			@PathVariable("id") Child child,
-			@RequestParam(value = "copy", defaultValue = "false") boolean isCopy) {
+    @RequestMapping(value = "child/create", method = RequestMethod.GET)
+    public String showChildCreateForm(Model model) {
 
-		this.permissionList.assertHasEditPermission();
+        this.permissionList.assertHasEditPermission();
 
-		setCommonData(model);
-		model.addAttribute(Constants.OP_NAME, isCopy ? "复制" : "修改");
-		if (!model.containsAttribute("child")) {
-			if (child == null) {
-				child = new Child();
-			}
-			if (isCopy) {
-				child.setId(null);
-			}
-			model.addAttribute("child", child);
-		}
-		return "showcase/parentchild/child/editForm";
-	}
+        setCommonData(model);
+        model.addAttribute(Constants.OP_NAME, "新增");
+        if (!model.containsAttribute("child")) {
+            model.addAttribute("child", new Child());
+        }
+        return "showcase/parentchild/child/editForm";
+    }
 
-	@RequestMapping(value = "child/{id}/delete", method = RequestMethod.POST)
-	@ResponseBody
-	public Child deleteChild(@PathVariable("id") Child child) {
+    @RequestMapping(value = "child/{id}/update", method = RequestMethod.GET)
+    public String showChildUpdateForm(
+            Model model,
+            @PathVariable("id") Child child,
+            @RequestParam(value = "copy", defaultValue = "false") boolean isCopy) {
 
-		this.permissionList.assertHasEditPermission();
+        this.permissionList.assertHasEditPermission();
 
-		childService.delete(child);
-		return child;
-	}
+        setCommonData(model);
+        model.addAttribute(Constants.OP_NAME, isCopy ? "复制" : "修改");
+        if (!model.containsAttribute("child")) {
+            if (child == null) {
+                child = new Child();
+            }
+            if (isCopy) {
+                child.setId(null);
+            }
+            model.addAttribute("child", child);
+        }
+        return "showcase/parentchild/child/editForm";
+    }
 
-	@RequestMapping(value = "child/batch/delete")
-	@ResponseBody
-	public Object deleteChildInBatch(
-			@RequestParam(value = "ids", required = false) Long[] ids) {
+    @RequestMapping(value = "child/{id}/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Child deleteChild(@PathVariable("id") Child child) {
 
-		this.permissionList.assertHasEditPermission();
+        this.permissionList.assertHasEditPermission();
 
-		childService.delete(ids);
-		return ids;
-	}
+        childService.delete(child);
+        return child;
+    }
+
+
+    @RequestMapping(value = "child/batch/delete")
+    @ResponseBody
+    public Object deleteChildInBatch(@RequestParam(value = "ids", required = false) Long[] ids) {
+
+        this.permissionList.assertHasEditPermission();
+
+        childService.delete(ids);
+        return ids;
+    }
+
 
 }

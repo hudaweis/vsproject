@@ -10,7 +10,10 @@ import org.mozilla.javascript.EvaluatorException;
 
 import java.io.*;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 public class YuiCompressorUtils {
 
 

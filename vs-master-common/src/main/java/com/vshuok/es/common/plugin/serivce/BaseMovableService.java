@@ -1,4 +1,4 @@
-package com.vshuok.es.common.plugin.service;
+package com.vshuok.es.common.plugin.serivce;
 
 import com.google.common.collect.Maps;
 import com.vshuok.es.common.entity.BaseEntity;
@@ -23,7 +23,6 @@ import java.util.Map;
  * @version 1.0
  */
 public abstract class BaseMovableService<M extends BaseEntity & Movable, ID extends Serializable> extends BaseService<M, ID> {
-
 
     //权重的步长
     private final Integer stepLength;
@@ -51,8 +50,8 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
 
     @Override
     public M save(M m) {
-        if (m.getWeigth() == null) {
-            m.setWeigth(findNextWeight());
+        if (m.getWeight() == null) {
+            m.setWeight(findNextWeight());
         }
         return super.save(m);
     }
@@ -71,16 +70,16 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (from == null || to == null || from.equals(to)) {
             return;
         }
-        Integer fromWeight = from.getWeigth();
-        Integer toWeight = to.getWeigth();
+        Integer fromWeight = from.getWeight();
+        Integer toWeight = to.getWeight();
 
 
         M nextTo = findNextByWeight(toWeight);
 
         //如果toId的下一个是fromId 则直接交换顺序即可
         if (from.equals(nextTo)) {
-            from.setWeigth(toWeight);
-            to.setWeigth(fromWeight);
+            from.setWeight(toWeight);
+            to.setWeight(fromWeight);
             return;
         }
 
@@ -91,17 +90,17 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (count > 0 && count < 20) {
             List<M> moves = findByBetweenAndAsc(minWeight, maxWeight);
             if (fromWeight < toWeight) {
-                Integer swapInteger = moves.get(count - 2).getWeigth();
+                Integer swapInteger = moves.get(count - 2).getWeight();
                 for (int i = count - 2; i >= 1; i--) {
                     //最后一个的weight = toWeight;
-                    moves.get(i).setWeigth(moves.get(i - 1).getWeigth());
+                    moves.get(i).setWeight(moves.get(i - 1).getWeight());
                 }
-                moves.get(0).setWeigth(swapInteger);
+                moves.get(0).setWeight(swapInteger);
             } else {
                 for (int i = 0; i <= count - 2; i++) {
-                    moves.get(i).setWeigth(moves.get(i + 1).getWeigth());
+                    moves.get(i).setWeight(moves.get(i + 1).getWeight());
                 }
-                moves.get(count - 1).setWeigth(minWeight);
+                moves.get(count - 1).setWeight(minWeight);
             }
             return;
         }
@@ -113,14 +112,14 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (preTo == null) {
             newWeight = toWeight / 2;
         } else {
-            newWeight = toWeight - (toWeight - preTo.getWeigth()) / 2;
+            newWeight = toWeight - (toWeight - preTo.getWeight()) / 2;
 
         }
 
         if (Math.abs(newWeight - toWeight) <= 1) {
             throw new IllegalStateException(String.format("up error, no enough weight :fromId:%d, toId:%d", fromId, toId));
         }
-        from.setWeigth(newWeight);
+        from.setWeight(newWeight);
 
     }
 
@@ -138,15 +137,15 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (from == null || to == null || from.equals(to)) {
             return;
         }
-        Integer fromWeight = from.getWeigth();
-        Integer toWeight = to.getWeigth();
+        Integer fromWeight = from.getWeight();
+        Integer toWeight = to.getWeight();
 
 
         M preTo = findPreByWeight(toWeight);
         //如果toId的下一个是fromId 则直接交换顺序即可
         if (from.equals(preTo)) {
-            from.setWeigth(toWeight);
-            to.setWeigth(fromWeight);
+            from.setWeight(toWeight);
+            to.setWeight(fromWeight);
             return;
         }
 
@@ -160,25 +159,25 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
             //5000 4000 3000
 
             if (fromWeight > toWeight) {
-                Integer swapInteger = moves.get(count - 2).getWeigth();
+                Integer swapInteger = moves.get(count - 2).getWeight();
                 for (int i = count - 2; i >= 1; i--) {
                     //最后一个的weight = toWeight;
-                    moves.get(i).setWeigth(moves.get(i - 1).getWeigth());
+                    moves.get(i).setWeight(moves.get(i - 1).getWeight());
                 }
-                moves.get(0).setWeigth(swapInteger);
+                moves.get(0).setWeight(swapInteger);
             } else {
                 for (int i = 0; i <= count - 2; i++) {
-                    moves.get(i).setWeigth(moves.get(i + 1).getWeigth());
+                    moves.get(i).setWeight(moves.get(i + 1).getWeight());
                 }
-                moves.get(count - 1).setWeigth(maxWeight);
+                moves.get(count - 1).setWeight(maxWeight);
             }
             return;
         }
 
         //如果toId的下一个是fromId 则直接交换顺序即可
         if (from.equals(preTo)) {
-            from.setWeigth(toWeight);
-            to.setWeigth(fromWeight);
+            from.setWeight(toWeight);
+            to.setWeight(fromWeight);
             return;
         }
         M nextTo = findNextByWeight(toWeight);
@@ -188,13 +187,13 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
         if (nextTo == null) {
             newWeight = toWeight + stepLength;
         } else {
-            newWeight = toWeight + (nextTo.getWeigth() - toWeight) / 2;
+            newWeight = toWeight + (nextTo.getWeight() - toWeight) / 2;
         }
 
         if (Math.abs(newWeight - toWeight) <= 1) {
             throw new IllegalStateException(String.format("down error, no enough weight :fromId:%d, toId:%d", fromId, toId));
         }
-        from.setWeigth(newWeight);
+        from.setWeight(newWeight);
     }
 
     public void reweight() {
@@ -227,7 +226,7 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
 
         for (int i = 0; i < moves.size(); i++) {
             M move = moves.get(i);
-            move.setWeigth((totalElements - firstElement - i) * stepLength);
+            move.setWeight((totalElements - firstElement - i) * stepLength);
             update(move);
         }
 
@@ -241,7 +240,7 @@ public abstract class BaseMovableService<M extends BaseEntity & Movable, ID exte
             return stepLength;
         }
 
-        return page.getContent().get(0).getWeigth() + stepLength;
+        return page.getContent().get(0).getWeight() + stepLength;
     }
 
     public M findPreByWeight(Integer weight) {

@@ -1,13 +1,12 @@
 package com.vshuok.es.sys.user.service;
 
 import com.vshuok.es.common.service.BaseService;
-
 import com.vshuok.es.sys.user.entity.UserLastOnline;
 import com.vshuok.es.sys.user.repository.UserLastOnlineRepository;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @Service

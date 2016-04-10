@@ -7,6 +7,8 @@ import java.util.Map;
 
 /**
  * 通知接口
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 public interface NotificationApi {
 

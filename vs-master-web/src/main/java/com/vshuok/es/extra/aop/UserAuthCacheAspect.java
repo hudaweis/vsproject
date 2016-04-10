@@ -1,15 +1,5 @@
 package com.vshuok.es.extra.aop;
 
-
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.vshuok.es.common.cache.BaseCacheAspect;
 import com.vshuok.es.sys.auth.entity.Auth;
 import com.vshuok.es.sys.auth.service.AuthService;
@@ -29,6 +19,14 @@ import com.vshuok.es.sys.resource.entity.Resource;
 import com.vshuok.es.sys.resource.service.ResourceService;
 import com.vshuok.es.sys.user.entity.User;
 import com.vshuok.es.sys.user.service.UserService;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
@@ -36,6 +34,10 @@ import java.util.Arrays;
  * 用户权限的切面
  * <p/>
  * 1、当调用如下方法时，加缓存
+ * {@link com.vshuok.es.sys.auth.service.UserAuthService#findRoles}
+ * {@link com.vshuok.es.sys.auth.service.UserAuthService#findStringRoles}
+ * {@link com.vshuok.es.sys.auth.service.UserAuthService#findStringPermissions}
+ * <p/>
  * 2、授权（Auth）
  * 当增删改授权时，
  * 如果是用户相关的，只删用户的即可，
@@ -78,6 +80,8 @@ import java.util.Arrays;
  * 此方法的一个缺点就是 只要改了一个，所有缓存失效。。。。
  * TODO 思考更好的做法？
  * <p/>
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Component
 @Aspect

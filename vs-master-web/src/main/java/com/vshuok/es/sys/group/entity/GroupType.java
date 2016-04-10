@@ -1,8 +1,9 @@
 package com.vshuok.es.sys.group.entity;
-/** 
- * <p>用户组分类</p>
- * @author Hu Dawei  
- * @version 1.0
+
+/**
+ * 用户组分类
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 public enum GroupType {
 

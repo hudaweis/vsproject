@@ -24,6 +24,8 @@ import java.util.Set;
  * <p/>
  * 如果消息是草稿 那么收件人状态是null
  * <p/>
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
 @Table(name = "personal_message")

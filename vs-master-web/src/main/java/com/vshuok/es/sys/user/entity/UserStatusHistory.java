@@ -8,7 +8,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
+ 13-3-11 下午3:23
  * <p>Version: 1.0
  */
 @Entity

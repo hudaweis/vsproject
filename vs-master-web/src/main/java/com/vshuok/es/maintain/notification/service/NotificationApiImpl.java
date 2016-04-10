@@ -1,7 +1,6 @@
 package com.vshuok.es.maintain.notification.service;
 
 import com.google.common.collect.Lists;
-
 import com.google.common.collect.Maps;
 import com.vshuok.es.common.entity.search.SearchOperator;
 import com.vshuok.es.common.entity.search.Searchable;
@@ -20,7 +19,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Service
 public class NotificationApiImpl implements NotificationApi {
 

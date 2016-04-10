@@ -1,7 +1,6 @@
 package com.vshuok.es.sys.user.service;
 
 import com.vshuok.es.common.service.BaseService;
-
 import com.vshuok.es.sys.user.entity.UserOnline;
 import com.vshuok.es.sys.user.repository.UserOnlineRepository;
 import org.springframework.data.domain.Page;
@@ -12,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @Service

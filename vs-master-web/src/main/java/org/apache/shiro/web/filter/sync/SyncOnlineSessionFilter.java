@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2005-2012 https://github.com/zhangkaitao
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ */
 package org.apache.shiro.web.filter.sync;
 
 import org.apache.shiro.ShiroConstants;
@@ -11,7 +16,8 @@ import javax.servlet.ServletResponse;
 /**
  * 同步当前会话数据到数据库
  * <p/>
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
+ 13-3-21 下午5:53
  * <p>Version: 1.0
  */
 public class SyncOnlineSessionFilter extends PathMatchingFilter {

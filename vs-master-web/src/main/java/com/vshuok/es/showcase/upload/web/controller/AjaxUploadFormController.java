@@ -15,32 +15,33 @@ import javax.validation.Valid;
 
 /**
  * 文件上传/下载
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Controller
 @RequestMapping(value = "showcase/upload/ajax")
 public class AjaxUploadFormController {
 
-	@Autowired
-	private UploadService uploadService;
+    @Autowired
+    private UploadService uploadService;
 
-	@RequiresPermissions("showcase:upload:create")
-	@RequestMapping(value = "create", method = RequestMethod.GET)
-	public String showCreateForm(Model model) {
-		model.addAttribute(Constants.OP_NAME, "新增");
-		if (!model.containsAttribute("upload")) {
-			model.addAttribute("upload", new Upload());
-		}
-		return "showcase/upload/ajax/editForm";
-	}
+    @RequiresPermissions("showcase:upload:create")
+    @RequestMapping(value = "create", method = RequestMethod.GET)
+    public String showCreateForm(Model model) {
+        model.addAttribute(Constants.OP_NAME, "新增");
+        if (!model.containsAttribute("upload")) {
+            model.addAttribute("upload", new Upload());
+        }
+        return "showcase/upload/ajax/editForm";
+    }
 
-	@RequiresPermissions("showcase:upload:create")
-	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String create(@Valid Upload upload,
-			RedirectAttributes redirectAttributes) {
+    @RequiresPermissions("showcase:upload:create")
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+    public String create(@Valid Upload upload, RedirectAttributes redirectAttributes) {
 
-		uploadService.save(upload);
-		redirectAttributes.addFlashAttribute(Constants.MESSAGE, "创建文件成功");
-		return "redirect:/showcase/upload";
-	}
+        uploadService.save(upload);
+        redirectAttributes.addFlashAttribute(Constants.MESSAGE, "创建文件成功");
+        return "redirect:/showcase/upload";
+    }
 
 }

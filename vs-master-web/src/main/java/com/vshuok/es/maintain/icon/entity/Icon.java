@@ -4,7 +4,12 @@ import com.vshuok.es.common.entity.BaseEntity;
 
 import javax.persistence.*;
 
-
+/**
+ * 图标管理
+ * class方式 和
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Entity
 @Table(name = "maintain_icon")
 public class Icon extends BaseEntity<Long> {

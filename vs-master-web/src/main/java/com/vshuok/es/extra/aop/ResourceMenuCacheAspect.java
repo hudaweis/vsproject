@@ -1,5 +1,7 @@
 package com.vshuok.es.extra.aop;
 
+import com.vshuok.es.common.cache.BaseCacheAspect;
+import com.vshuok.es.sys.user.entity.User;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -7,13 +9,10 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
-import com.vshuok.es.common.cache.BaseCacheAspect;
-import com.vshuok.es.sys.user.entity.User;
-
-/** 
- * <p>缓存及清理菜单缓存</p>
- * @author Hu Dawei  
- * @version 1.0
+/**
+ * 缓存及清理菜单缓存
+ * <p>User: Hu dawei
+ * <p>Version: 1.0
  */
 @Component
 @Aspect
@@ -73,5 +72,6 @@ public class ResourceMenuCacheAspect extends BaseCacheAspect {
     private String menusKey(Long userId) {
         return this.menusKeyPrefix + userId;
     }
+
 
 }

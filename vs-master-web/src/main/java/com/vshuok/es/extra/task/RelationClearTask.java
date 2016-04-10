@@ -1,17 +1,17 @@
 package com.vshuok.es.extra.task;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.vshuok.es.sys.auth.task.AuthRelationClearTask;
 import com.vshuok.es.sys.group.task.GroupClearRelationTask;
 import com.vshuok.es.sys.permission.task.RoleClearRelationTask;
 import com.vshuok.es.sys.user.task.UserClearRelationTask;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-/** 
- * <p>定时清理对象间的关系</p>
- * @author Hu Dawei  
- * @version 1.0
+/**
+ * 定时清理对象间的关系
+ * <p/>
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Service("relationClearTask")
 public class RelationClearTask {

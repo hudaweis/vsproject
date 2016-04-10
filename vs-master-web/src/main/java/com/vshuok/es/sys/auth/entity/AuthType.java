@@ -1,8 +1,9 @@
 package com.vshuok.es.sys.auth.entity;
-/** 
- * <p>授权类型</p>
- * @author Hu Dawei  
- * @version 1.0
+
+/**
+ * 授权类型
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 public enum AuthType {
 

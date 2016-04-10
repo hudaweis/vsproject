@@ -1,4 +1,4 @@
-package com.vshuok.es.common.plugin.service;
+package com.vshuok.es.common.plugin.serivce;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;

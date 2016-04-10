@@ -1,28 +1,27 @@
 package com.vshuok.es.sys.group.entity;
 
-import javax.persistence.*;
-
 import com.vshuok.es.common.entity.BaseEntity;
 import com.vshuok.es.common.repository.support.annotation.EnableQueryCache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-/** 
- * <p>分组超类</p>
- * @author Hu Dawei  
- * @version 1.0
+import javax.persistence.*;
+
+/**
+ * 分组超类
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Entity
-@Table(name="sys_group")
+@Table(name = "sys_group")
 @EnableQueryCache
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Group extends BaseEntity<Long> {
-
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1765673902948640151L;
-	
-	  /**
+	private static final long serialVersionUID = -8907006107428476056L;
+
+	/**
      * 分组名称
      */
     private String name;
@@ -77,6 +76,5 @@ public class Group extends BaseEntity<Long> {
     public void setShow(Boolean show) {
         this.show = show;
     }
-
 
 }

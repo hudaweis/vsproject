@@ -1,51 +1,55 @@
 package com.vshuok.es.sys.auth.entity;
 
-import java.util.Set;
-
 import com.google.common.collect.Sets;
 import com.vshuok.es.common.entity.BaseEntity;
 import com.vshuok.es.common.repository.hibernate.type.CollectionToStringUserType;
 import com.vshuok.es.common.repository.support.annotation.EnableQueryCache;
-
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
- * 组织机构 工作职位 用户 角色 关系表 1、授权的五种情况 只给组织机构授权 (orgnizationId=? and jobId=0) 只给工作职务授权
- * (orgnizationId=0 and jobId=?) 给组织机构和工作职务都授权 (orgnizationId=? and jobId=?)
- * 给用户授权 (userId=?) 给组授权 (groupId=?)
+ * 组织机构 工作职位  用户  角色 关系表
+ * 1、授权的五种情况
+ * 只给组织机构授权 (orgnizationId=? and jobId=0)
+ * 只给工作职务授权 (orgnizationId=0 and jobId=?)
+ * 给组织机构和工作职务都授权 (orgnizationId=? and jobId=?)
+ * 给用户授权  (userId=?)
+ * 给组授权 (groupId=?)
  * <p/>
- * 因此查询用户有没有权限 就是 where (orgnizationId=? and jobId=0) or (organizationId = 0 and
- * jobId=?) or (orgnizationId=? and jobId=?) or (userId=?) or (groupId=?)
+ * 因此查询用户有没有权限 就是
+ * where (orgnizationId=? and jobId=0) or (organizationId = 0 and jobId=?) or (orgnizationId=? and jobId=?) or (userId=?) or (groupId=?)
  * <p/>
  * <p/>
- * 2、为了提高性能 放到一张表 此处不做关系映射（这样需要配合缓存）
+ * 2、为了提高性能
+ * 放到一张表
+ * 此处不做关系映射（这样需要配合缓存）
  * <p/>
  * 3、如果另一方是可选的（如只选组织机构 或 只选工作职务） 那么默认0 使用0的目的是为了也让走索引
- * 
- * @author Hu Dawei
- * @version 1.0
+ * <p/>
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
-@TypeDef(name = "SetToStringUserType", typeClass = CollectionToStringUserType.class, parameters = {
-		@Parameter(name = "separator", value = ","),
-		@Parameter(name = "collectionType", value = "java.util.HashSet"),
-		@Parameter(name = "elementType", value = "java.lang.Long") })
+@TypeDef(
+        name = "SetToStringUserType",
+        typeClass = CollectionToStringUserType.class,
+        parameters = {
+                @Parameter(name = "separator", value = ","),
+                @Parameter(name = "collectionType", value = "java.util.HashSet"),
+                @Parameter(name = "elementType", value = "java.lang.Long")
+        }
+)
 @Entity
 @Table(name = "sys_auth")
 @EnableQueryCache
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Auth extends BaseEntity<Long> {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7690232561343172695L;
-	
-	 /**
+    /**
      * 组织机构
      */
     @Column(name = "organization_id")
@@ -136,6 +140,5 @@ public class Auth extends BaseEntity<Long> {
     public void setGroupId(Long groupId) {
         this.groupId = groupId;
     }
-
 
 }

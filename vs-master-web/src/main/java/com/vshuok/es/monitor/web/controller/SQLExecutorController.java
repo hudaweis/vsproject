@@ -1,7 +1,6 @@
 package com.vshuok.es.monitor.web.controller;
 
 import com.google.common.collect.Lists;
-
 import com.vshuok.es.common.Constants;
 import com.vshuok.es.common.repository.hibernate.HibernateUtils;
 import com.vshuok.es.common.web.bind.annotation.PageableDefaults;
@@ -35,102 +34,98 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Controller
 @RequestMapping("/admin/monitor/db")
 @RequiresPermissions("monitor:ql:*")
 public class SQLExecutorController extends BaseController {
 
-	@PersistenceContext
-	private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-	@Autowired
-	private PlatformTransactionManager transactionManager;
+    @Autowired
+    private PlatformTransactionManager transactionManager;
 
-	@RequestMapping(value = "/sql", method = RequestMethod.GET)
-	public String showSQLForm() {
-		return viewName("sqlForm");
-	}
 
-	@PageableDefaults(pageNumber = 0, value = 10)
-	@RequestMapping(value = "/sql", method = RequestMethod.POST)
-	public String executeQL(final @RequestParam("sql") String sql,
-			final Model model, final Pageable pageable) {
+    @RequestMapping(value = "/sql", method = RequestMethod.GET)
+    public String showSQLForm() {
+        return viewName("sqlForm");
+    }
 
-		model.addAttribute("sessionFactory",
-				HibernateUtils.getSessionFactory(em));
 
-		String lowerCaseSQL = sql.trim().toLowerCase();
-		final boolean isDML = lowerCaseSQL.startsWith("insert")
-				|| lowerCaseSQL.startsWith("update")
-				|| lowerCaseSQL.startsWith("delete");
-		final boolean isDQL = lowerCaseSQL.startsWith("select");
+    @PageableDefaults(pageNumber = 0, value = 10)
+    @RequestMapping(value = "/sql", method = RequestMethod.POST)
+    public String executeQL(
+            final @RequestParam("sql") String sql, final Model model,
+            final Pageable pageable
+    ) {
 
-		if (!isDML && !isDQL) {
-			model.addAttribute(Constants.ERROR,
-					"您执行的SQL不允许，只允许insert、update、delete、select");
-			return showSQLForm();
-		}
-		try {
-			new TransactionTemplate(transactionManager)
-					.execute(new TransactionCallback<Void>() {
-						@Override
-						public Void doInTransaction(TransactionStatus status) {
+        model.addAttribute("sessionFactory", HibernateUtils.getSessionFactory(em));
 
-							if (isDML) {
-								Query query = em.createNativeQuery(sql);
-								int updateCount = query.executeUpdate();
-								model.addAttribute("updateCount", updateCount);
-							} else {
-								String findSQL = sql;
-								String countSQL = "select count(*) count from ("
-										+ findSQL + ") o";
-								Query countQuery = em
-										.createNativeQuery(countSQL);
-								Query findQuery = em.createNativeQuery(findSQL);
-								findQuery.setFirstResult(pageable.getOffset());
-								findQuery.setMaxResults(pageable.getPageSize());
+        String lowerCaseSQL = sql.trim().toLowerCase();
+        final boolean isDML = lowerCaseSQL.startsWith("insert") || lowerCaseSQL.startsWith("update") || lowerCaseSQL.startsWith("delete");
+        final boolean isDQL = lowerCaseSQL.startsWith("select");
 
-								Page page = new PageImpl(findQuery
-										.getResultList(), pageable,
-										((BigInteger) countQuery
-												.getSingleResult()).longValue());
+        if(!isDML && !isDQL) {
+            model.addAttribute(Constants.ERROR, "您执行的SQL不允许，只允许insert、update、delete、select");
+            return showSQLForm();
+        }
+        try {
+            new TransactionTemplate(transactionManager).execute(new TransactionCallback<Void>() {
+                @Override
+                public Void doInTransaction(TransactionStatus status) {
 
-								model.addAttribute("resultPage", page);
+                    if (isDML) {
+                        Query query = em.createNativeQuery(sql);
+                        int updateCount = query.executeUpdate();
+                        model.addAttribute("updateCount", updateCount);
+                    } else {
+                        String findSQL = sql;
+                        String countSQL = "select count(*) count from (" + findSQL + ") o";
+                        Query countQuery = em.createNativeQuery(countSQL);
+                        Query findQuery = em.createNativeQuery(findSQL);
+                        findQuery.setFirstResult(pageable.getOffset());
+                        findQuery.setMaxResults(pageable.getPageSize());
 
-								em.unwrap(Session.class).doWork(new Work() {
-									@Override
-									public void execute(
-											final Connection connection)
-											throws SQLException {
-										PreparedStatement psst = connection
-												.prepareStatement(sql);
-										ResultSetMetaData metaData = psst
-												.getMetaData();
+                        Page page = new PageImpl(
+                                findQuery.getResultList(),
+                                pageable,
+                                ((BigInteger) countQuery.getSingleResult()).longValue());
 
-										List<String> columnNames = Lists
-												.newArrayList();
-										for (int i = 1, l = metaData
-												.getColumnCount(); i <= l; i++) {
-											columnNames.add(metaData
-													.getColumnLabel(i));
-										}
-										psst.close();
-										model.addAttribute("columnNames",
-												columnNames);
-									}
-								});
-							}
+                        model.addAttribute("resultPage", page);
 
-							return null;
-						}
-					});
-		} catch (Exception e) {
-			StringWriter sw = new StringWriter();
-			e.printStackTrace(new PrintWriter(sw));
-			model.addAttribute(Constants.ERROR, sw.toString());
-		}
+                        em.unwrap(Session.class).doWork(new Work() {
+                            @Override
+                            public void execute(final Connection connection) throws SQLException {
+                                PreparedStatement psst = connection.prepareStatement(sql);
+                                ResultSetMetaData metaData = psst.getMetaData();
 
-		return showSQLForm();
-	}
+                                List<String> columnNames = Lists.newArrayList();
+                                for(int i = 1, l = metaData.getColumnCount(); i <= l; i++) {
+                                    columnNames.add(metaData.getColumnLabel(i));
+                                }
+                                psst.close();
+                                model.addAttribute("columnNames", columnNames);
+                            }
+                        });
+                    }
+
+                    return null;
+                }
+            });
+        } catch (Exception e) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            model.addAttribute(Constants.ERROR, sw.toString());
+        }
+
+        return showSQLForm();
+    }
+
+
+
 
 }

@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * <p>User: Hu dawei
- * <p>Date: 13-1-28 下午4:29
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 @Controller

@@ -9,7 +9,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
  * <p>用于绑定@FormModel的方法参数解析器
- * <p>User: Hu dawei
+ * <p>User: Hu Dawei
  * <p>Version: 1.0
  */
 public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
@@ -19,7 +19,10 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(CurrentUser.class);
+        if (parameter.hasParameterAnnotation(CurrentUser.class)) {
+            return true;
+        }
+        return false;
     }
 
     @Override

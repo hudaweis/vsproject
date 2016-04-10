@@ -1,48 +1,52 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Druid Web Session Stat</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
-		<link href='css/bootstrap.min.css' rel="stylesheet" />
-		<link href="css/style.css" type="text/css" rel="stylesheet"/>
-    	<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script src="js/common.js" type="text/javascript" charset="utf8"></script>
-	</head>
-	<body>
-		<div class="container-fluid">
-      		<div class="row-fluid">
-        		<div class="span12">
-          				<h3>
-          					Web Session Stat
-          					<a href="websession.json" target="_blank">View JSON API</a>
-          				</h3>
-						<table id="dataTable" class="table table-bordered table-striped">
-							<thead>
-								<tr>
-									<th>N</th>
-									<th><a id="th-SESSIONID" >SESSIONID </a></th>
-									<th width="50"><a id="th-Principal" >Principal</a></th>
-									<th width="100"><a id="th-CreateTime" >CreateTime</a></th>
-									<th width="100"><a id="th-LastAccessTime" >LastAccess</a></th>
-									<th width="50"><a id="th-RemoteAddress" >RemoteAddress</a></th>
-									<th width="50"><a id="th-RequestCount" >RequestCount</a></th>
-									<th width="50" title="RequestTimeMillisTotal"><a id="th-RequestTimeMillisTotal" >RequestTime</a></th>
-									<th width="50"><a id="th-RunningCount"  title="Running Count">Running</a></th>
-									<th width="80" title="Concurrent Max"><a id="th-ConcurrentMax" >Concurrent</a></th>
-									<th width="80" title="Jdbc Exec Count"><a id="th-JdbcExecuteCount" >JdbcCount</a></th>
-									<th width="80" title="Jdbc Exec Time"><a id="th-JdbcExecuteTimeMillis"  title="JdbcExecuteTimeMillis">JdbcTime</a></th>
-									<th width="80"><a id="th-JdbcCommitCount" >JdbcCommit</a></th>
-									<th width="80"><a id="th-JdbcRollbackCount" >JdbcRollback</a></th>
-									<th width="80"><a id="th-JdbcFetchRowCount" >JdbcFetchRow</a></th>
-									<th width="80"><a id="th-JdbcUpdateCount" >JdbcUpdate</a></th>
-								</tr>
-							</thead>
-							<tbody></tbody>
-						</table>
-        		</div>
-      		</div> 
-    	</div>
-    	<script type="text/javascript">
+<head>
+<title>Druid Web Session Stat</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<link href='css/bootstrap.min.css' rel="stylesheet" />
+<link href="css/style.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/common.js" type="text/javascript" charset="utf8"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span12">
+				<h3>
+					Web Session Stat <a href="websession.json" target="_blank">View
+						JSON API</a>
+				</h3>
+				<table id="dataTable" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>N</th>
+							<th><a id="th-SESSIONID">SESSIONID </a></th>
+							<th width="50"><a id="th-Principal">Principal</a></th>
+							<th width="100"><a id="th-CreateTime">CreateTime</a></th>
+							<th width="100"><a id="th-LastAccessTime">LastAccess</a></th>
+							<th width="50"><a id="th-RemoteAddress">RemoteAddress</a></th>
+							<th width="50"><a id="th-RequestCount">RequestCount</a></th>
+							<th width="50" title="RequestTimeMillisTotal"><a
+								id="th-RequestTimeMillisTotal">RequestTime</a></th>
+							<th width="50"><a id="th-RunningCount" title="Running Count">Running</a></th>
+							<th width="80" title="Concurrent Max"><a
+								id="th-ConcurrentMax">Concurrent</a></th>
+							<th width="80" title="Jdbc Exec Count"><a
+								id="th-JdbcExecuteCount">JdbcCount</a></th>
+							<th width="80" title="Jdbc Exec Time"><a
+								id="th-JdbcExecuteTimeMillis" title="JdbcExecuteTimeMillis">JdbcTime</a></th>
+							<th width="80"><a id="th-JdbcCommitCount">JdbcCommit</a></th>
+							<th width="80"><a id="th-JdbcRollbackCount">JdbcRollback</a></th>
+							<th width="80"><a id="th-JdbcFetchRowCount">JdbcFetchRow</a></th>
+							<th width="80"><a id="th-JdbcUpdateCount">JdbcUpdate</a></th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
     	$.namespace("druid.websession");
     	druid.websession = function () {  
     		return  {
@@ -103,5 +107,5 @@
     		druid.websession.init();
     	});
     	</script>
-	</body>
+</body>
 </html>

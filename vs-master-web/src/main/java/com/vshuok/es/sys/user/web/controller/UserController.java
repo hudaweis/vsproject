@@ -27,256 +27,259 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>
- * User: Hu dawei
- * <p>
- * Version: 1.0
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Controller("adminUserController")
 @RequestMapping(value = "/admin/sys/user")
 public class UserController extends BaseCRUDController<User, Long> {
 
-	private UserService getUserService() {
-		return (UserService) baseService;
-	}
+    private UserService getUserService() {
+        return (UserService) baseService;
+    }
 
-	public UserController() {
-		setResourceIdentity("sys:user");
-	}
+    public UserController() {
+        setResourceIdentity("sys:user");
+    }
 
-	@Override
-	protected void setCommonData(Model model) {
-		model.addAttribute("statusList", UserStatus.values());
-		model.addAttribute("booleanList", BooleanEnum.values());
-	}
+    @Override
+    protected void setCommonData(Model model) {
+        model.addAttribute("statusList", UserStatus.values());
+        model.addAttribute("booleanList", BooleanEnum.values());
+    }
 
-	@RequestMapping(value = "main", method = RequestMethod.GET)
-	public String main(Model model) {
-		return viewName("main");
-	}
 
-	@RequestMapping(value = "tree", method = RequestMethod.GET)
-	public String tree(Model model) {
-		return viewName("tree");
-	}
+    @RequestMapping(value = "main", method = RequestMethod.GET)
+    public String main(Model model) {
+        return viewName("main");
+    }
 
-	@RequestMapping(value = "list/discard", method = RequestMethod.GET)
-	@PageableDefaults(sort = "id=desc")
-	public String list(Searchable searchable, Model model) {
-		throw new RuntimeException("discarded method");
-	}
+    @RequestMapping(value = "tree", method = RequestMethod.GET)
+    public String tree(Model model) {
+        return viewName("tree");
+    }
 
-	@RequestMapping(value = { "" }, method = RequestMethod.GET)
-	@PageableDefaults(sort = "id=desc")
-	@SearchableDefaults(value = "deleted_eq=0")
-	public String listAll(Searchable searchable, Model model) {
-		return list(null, null, searchable, model);
-	}
 
-	@RequestMapping(value = { "{organization}/{job}" }, method = RequestMethod.GET)
-	@PageableDefaults(sort = "id=desc")
-	@SearchableDefaults(value = "deleted_eq=0")
-	public String list(@PathVariable("organization") Organization organization,
-			@PathVariable("job") Job job, Searchable searchable, Model model) {
+    @RequestMapping(value = "list/discard", method = RequestMethod.GET)
+    @PageableDefaults(sort = "id=desc")
+    public String list(Searchable searchable, Model model) {
+        throw new RuntimeException("discarded method");
+    }
 
-		setCommonData(model);
+    @RequestMapping(value = {""}, method = RequestMethod.GET)
+    @PageableDefaults(sort = "id=desc")
+    @SearchableDefaults(value = "deleted_eq=0")
+    public String listAll(Searchable searchable, Model model) {
+        return list(null, null, searchable, model);
+    }
 
-		if (organization != null && !organization.isRoot()) {
-			searchable.addSearchParam("organizationId", organization.getId());
-		}
-		if (job != null && !job.isRoot()) {
-			searchable.addSearchParam("jobId", job.getId());
-		}
 
-		return super.list(searchable, model);
-	}
+    @RequestMapping(value = {"{organization}/{job}"}, method = RequestMethod.GET)
+    @PageableDefaults(sort = "id=desc")
+    @SearchableDefaults(value = "deleted_eq=0")
+    public String list(
+            @PathVariable("organization") Organization organization,
+            @PathVariable("job") Job job,
+            Searchable searchable, Model model) {
 
-	@RequestMapping(value = "create/discard", method = RequestMethod.POST)
-	@Override
-	public String create(Model model, @Valid @ModelAttribute("m") User m,
-			BindingResult result, RedirectAttributes redirectAttributes) {
-		throw new RuntimeException("discarded method");
-	}
+        setCommonData(model);
 
-	@RequestMapping(value = "{id}/update/discard", method = RequestMethod.POST)
-	@Override
-	public String update(
-			Model model,
-			@Valid @ModelAttribute("m") User m,
-			BindingResult result,
-			@RequestParam(value = Constants.BACK_URL, required = false) String backURL,
-			RedirectAttributes redirectAttributes) {
-		throw new RuntimeException("discarded method");
-	}
+        if (organization != null && !organization.isRoot()) {
+            searchable.addSearchParam("organizationId", organization.getId());
+        }
+        if (job != null && !job.isRoot()) {
+            searchable.addSearchParam("jobId", job.getId());
+        }
 
-	@RequestMapping(value = "create", method = RequestMethod.POST)
-	public String createWithOrganization(
-			Model model,
-			@Valid @ModelAttribute("m") User m,
-			BindingResult result,
-			@RequestParam(value = "organizationId", required = false) Long[] organizationIds,
-			@RequestParam(value = "jobId", required = false) Long[][] jobIds,
-			RedirectAttributes redirectAttributes) {
+        return super.list(searchable, model);
+    }
 
-		fillUserOrganization(m, organizationIds, jobIds);
 
-		return super.create(model, m, result, redirectAttributes);
-	}
+    @RequestMapping(value = "create/discard", method = RequestMethod.POST)
+    @Override
+    public String create(
+            Model model, @Valid @ModelAttribute("m") User m, BindingResult result,
+            RedirectAttributes redirectAttributes) {
+        throw new RuntimeException("discarded method");
+    }
 
-	private void fillUserOrganization(User m, Long[] organizationIds,
-			Long[][] jobIds) {
-		if (ArrayUtils.isEmpty(organizationIds)) {
-			return;
-		}
-		for (int i = 0, l = organizationIds.length; i < l; i++) {
+    @RequestMapping(value = "{id}/update/discard", method = RequestMethod.POST)
+    @Override
+    public String update(
+            Model model, @Valid @ModelAttribute("m") User m, BindingResult result,
+            @RequestParam(value = Constants.BACK_URL, required = false) String backURL,
+            RedirectAttributes redirectAttributes) {
+        throw new RuntimeException("discarded method");
+    }
 
-			// 仅新增/修改一个 spring会自动split（“，”）--->给数组
-			if (l == 1) {
-				for (int j = 0, l2 = jobIds.length; j < l2; j++) {
-					UserOrganizationJob userOrganizationJob = new UserOrganizationJob();
-					userOrganizationJob.setOrganizationId(organizationIds[i]);
-					userOrganizationJob.setJobId(jobIds[j][0]);
-					m.addOrganizationJob(userOrganizationJob);
-				}
-			} else {
-				Long[] jobId = jobIds[i];
-				for (int j = 0, l2 = jobId.length; j < l2; j++) {
-					UserOrganizationJob userOrganizationJob = new UserOrganizationJob();
-					userOrganizationJob.setOrganizationId(organizationIds[i]);
-					userOrganizationJob.setJobId(jobId[j]);
-					m.addOrganizationJob(userOrganizationJob);
-				}
-			}
 
-		}
-	}
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+    public String createWithOrganization(
+            Model model,
+            @Valid @ModelAttribute("m") User m, BindingResult result,
+            @RequestParam(value = "organizationId", required = false) Long[] organizationIds,
+            @RequestParam(value = "jobId", required = false) Long[][] jobIds,
+            RedirectAttributes redirectAttributes) {
 
-	@RequestMapping(value = "{id}/update", method = RequestMethod.POST)
-	public String updateWithOrganization(
-			Model model,
-			@Valid @ModelAttribute("m") User m,
-			BindingResult result,
-			@RequestParam(value = "organizationId", required = false) Long[] organizationIds,
-			@RequestParam(value = "jobId", required = false) Long[][] jobIds,
-			@RequestParam(value = Constants.BACK_URL, required = false) String backURL,
-			RedirectAttributes redirectAttributes) {
+        fillUserOrganization(m, organizationIds, jobIds);
 
-		fillUserOrganization(m, organizationIds, jobIds);
+        return super.create(model, m, result, redirectAttributes);
+    }
 
-		return super.update(model, m, result, backURL, redirectAttributes);
-	}
+    private void fillUserOrganization(User m, Long[] organizationIds, Long[][] jobIds) {
+        if (ArrayUtils.isEmpty(organizationIds)) {
+            return;
+        }
+        for (int i = 0, l = organizationIds.length; i < l; i++) {
 
-	@RequestMapping(value = "changePassword")
-	public String changePassword(HttpServletRequest request,
-			@RequestParam("ids") Long[] ids,
-			@RequestParam("newPassword") String newPassword,
-			@CurrentUser User opUser, RedirectAttributes redirectAttributes) {
+            //仅新增/修改一个 spring会自动split（“，”）--->给数组
+            if (l == 1) {
+                for (int j = 0, l2 = jobIds.length; j < l2; j++) {
+                    UserOrganizationJob userOrganizationJob = new UserOrganizationJob();
+                    userOrganizationJob.setOrganizationId(organizationIds[i]);
+                    userOrganizationJob.setJobId(jobIds[j][0]);
+                    m.addOrganizationJob(userOrganizationJob);
+                }
+            } else {
+                Long[] jobId = jobIds[i];
+                for (int j = 0, l2 = jobId.length; j < l2; j++) {
+                    UserOrganizationJob userOrganizationJob = new UserOrganizationJob();
+                    userOrganizationJob.setOrganizationId(organizationIds[i]);
+                    userOrganizationJob.setJobId(jobId[j]);
+                    m.addOrganizationJob(userOrganizationJob);
+                }
+            }
 
-		getUserService().changePassword(opUser, ids, newPassword);
+        }
+    }
 
-		redirectAttributes.addFlashAttribute(Constants.MESSAGE, "改密成功！");
+    @RequestMapping(value = "{id}/update", method = RequestMethod.POST)
+    public String updateWithOrganization(
+            Model model, @Valid @ModelAttribute("m") User m, BindingResult result,
+            @RequestParam(value = "organizationId", required = false) Long[] organizationIds,
+            @RequestParam(value = "jobId", required = false) Long[][] jobIds,
+            @RequestParam(value = Constants.BACK_URL, required = false) String backURL,
+            RedirectAttributes redirectAttributes) {
 
-		return redirectToUrl((String) request.getAttribute(Constants.BACK_URL));
-	}
+        fillUserOrganization(m, organizationIds, jobIds);
 
-	@RequestMapping(value = "changeStatus/{newStatus}")
-	public String changeStatus(HttpServletRequest request,
-			@RequestParam("ids") Long[] ids,
-			@PathVariable("newStatus") UserStatus newStatus,
-			@RequestParam("reason") String reason, @CurrentUser User opUser,
-			RedirectAttributes redirectAttributes) {
+        return super.update(model, m, result, backURL, redirectAttributes);
+    }
 
-		getUserService().changeStatus(opUser, ids, newStatus, reason);
 
-		if (newStatus == UserStatus.normal) {
-			redirectAttributes.addFlashAttribute(Constants.MESSAGE, "解封成功！");
-		} else if (newStatus == UserStatus.blocked) {
-			redirectAttributes.addFlashAttribute(Constants.MESSAGE, "封禁成功！");
-		}
+    @RequestMapping(value = "changePassword")
+    public String changePassword(
+            HttpServletRequest request,
+            @RequestParam("ids") Long[] ids, @RequestParam("newPassword") String newPassword,
+            @CurrentUser User opUser,
+            RedirectAttributes redirectAttributes) {
 
-		return redirectToUrl((String) request.getAttribute(Constants.BACK_URL));
-	}
+        getUserService().changePassword(opUser, ids, newPassword);
 
-	@RequestMapping(value = "recycle")
-	public String recycle(HttpServletRequest request,
-			@RequestParam("ids") Long[] ids,
-			RedirectAttributes redirectAttributes) {
-		for (Long id : ids) {
-			User user = getUserService().findOne(id);
-			user.setDeleted(Boolean.FALSE);
-			getUserService().update(user);
-		}
-		redirectAttributes.addFlashAttribute(Constants.MESSAGE, "还原成功！");
-		return redirectToUrl((String) request.getAttribute(Constants.BACK_URL));
-	}
+        redirectAttributes.addFlashAttribute(Constants.MESSAGE, "改密成功！");
 
-	@RequestMapping("{user}/organizations")
-	public String permissions(@PathVariable("user") User user) {
-		return viewName("organizationsTable");
-	}
+        return redirectToUrl((String) request.getAttribute(Constants.BACK_URL));
+    }
 
-	@RequestMapping("ajax/autocomplete")
-	@PageableDefaults(value = 30)
-	@ResponseBody
-	public Set<Map<String, Object>> autocomplete(Searchable searchable,
-			@RequestParam("term") String term) {
+    @RequestMapping(value = "changeStatus/{newStatus}")
+    public String changeStatus(
+            HttpServletRequest request,
+            @RequestParam("ids") Long[] ids,
+            @PathVariable("newStatus") UserStatus newStatus,
+            @RequestParam("reason") String reason,
+            @CurrentUser User opUser,
+            RedirectAttributes redirectAttributes) {
 
-		return getUserService().findIdAndNames(searchable, term);
-	}
+        getUserService().changeStatus(opUser, ids, newStatus, reason);
 
-	/**
-	 * 验证返回格式 单个：[fieldId, 1|0, msg] 多个：[[fieldId, 1|0, msg],[fieldId, 1|0,
-	 * msg]]
-	 *
-	 * @param fieldId
-	 * @param fieldValue
-	 * @return
-	 */
-	@RequestMapping(value = "validate", method = RequestMethod.GET)
-	@ResponseBody
-	public Object validate(@RequestParam("fieldId") String fieldId,
-			@RequestParam("fieldValue") String fieldValue,
-			@RequestParam(value = "id", required = false) Long id) {
+        if (newStatus == UserStatus.normal) {
+            redirectAttributes.addFlashAttribute(Constants.MESSAGE, "解封成功！");
+        } else if (newStatus == UserStatus.blocked) {
+            redirectAttributes.addFlashAttribute(Constants.MESSAGE, "封禁成功！");
+        }
 
-		ValidateResponse response = ValidateResponse.newInstance();
+        return redirectToUrl((String) request.getAttribute(Constants.BACK_URL));
+    }
 
-		if ("username".equals(fieldId)) {
-			User user = getUserService().findByUsername(fieldValue);
-			if (user == null
-					|| (user.getId().equals(id) && user.getUsername().equals(
-							fieldValue))) {
-				// 如果msg 不为空 将弹出提示框
-				response.validateSuccess(fieldId, "");
-			} else {
-				response.validateFail(fieldId, "用户名已被其他人使用");
-			}
-		}
+    @RequestMapping(value = "recycle")
+    public String recycle(HttpServletRequest request, @RequestParam("ids") Long[] ids, RedirectAttributes redirectAttributes) {
+        for (Long id : ids) {
+            User user = getUserService().findOne(id);
+            user.setDeleted(Boolean.FALSE);
+            getUserService().update(user);
+        }
+        redirectAttributes.addFlashAttribute(Constants.MESSAGE, "还原成功！");
+        return redirectToUrl((String) request.getAttribute(Constants.BACK_URL));
+    }
 
-		if ("email".equals(fieldId)) {
-			User user = getUserService().findByEmail(fieldValue);
-			if (user == null
-					|| (user.getId().equals(id) && user.getEmail().equals(
-							fieldValue))) {
-				// 如果msg 不为空 将弹出提示框
-				response.validateSuccess(fieldId, "");
-			} else {
-				response.validateFail(fieldId, "邮箱已被其他人使用");
-			}
-		}
 
-		if ("mobilePhoneNumber".equals(fieldId)) {
-			User user = getUserService().findByMobilePhoneNumber(fieldValue);
-			if (user == null
-					|| (user.getId().equals(id) && user.getMobilePhoneNumber()
-							.equals(fieldValue))) {
-				// 如果msg 不为空 将弹出提示框
-				response.validateSuccess(fieldId, "");
-			} else {
-				response.validateFail(fieldId, "手机号已被其他人使用");
-			}
-		}
+    @RequestMapping("{user}/organizations")
+    public String permissions(@PathVariable("user") User user) {
+        return viewName("organizationsTable");
+    }
 
-		return response.result();
-	}
+
+    @RequestMapping("ajax/autocomplete")
+    @PageableDefaults(value = 30)
+    @ResponseBody
+    public Set<Map<String, Object>> autocomplete(
+            Searchable searchable,
+            @RequestParam("term") String term) {
+
+        return getUserService().findIdAndNames(searchable, term);
+    }
+
+
+    /**
+     * 验证返回格式
+     * 单个：[fieldId, 1|0, msg]
+     * 多个：[[fieldId, 1|0, msg],[fieldId, 1|0, msg]]
+     *
+     * @param fieldId
+     * @param fieldValue
+     * @return
+     */
+    @RequestMapping(value = "validate", method = RequestMethod.GET)
+    @ResponseBody
+    public Object validate(
+            @RequestParam("fieldId") String fieldId, @RequestParam("fieldValue") String fieldValue,
+            @RequestParam(value = "id", required = false) Long id) {
+
+        ValidateResponse response = ValidateResponse.newInstance();
+
+
+        if ("username".equals(fieldId)) {
+            User user = getUserService().findByUsername(fieldValue);
+            if (user == null || (user.getId().equals(id) && user.getUsername().equals(fieldValue))) {
+                //如果msg 不为空 将弹出提示框
+                response.validateSuccess(fieldId, "");
+            } else {
+                response.validateFail(fieldId, "用户名已被其他人使用");
+            }
+        }
+
+        if ("email".equals(fieldId)) {
+            User user = getUserService().findByEmail(fieldValue);
+            if (user == null || (user.getId().equals(id) && user.getEmail().equals(fieldValue))) {
+                //如果msg 不为空 将弹出提示框
+                response.validateSuccess(fieldId, "");
+            } else {
+                response.validateFail(fieldId, "邮箱已被其他人使用");
+            }
+        }
+
+        if ("mobilePhoneNumber".equals(fieldId)) {
+            User user = getUserService().findByMobilePhoneNumber(fieldValue);
+            if (user == null || (user.getId().equals(id) && user.getMobilePhoneNumber().equals(fieldValue))) {
+                //如果msg 不为空 将弹出提示框
+                response.validateSuccess(fieldId, "");
+            } else {
+                response.validateFail(fieldId, "手机号已被其他人使用");
+            }
+        }
+
+        return response.result();
+    }
+
 
 }

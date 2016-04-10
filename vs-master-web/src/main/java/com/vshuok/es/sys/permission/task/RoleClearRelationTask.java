@@ -17,17 +17,16 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Iterator;
 
-/** 
- * <p>
+/**
  * 清理无关联的Role-Resource/Permission关系
  * 1、Role-Resource
- * 2、Role-Permission</p>
- * @author Hu Dawei  
- * @version 1.0
+ * 2、Role-Permission
+ * <p/>
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
  */
 @Service()
 public class RoleClearRelationTask {
-
 
     @Autowired
     private RoleService roleService;
@@ -101,4 +100,5 @@ public class RoleClearRelationTask {
         }
 
     }
+
 }

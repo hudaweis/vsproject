@@ -1,7 +1,6 @@
 package com.vshuok.es.maintain.push.web.controller;
 
 import com.google.common.collect.Maps;
-
 import com.vshuok.es.maintain.notification.service.NotificationApi;
 import com.vshuok.es.maintain.push.service.PushService;
 import com.vshuok.es.personal.message.service.MessageApi;
@@ -16,7 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * 1、实时推送用户：消息和通知
+ * <p>User: Hu Dawei
+ * <p>Version: 1.0
+ */
 @Controller
 public class PushController {
 
