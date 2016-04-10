@@ -1,6 +1,6 @@
-<%@ tag import="com.sishuok.es.common.utils.SpringUtils" %>
-<%@ tag import="com.sishuok.es.sys.permission.entity.Permission" %>
-<%@ tag import="com.sishuok.es.sys.permission.service.PermissionService" %>
+<%@ tag import="com.vshuok.es.common.utils.SpringUtils" %>
+<%@ tag import="com.vshuok.es.sys.permission.entity.Permission" %>
+<%@ tag import="com.vshuok.es.sys.permission.service.PermissionService" %>
 <%@ tag pageEncoding="UTF-8"%>
 <%@ attribute name="id" type="java.lang.Long" required="true" description="当前要展示的组织机构的名字" %>
 <%!private PermissionService permissionService;%>
